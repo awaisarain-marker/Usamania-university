@@ -91,6 +91,33 @@ interface LeadershipSectionProps {
 export default function LeadershipSection({ hideHeader = false, introTabConfig, customTabs, customBottomSection }: LeadershipSectionProps) {
     const [activeTab, setActiveTab] = useState(0);
 
+    // Effect to handle hash-based navigation for tabs
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace('#', '').toLowerCase();
+            if (!hash) return;
+
+            const currentTabs = customTabs || defaultTabs;
+            const index = currentTabs.findIndex(t =>
+                t.id.toLowerCase() === hash ||
+                t.label.toLowerCase().replace(/\s+/g, '-') === hash
+            );
+
+            if (index !== -1) {
+                setActiveTab(index);
+                // Optional: smooth scroll to section if needed, but the hash link usually handles scrolling. 
+                // We might need to adjust for fixed header offset later.
+            }
+        };
+
+        // Check on mount
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, [customTabs]); // customTabs is a dependency, defaultTabs is stable enough or reconstructed.
+
     const defaultTabs = [
         {
             id: introTabConfig?.label || 'Vice Chancellors Message',

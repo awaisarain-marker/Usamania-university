@@ -2470,6 +2470,11 @@ span.btn-link.--red.--small {
   margin-right: 20px;
 }
 
+.qec-team .accordion-section__head-text {
+  width: 90%;
+  padding: 6vmin 6.3vmin 0 0;
+}
+
 @media (min-width: 1024px) {
   .hero__scroll {
     display: block;
