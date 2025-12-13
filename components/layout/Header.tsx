@@ -23,7 +23,7 @@ export default function Header() {
 
     return (
         <>
-            <header className={`site-header fixed top-0 left-0 w-full transition-all duration-300 z-[9999] px-4 md:px-8 lg:px-8 py-4 lg:py-5 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+            <header className={`site-header fixed top-0 left-0 w-full transition-all duration-300 z-[9999] px-4 md:px-8 lg:px-8 py-4 lg:py-5 ${isScrolled ? 'bg-white border-b border-gray-200' : 'bg-transparent'}`}>
                 <nav className="flex items-center justify-between">
                     {/* Left: Logo */}
                     <div className="flex items-center">

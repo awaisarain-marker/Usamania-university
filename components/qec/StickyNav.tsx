@@ -19,6 +19,17 @@ export default function StickyNav() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const [currentHash, setCurrentHash] = useState('');
+
+    useEffect(() => {
+        const handleHash = () => {
+            setCurrentHash(window.location.hash.replace('#', ''));
+        };
+        window.addEventListener('hashchange', handleHash);
+        handleHash(); // init
+        return () => window.removeEventListener('hashchange', handleHash);
+    }, []);
+
     useEffect(() => {
         // Intersection Observer for Active State
         const sections = [
@@ -61,18 +72,8 @@ export default function StickyNav() {
     }, []);
 
 
+
     if (!isSticky) return null;
-
-    const [currentHash, setCurrentHash] = useState('');
-
-    useEffect(() => {
-        const handleHash = () => {
-            setCurrentHash(window.location.hash.replace('#', ''));
-        };
-        window.addEventListener('hashchange', handleHash);
-        handleHash(); // init
-        return () => window.removeEventListener('hashchange', handleHash);
-    }, []);
 
     const navItems = [
         { id: 'introduction', label: 'Introduction' },
@@ -86,7 +87,7 @@ export default function StickyNav() {
     ];
 
     return (
-        <div className="fixed top-[88px] left-0 w-full z-[999] bg-white shadow-md animate-fade-in-down transition-all duration-300 border-t border-gray-100">
+        <div className="fixed top-[88px] left-0 w-full z-[999] bg-white border-b border-gray-200 animate-fade-in-down transition-all duration-300">
             <div className="container mx-auto px-4 overflow-x-auto no-scrollbar">
                 <div className="flex items-center justify-start md:justify-center h-16 gap-2 md:gap-4 min-w-max">
                     {navItems.map((item) => {
@@ -105,9 +106,6 @@ export default function StickyNav() {
                             if (currentHash.toLowerCase() === item.id.toLowerCase()) {
                                 isActive = true;
                             }
-                            // Fallback: If no specific tab hash is set, but we are scrolling in the leadership section, 
-                            // maybe default to Organogram? Or just don't highlight.
-                            // Better: Users usually click to navigate.
                         } else {
                             isActive = activeSection === item.id;
                         }
@@ -125,10 +123,10 @@ export default function StickyNav() {
                                 key={item.id}
                                 href={`#${item.id}`}
                                 className={`
-                                    flex items-center gap-2 px-4 py-2 rounded transition-all duration-300 text-sm font-bold uppercase whitespace-nowrap
+                                    flex items-center gap-2 px-5 py-2 transition-all duration-300 text-sm font-bold uppercase whitespace-nowrap
                                     ${isActive
-                                        ? 'bg-[#ed1c24] text-white border border-[#ed1c24]'
-                                        : 'text-[#002856] hover:text-[#ed1c24] border border-transparent hover:bg-gray-50'}
+                                        ? 'bg-[#ed1c24] text-white'
+                                        : 'text-[#002856] hover:text-[#ed1c24] hover:bg-gray-50'}
                                 `}
                                 onClick={(e) => {
                                     // Let default behavior happen (hash update + scroll)
