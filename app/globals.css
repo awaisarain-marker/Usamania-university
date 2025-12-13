@@ -2450,8 +2450,8 @@ body {
 .btn-link .icon {
   color: #ed1c24;
   position: relative;
-  width: 13px;
-  height: 13px;
+  width: 17px;
+  height: 17px;
   top: 5px;
   transform: translate(8px, -3px);
   transition: transform 0.3s ease-in-out;
@@ -3005,12 +3005,17 @@ h4 {
   margin-bottom: 35px;
 }
 
-.accordion-section__head-text-wrap .section-title h2 {
+.accordion-section__head-text-wrap .section-title h2,
+.qec-vision-content-wrap .section-title h2 {
   margin-bottom: 10px;
 }
 
 .page-merl .hero.--small .hero__content-wrap {
   width: 80%;
+}
+
+.page-qec .hero.--small .hero__content-wrap {
+  width: 75%;
 }
 
 @media all {
@@ -3242,4 +3247,238 @@ body {
   .residence .accordion-section__head-text {
     margin-top: -200px;
   }
+}
+
+/* ===== QEC Page Hero CTA ===== */
+.hero__cta-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  margin-top: clamp(30px, 5vmin, 40px);
+  padding-top: clamp(30px, 5vmin, 40px);
+}
+
+.--arrow.navbar-main__btn,
+.--arrow.navbar-main__close,
+.btn-secondary.--arrow {
+  font-weight: 700;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.--red.navbar-main__btn,
+.--red.navbar-main__close,
+.btn-secondary.--red {
+  color: #fff;
+  border: 1px solid #ed1c24;
+  background-color: #ed1c24;
+}
+
+.btn-secondary,
+.navbar-main__btn,
+.navbar-main__close {
+  padding: 0 25px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.btn,
+.btn-primary,
+.btn-secondary,
+.navbar-main__btn,
+.navbar-main__close {
+  transition: transform .3s, border .3s, background .3s, -webkit-transform .3s;
+  -webkit-backface-visibility: hidden;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 7;
+}
+
+.hero__cta-list .btn-link {
+  margin-left: clamp(40px, 6vmin, 55px);
+}
+
+.btn-link.--white {
+  color: #fff;
+}
+
+.btn-link:not(.--small),
+.read-more:not(.--small) {
+  font-size: 17px;
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  transition: color .3s, font-size .3s;
+}
+
+.btn-link,
+.read-more {
+  position: relative;
+  z-index: 7;
+}
+
+.page-qec .accordion-section__head-text {
+  padding: 6vmin 6.3vmin;
+}
+
+/* ===== QEC Vision Section ===== */
+.qec-vision-box {
+  background-color: #fff;
+  padding: 6vmin 6.3vmin;
+  width: 100%;
+  position: relative;
+  /* Retain any other necessary base styles from accordion-text if needed, like box-shadow if present globally */
+}
+
+.qec-vision-content-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Organogram Tree ===== */
+.org-tree ul {
+  padding-top: 20px;
+  position: relative;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+}
+
+.org-tree li {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+/* Connectors */
+.org-tree li::before,
+.org-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid #ccc;
+  width: 50%;
+  height: 20px;
+}
+
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid #ccc;
+}
+
+/* Remove connectors from first child */
+.org-tree li:first-child::before,
+.org-tree li:last-child::after {
+  border: 0 none;
+}
+
+/* Vertical connector for last child */
+.org-tree li:last-child::before {
+  border-right: 1px solid #ccc;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
+}
+
+.org-tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+}
+
+/* Downward connector from parent */
+.org-tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid #ccc;
+  width: 0;
+  height: 20px;
+}
+
+/* Box Styling */
+/* Box Styling */
+.org-tree .node {
+  border: 2px solid #002856;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #002856;
+  font-family: var(--font-open-sans);
+  font-size: 14px;
+  display: inline-block;
+  background: #fff;
+  border-radius: 0;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  min-width: 150px;
+  max-width: 200px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Root Node Specifics */
+.org-tree>ul>li>.node {
+  background: #002856;
+  color: #fff;
+  border-color: #002856;
+}
+
+/* Hover Effects */
+.org-tree .node:hover,
+.org-tree .node:hover+ul li .node {
+  background: #f0f0f0;
+  color: #002856;
+  border-color: #ed1c24;
+}
+
+.org-tree .node:hover+ul li::after,
+.org-tree .node:hover+ul li::before,
+.org-tree .node:hover+ul::before,
+.org-tree .node:hover+ul ul::before {
+  border-color: #ed1c24;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .org-tree {
+    overflow-x: auto;
+    padding-bottom: 20px;
+  }
+
+  .org-tree ul {
+    min-width: 600px;
+    /* Ensure tree doesn't break on small screens, allow abstract scroll */
+  }
+}
+
+.custom-accordion-tabs .qec-vision-box {
+  padding: 6vmin 6.3vmin 0 0;
 }

@@ -7,7 +7,6 @@ import AlumniSection from "@/components/home/AlumniSection";
 import EventsSection from "@/components/home/EventsSection";
 import CtaSection from "@/components/home/CtaSection";
 import CampusExperienceSection from "@/components/home/CampusExperienceSection";
-import Footer from "@/components/layout/Footer";
 import SvgSprite from "@/components/icons/Sprite";
 
 export default function Home() {
@@ -23,7 +22,7 @@ export default function Home() {
       <EventsSection />
       <CtaSection />
       <CampusExperienceSection />
-      <Footer />
+      <CampusExperienceSection />
     </div>
   );
 }

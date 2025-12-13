@@ -8,7 +8,7 @@ import MerlResearchProjects from "@/components/home/MerlResearchProjects";
 
 export default function MerlPage() {
     return (
-        <main>
+        <div>
             <PageHero
                 title="Micro Electronics Research Lab (MERL)"
                 subtitle="Fostering innovation in chip design education"
@@ -328,6 +328,6 @@ export default function MerlPage() {
 
             {/* Research Projects Section */}
             <MerlResearchProjects />
-        </main>
+        </div>
     );
 }
