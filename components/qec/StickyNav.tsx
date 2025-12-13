@@ -129,9 +129,42 @@ export default function StickyNav() {
                                         : 'text-[#002856] hover:text-[#ed1c24] hover:bg-gray-50'}
                                 `}
                                 onClick={(e) => {
-                                    // Let default behavior happen (hash update + scroll)
-                                    // setActiveSection might flash, so we rely on hash loop
-                                    if (!isTab) setActiveSection(item.id);
+                                    e.preventDefault();
+
+                                    // 1. Determine Target ID
+                                    let targetId = item.id;
+                                    // If it's a tab, we actually want to scroll to the leadership section wrapper
+                                    if (isTab) targetId = 'leadership-section';
+
+                                    const element = document.getElementById(targetId);
+                                    if (element) {
+                                        // 2. Calculate Position with Offset
+                                        // Header is fixed (~80-100px), StickyNav is below it (~64px). 
+                                        // We want the section to start below the sticky nav.
+                                        // StickyNav top is 88px. Height is 64px (h-16).
+                                        // Total offset needed = 88 + 64 = 152px roughly.
+                                        // Let's use getBoundingClientRect + window.scrollY
+
+                                        const headerOffset = 156; // 88px (header) + 64px (nav) + small buffer
+                                        const elementPosition = element.getBoundingClientRect().top;
+                                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                                        window.scrollTo({
+                                            top: offsetPosition,
+                                            behavior: "smooth"
+                                        });
+
+                                        // 3. Update URL Hash and State
+                                        // Use history.pushState to update URL without jumping
+                                        history.pushState(null, '', `#${item.id}`);
+
+                                        // 4. Manually trigger hashchange for LeadershipSection or other listeners
+                                        window.dispatchEvent(new HashChangeEvent('hashchange'));
+
+                                        // 5. Update local state
+                                        setCurrentHash(item.id);
+                                        if (!isTab) setActiveSection(item.id);
+                                    }
                                 }}
                             >
                                 <span>{item.label}</span>
