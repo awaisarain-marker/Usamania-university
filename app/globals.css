@@ -3757,3 +3757,19 @@ body {
   color: rgb(0, 40, 86) !important;
   margin-bottom: 0 !important;
 }
+/* Testimonial Box Image Overlay */
+.testimonial-box__image {
+  position: relative;
+}
+
+.testimonial-box__image:before {
+    content: '';
+    pointer-events: none;
+    z-index: 2;
+    border: 1px solid #ffffff80;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}

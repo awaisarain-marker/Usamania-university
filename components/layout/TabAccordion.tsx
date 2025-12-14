@@ -1,12 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface TabData {
     id: string;
     label: string;
     content: React.ReactNode;
     rightImage: string;
+    rightImages?: string[];
     rightQuote: string;
     rightQuoteAuthor: string;
 }
@@ -108,8 +114,13 @@ const tabs: TabData[] = [
     }
 ];
 
-export default function TabAccordion() {
+interface TabAccordionProps {
+    customTabs?: TabData[];
+}
+
+export default function TabAccordion({ customTabs }: TabAccordionProps) {
     const [activeTab, setActiveTab] = useState(0);
+    const displayTabs = customTabs || tabs;
 
     return (
         <section className="tab-accordion jsWhyAubg">
@@ -117,7 +128,7 @@ export default function TabAccordion() {
                 <div className="tab-accordion__wrap row">
                     <div className="custom-accordion-tabs nav-tabs col-6 tabs-allowed">
                         <ul role="tablist" className="custom-accordion-tabs__list tabs-tab-list row">
-                            {tabs.map((tab, index) => (
+                            {displayTabs.map((tab, index) => (
                                 <li key={tab.id} role="presentation" className="custom-accordion-tabs__item jsTabItem">
                                     <button
                                         role="tab"
@@ -131,7 +142,7 @@ export default function TabAccordion() {
                             ))}
                         </ul>
 
-                        {tabs.map((tab, index) => (
+                        {displayTabs.map((tab, index) => (
                             <section
                                 key={tab.id}
                                 role="tabpanel"
@@ -146,11 +157,26 @@ export default function TabAccordion() {
 
                     <div className="testimonial-box col-6">
                         <div className="testimonial-box__image">
-                            <img
-                                className="image lazy loaded"
-                                alt={tabs[activeTab].label}
-                                src={tabs[activeTab].rightImage}
-                            />
+                            <Swiper
+                                modules={[Navigation, Pagination, Autoplay]}
+                                spaceBetween={0}
+                                slidesPerView={1}
+                                navigation
+                                pagination={{ clickable: true }}
+                                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                                loop={true}
+                                className="h-full w-full"
+                            >
+                                {(displayTabs[activeTab].rightImages || [displayTabs[activeTab].rightImage]).map((imgSrc, idx) => (
+                                    <SwiperSlide key={idx}>
+                                        <img
+                                            className="image lazy loaded w-full h-full object-cover"
+                                            alt={displayTabs[activeTab].label}
+                                            src={imgSrc}
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                         <div className="testimonial-box__quote --ribbon --shadow">
                             <svg width="25" height="25" className="icon icon-quote" aria-hidden="true" role="img">
@@ -158,12 +184,12 @@ export default function TabAccordion() {
                             </svg>
                             <div className="text-small">
                                 <p className="text-bold text-white">
-                                    {tabs[activeTab].rightQuote}
+                                    {displayTabs[activeTab].rightQuote}
                                 </p>
                             </div>
                             <div className="text-small">
                                 <p className="text-white">
-                                    {tabs[activeTab].rightQuoteAuthor}
+                                    {displayTabs[activeTab].rightQuoteAuthor}
                                 </p>
                             </div>
                         </div>

@@ -1,0 +1,41 @@
+{
+    "courses": [
+        {
+            "id": "1",
+            "title": "Bachelor's Degrees",
+            "image": "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
+            "link": "https://www.aubg.edu/academics/bachelor-degrees/",
+            "alt": "Bachelor's Degrees Academic"
+        },
+        {
+            "id": "2",
+            "title": "Summer Programs",
+            "image": "https://www.aubg.edu/wp-content/uploads/2022/03/AUBG-Symmer-Programs-480x338.jpg",
+            "link": "https://www.aubg.edu/academics/summer-programs/",
+            "alt": "Summer Programs Academic"
+        },
+        {
+            "id": "3",
+            "title": "Exchange programs",
+            "image": "https://www.aubg.edu/wp-content/uploads/2022/03/AUBG-Study-Abroad-480x366.jpg",
+            "link": "https://www.aubg.edu/academics/study-abroad/",
+            "alt": "Exchange programs Academic"
+        },
+        {
+            "id": "4",
+            "title": "Executive MBA",
+            "image": "https://www.aubg.edu/wp-content/uploads/2022/03/136-e1661700039394-480x318.jpg",
+            "link": "https://www.aubg.edu/academics/executive-mba/",
+            "alt": "Executive MBA Academic"
+        },
+        {
+            "id": "5",
+            "title": "ELI – English Language Institute",
+            "image": "https://www.aubg.edu/wp-content/uploads/2022/03/DSC00353-1-480x320.jpg",
+            "link": "https://www.aubg.edu/academics/english-language-institute/",
+            "alt": "ELI – English Language Institute Academic"
+        }
+    ],
+    "staff": [],
+    "menu": []
+}
