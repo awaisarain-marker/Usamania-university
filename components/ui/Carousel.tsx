@@ -50,7 +50,7 @@ export default function Carousel({ items }: CarouselProps) {
                     justify-content: center;
                     background-color: #fff;
                     border: none;
-                    border-radius: 100px; /* User CSS says 100px */
+                    border-radius: 0; /* User requested no rounded corners */
                     box-shadow: 0 20px 40px rgba(0, 40, 86, .2);
                     margin: 0 5px;
                     width: 70px;

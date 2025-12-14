@@ -27,6 +27,69 @@ body {
   font-family: var(--font-open-sans), sans-serif;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: #002856;
+}
+
+h3 {
+  font-size: 36px;
+}
+
+h4 {
+  font-size: 30px;
+}
+
+h5 {
+  font-size: 27px;
+}
+
+h6 {
+  font-size: 24px;
+}
+
+/* Page Hero H1 Override */
+.page-title h1 {
+  color: #fff;
+}
+
+/* Animated Link Style */
+.animated-link {
+  color: #002856;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.animated-link:hover {
+  color: #ed1c24;
+}
+
+.animated-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.animated-link:hover::after {
+  width: 100%;
+}
+
 /* ===== Hero Groups List ===== */
 .hero__groups-list {
   display: flex;
@@ -2475,6 +2538,10 @@ span.btn-link.--red.--small {
   padding: 6vmin 6.3vmin 0 0;
 }
 
+.js-accordion-content button.accordion__button-wrap.js-accordion {
+  border-bottom: none;
+}
+
 @media (min-width: 1024px) {
   .hero__scroll {
     display: block;
@@ -3486,4 +3553,207 @@ body {
 
 .custom-accordion-tabs .qec-vision-box {
   padding: 6vmin 6.3vmin 0 0;
+}
+
+/* ===== Accordion / FAQs Section ===== */
+.tab-accordion .accordion {
+  margin: 0;
+}
+
+.accordion {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.item-list__box {
+  padding: 5px 0;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+.item-list__box.--v2 .item-list__box-wrap {
+  width: 100%;
+}
+
+.item-list__box-wrap.--scroll {
+  padding: clamp(14px, 1.05vmax, 60px) 0 clamp(14px, 1.05vmax, 60px) clamp(15px, 1.57vmax, 80px);
+}
+
+.item-list__box-wrap {
+  background-color: #fff;
+  border: 1px solid #a3bfd6;
+  -webkit-box-shadow: 0 4px 10px rgba(0, 40, 86, .1);
+  box-shadow: 0 4px 10px rgba(0, 40, 86, .1);
+  height: 100%;
+}
+
+.item-list__box.--v2 .item-list__box-head {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.blog__filters,
+.history__wrap,
+.item-list__box.--v2 .item-list__box-head,
+.row,
+.slider__navigation,
+.table-list__list-wrap,
+.tabs-split__bottom,
+.team__wrap {
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.item-list__box-head {
+  position: relative;
+}
+
+.item-list__box-footer,
+.item-list__box-head {
+  width: 100%;
+}
+
+.accordion__button-wrap:focus {
+  border: none;
+  outline: 0;
+}
+
+.accordion__button-wrap {
+  background-color: transparent;
+  text-align: left;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item-list__box-wrap.--scroll .accordion__button,
+.item-list__box-wrap.--scroll .item-list__box-body {
+  right: clamp(20px, 1.57vmax, 80px);
+}
+
+.accordion__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  display: block;
+  background-color: #e6eef4;
+  border: none;
+  border-radius: 100px;
+  top: -.15em;
+  right: 0;
+  height: 34px;
+  width: 34px;
+  text-align: left;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+  z-index: 6;
+  cursor: pointer;
+}
+
+.accordion__button,
+.blog-section__item-title,
+.blog-section__video-title,
+.donate-care .item-list__box-head-wrap,
+.items-list__accordion .items-list__title,
+.text-blue {
+  color: #002856;
+}
+
+.accordion__button::before {
+  left: 0;
+  -webkit-transform: translate(50%, -50%);
+  transform: translate(50%, -50%);
+  height: 2px;
+  width: 17px;
+}
+
+.accordion__button::after,
+.accordion__button::before {
+  content: ' ';
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  background-color: #005092;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.accordion__button::after {
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(0);
+  transform: translate(-50%, -50%) rotate(0);
+  height: 17px;
+  width: 2px;
+}
+
+.accordion__button.is-active::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.item-list__box-body {
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.item-list__box.--v2 .item-list__box-head .cta-section__paragraph,
+.item-list__box.--v2 .item-list__box-head .donate__bank-title,
+.item-list__box.--v2 .item-list__box-head .modal.--testimonials .modal__text,
+.item-list__box.--v2 .item-list__box-head .single-events__content-wrap blockquote,
+.item-list__box.--v2 .item-list__box-head .single-events__content-wrap h3,
+.item-list__box.--v2 .item-list__box-head .single-post__content-wrap blockquote,
+.item-list__box.--v2 .item-list__box-head .single-post__content-wrap h3,
+.item-list__box.--v2 .item-list__box-head .text-big,
+.item-list__box.--v2 .item-list__box-head .text-block blockquote,
+.modal.--testimonials .item-list__box.--v2 .item-list__box-head .modal__text,
+.single-events__content-wrap .item-list__box.--v2 .item-list__box-head blockquote,
+.single-events__content-wrap .item-list__box.--v2 .item-list__box-head h3,
+.single-post__content-wrap .item-list__box.--v2 .item-list__box-head blockquote,
+.single-post__content-wrap .item-list__box.--v2 .item-list__box-head h3,
+.text-block .item-list__box.--v2 .item-list__box-head blockquote {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .item-list__box.--v2 .item-list__box-head .text-big {
+    margin-bottom: 15px;
+    padding-right: 45px;
+  }
+}
+
+.academics-section__item-title,
+.font-secondary {
+  font-family: 'Lato', sans-serif;
+}
+
+/* Override H3 size in Accordion to match design */
+.item-list__box-head .text-big h3 {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* FAQ Section Scoped Overrides */
+.js-accordion-content .item-list__box.--v2 .item-list__box-head .text-big {
+  margin-bottom: 0 !important;
+}
+
+.js-accordion-content h1,
+.js-accordion-content h2,
+.js-accordion-content h3,
+.js-accordion-content h4,
+.js-accordion-content h5,
+.js-accordion-content h6 {
+  color: rgb(0, 40, 86) !important;
+  margin-bottom: 0 !important;
 }
