@@ -76,7 +76,15 @@ export default function StickyNav() {
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
 
-        const element = document.getElementById(id);
+        let element = document.getElementById(id);
+        // If the specific section ID isn't found, check if it's a tab inside the admission-info container
+        if (!element) {
+            const container = document.getElementById('admission-info');
+            if (container) {
+                element = container;
+            }
+        }
+
         if (element) {
             const offset = 100; // Height of sticky nav + buffer
             const elementPosition = element.getBoundingClientRect().top;
@@ -92,41 +100,54 @@ export default function StickyNav() {
 
             // Update URL hash without jumping
             window.history.pushState(null, '', `#${id}`);
+            // Dispatch hashchange event so LeadershipSection (tabs) can react
+            window.dispatchEvent(new Event('hashchange'));
         }
     };
 
     return (
-        <div className="fixed top-[88px] left-0 w-full z-[999] bg-white border-b border-gray-200 animate-fade-in-down transition-all duration-300 shadow-sm">
-            <div className="container">
-                <div className="flex items-center justify-between">
-                    <ul className="flex flex-wrap gap-x-1 items-center sticky-nav-list p-2">
-                        {navItems.map((item) => (
-                            <li key={item.id}>
-                                <a
-                                    href={`#${item.id}`}
-                                    onClick={(e) => handleNavClick(e, item.id)}
-                                    className={`
-                                        block px-4 py-2 text-[13px] font-bold uppercase tracking-wider transition-all duration-300
-                                        ${activeSection === item.id
-                                            ? 'bg-[#ed1c24] text-white shadow-md transform -translate-y-0.5'
-                                            : 'text-gray-600 hover:text-[#ed1c24] hover:bg-gray-50'
-                                        }
-                                    `}
-                                >
-                                    {item.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <a href="/apply" className="hidden md:flex items-center gap-2 bg-[#ed1c24] text-white px-6 py-2 text-sm font-bold uppercase hover:bg-[#002856] transition-colors duration-300">
-                        <span>Apply Now</span>
-                        <svg width="16" height="16" className="icon" aria-hidden="true" role="img">
-                            <use xlinkHref="#arrow"></use>
-                        </svg>
-                    </a>
+        <div className="fixed top-[88px] left-0 w-full z-[999] bg-white border-b border-gray-200 animate-fade-in-down transition-all duration-300">
+            <div className="container mx-auto px-4 overflow-x-auto no-scrollbar">
+                <div className="flex items-center justify-start md:justify-center h-16 gap-2 md:gap-4 min-w-max">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.id}
+                            href={`#${item.id}`}
+                            onClick={(e) => handleNavClick(e, item.id)}
+                            className={`
+                                flex items-center gap-2 px-5 py-2 transition-all duration-300 text-sm font-bold uppercase whitespace-nowrap
+                                ${activeSection === item.id
+                                    ? 'bg-[#ed1c24] text-white'
+                                    : 'text-[#002856] hover:text-[#ed1c24] hover:bg-gray-50'
+                                }
+                            `}
+                        >
+                            <span>{item.label}</span>
+                            {activeSection === item.id && (
+                                <svg width="20" height="20" className="w-5 h-5 fill-current" aria-hidden="true" role="img">
+                                    <use xlinkHref="#arrow"></use>
+                                </svg>
+                            )}
+                        </a>
+                    ))}
                 </div>
             </div>
+            <style jsx>{`
+                @keyframes fade-in-down {
+                    0% { opacity: 0; transform: translateY(-10px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in-down {
+                    animation: fade-in-down 0.3s ease-out forwards;
+                }
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}</style>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import { Calendar } from "lucide-react";
 const newsItems = [
     {
         id: 1,
-        title: "AUBG Hosts Annual Business Conference",
+        title: "UIT Hosts Annual Business Conference",
         date: "Dec 01, 2025",
         category: "Events",
         image: "https://placehold.co/600x400/002F6C/white?text=Business+Conference",

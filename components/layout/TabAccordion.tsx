@@ -178,21 +178,7 @@ export default function TabAccordion({ customTabs }: TabAccordionProps) {
                                 ))}
                             </Swiper>
                         </div>
-                        <div className="testimonial-box__quote --ribbon --shadow">
-                            <svg width="25" height="25" className="icon icon-quote" aria-hidden="true" role="img">
-                                <use href="#quote"></use>
-                            </svg>
-                            <div className="text-small">
-                                <p className="text-bold text-white">
-                                    {displayTabs[activeTab].rightQuote}
-                                </p>
-                            </div>
-                            <div className="text-small">
-                                <p className="text-white">
-                                    {displayTabs[activeTab].rightQuoteAuthor}
-                                </p>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ export default function Footer() {
 
     const contactInfo = [
         {
-            title: "AUBG Main Building",
+            title: "UIT Main Building",
             address: "1 Georgi Izmirliev Sq., 2700 Blagoevgrad",
             phone: null
         },
@@ -17,7 +17,7 @@ export default function Footer() {
             phone: "+359 73 888 555"
         },
         {
-            title: "AUBG Skaptopara Campus",
+            title: "UIT Skaptopara Campus",
             address: "4 - 12 Svoboda Bachvarova St., 2700 Blagoevgrad",
             phone: "+359 73 888 111"
         },
@@ -38,7 +38,7 @@ export default function Footer() {
 
     const footerMenuItems = [
         { href: "/staff-and-faculty-members/", label: "Contact us" },
-        { href: "/careers/", label: "Careers at AUBG" },
+        { href: "/careers/", label: "Careers at UIT" },
         { href: "/open-tenders/", label: "Open Tenders" },
         { href: "/privacy-notices/", label: "Privacy Notices" }
     ];

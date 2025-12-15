@@ -24,7 +24,7 @@ export default function CtaSection() {
                 </div>
 
                 <div className="cta-section__paragraph">
-                    <p>Our counselors and students are here to answer all your AUBG-related questions about higher Education in Europe. Get in touch:</p>
+                    <p>Our counselors and students are here to answer all your UIT-related questions about higher Education. Get in touch:</p>
                 </div>
 
                 <a href="/offices/admissions-office/" className="btn-secondary --red --arrow --border" target="_blank">

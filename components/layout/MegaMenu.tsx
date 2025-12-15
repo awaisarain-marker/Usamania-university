@@ -27,34 +27,33 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     const admissionsData = {
         title: "Start Your Journey",
         heading: "Admissions",
-        description: "Join a diverse community of scholars, innovators, and leaders. Discover how your potential can shape the future at AUBG.",
+        description: "Join a diverse community of scholars, innovators, and leaders. Discover how your potential can shape the future at UIT University.",
         cards: [
-            { icon: <BookOpen className="w-6 h-6" />, title: "Undergraduate", desc: "Majors, minors & programs", href: "/admissions/undergraduate" },
-            { icon: <GraduationCap className="w-6 h-6" />, title: "Graduate", desc: "Masters, PhD & certificates", href: "/admissions/graduate" },
-            { icon: <DollarSign className="w-6 h-6" />, title: "Tuition & Aid", desc: "Scholarships & grants", href: "/admissions/tuition-and-aid" },
-            { icon: <MapPin className="w-6 h-6" />, title: "Visit Campus", desc: "Tours & open houses", href: "/admissions/visit" },
+            { icon: <BookOpen className="w-6 h-6" />, title: "Overview", desc: "Admission Guidelines", href: "/admission" },
+            { icon: <GraduationCap className="w-6 h-6" />, title: "BS Computer Science", desc: "Program Details", href: "/admission/bs-computer-science" },
+            { icon: <DollarSign className="w-6 h-6" />, title: "Tuition & Fees", desc: "Fee Structures", href: "/admission#fee" },
+            { icon: <MapPin className="w-6 h-6" />, title: "How to Apply", desc: "Process & Req.", href: "/admission#how-to-apply" },
         ]
     };
 
     // Data for other sections (Column View)
     const genericMenuData: { [key: string]: { title: string, columns: { title: string, links: { name: string, href: string }[] }[] } } = {
         'About': {
-            title: 'About AUBG',
+            title: 'About UIT University',
             columns: [
                 {
                     title: "Overview",
                     links: [
                         { name: 'About Us', href: '/about-us' },
-                        { name: 'Contact', href: '/contact' },
-                        { name: 'News & Events', href: '/news-and-events' },
+                        { name: 'Contact', href: '/about-us' },
+                        { name: 'News & Events', href: '#' },
                     ]
                 },
                 {
                     title: "Governance",
                     links: [
-                        { name: 'Views & Opinions', href: '/views-and-opinions' },
-                        { name: 'Sustainable Development Goals', href: '/sdg' },
-                        { name: 'SDGs Report', href: '/sdg-report' },
+                        { name: 'Sustainable Development Goals', href: '/sustainable-development-goals' },
+                        { name: 'News & Media', href: '/oric#news' },
                     ]
                 },
                 {
@@ -73,16 +72,14 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                 {
                     title: "Programs",
                     links: [
-                        { name: 'Academics', href: '/academics' },
-                        { name: 'Short Courses', href: '/short-courses' },
-                        { name: 'Workshops', href: '/workshops' },
+                        { name: 'BS Computer Science', href: '/admission/bs-computer-science' },
                     ]
                 },
                 {
                     title: "Resources",
                     links: [
-                        { name: 'Faculty', href: '/faculty' },
-                        { name: 'Library Catalog', href: '/library' },
+                        { name: 'Faculty', href: '#' },
+                        { name: 'Library Catalog', href: '#' },
                         { name: 'MERL', href: '/merl' },
                     ]
                 },
@@ -158,8 +155,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                 {
                     title: "Collaboration",
                     links: [
-                        { name: 'Corporate Liaison Events', href: '/corporate-events' },
-                        { name: 'CSR', href: '/csr' },
+                        { name: 'Corporate Liaison', href: '/corporate-liaison' },
+                        { name: 'Corporate Events', href: '/corporate-liaison#events' },
                     ]
                 },
                 {
@@ -207,20 +204,20 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                             <div className="flex items-center gap-3">
                                 <img
                                     src="https://uitu.edu.pk/wp-content/uploads/2023/12/logo_with_text_final__6_-removebg-preview.png"
-                                    alt="AUBG Logo"
+                                    alt="UIT Logo"
                                     width={110}
                                     height={40}
                                     className="brightness-0 invert max-w-[100px] md:max-w-[110px]"
                                 />
                             </div>
                             <div className="flex items-center gap-4 md:gap-6">
-                                <Link href="/apply" className="group hidden md:flex items-center gap-2 bg-[#ed1c24] hover:bg-[#d4171f] text-white px-5 py-2.5 rounded-full transition-all duration-200">
+                                <Link href="/admission" className="group hidden md:flex items-center gap-2 bg-[#ed1c24] hover:bg-[#d4171f] text-white px-5 py-2.5 transition-all duration-200" onClick={onClose}>
                                     <span className="font-medium text-base">Apply Now</span>
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </Link>
                                 <button
                                     onClick={onClose}
-                                    className="bg-white/5 hover:bg-white/10 p-2.5 rounded-full text-white transition-colors"
+                                    className="bg-white/5 hover:bg-white/10 p-2.5 text-white transition-colors"
                                 >
                                     <X className="w-6 h-6" />
                                 </button>
@@ -253,7 +250,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                         animate={{ height: 'auto', opacity: 1 }}
                                                         exit={{ height: 0, opacity: 0 }}
                                                         transition={{ duration: 0.3 }}
-                                                        className="overflow-hidden bg-white/5 rounded-lg mb-4"
+                                                        className="overflow-hidden bg-white/5 mb-4"
                                                     >
                                                         <div className="p-4 space-y-6">
                                                             {/* Admissions Content for Mobile */}
@@ -262,7 +259,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                                     <p className="text-gray-300 text-sm mb-4">{admissionsData.description}</p>
                                                                     <div className="grid grid-cols-1 gap-3">
                                                                         {admissionsData.cards.map((card, idx) => (
-                                                                            <Link key={idx} href={card.href} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors" onClick={onClose}>
+                                                                            <Link key={idx} href={card.href} className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 transition-colors" onClick={onClose}>
                                                                                 <div className="text-[#ed1c24]">{card.icon}</div>
                                                                                 <div>
                                                                                     <div className="text-white font-medium text-sm">{card.title}</div>
@@ -303,7 +300,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
                                 {/* Mobile Footer Links */}
                                 <div className="mt-8 pt-8 border-t border-white/10 space-y-4 px-2">
-                                    <Link href="/apply" className="flex items-center justify-center gap-2 bg-[#ed1c24] text-white w-full py-3 rounded-lg font-medium" onClick={onClose}>
+                                    <Link href="/admission" className="flex items-center justify-center gap-2 bg-[#ed1c24] text-white w-full py-3 font-medium" onClick={onClose}>
                                         Apply Now
                                     </Link>
                                     <div className="flex justify-center gap-6 text-gray-400 text-sm">
@@ -339,10 +336,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                 </nav>
 
                                 <div className="mt-auto pt-10 text-gray-500 text-base">
-                                    <p>© {new Date().getFullYear()} AUBG</p>
+                                    <p>© {new Date().getFullYear()} UIT University</p>
                                     <div className="flex gap-4 mt-4">
-                                        <Link href="/directory" className="hover:text-white transition-colors">Directory</Link>
-                                        <Link href="/map" className="hover:text-white transition-colors">Map</Link>
+                                        <Link href="/directory" className="hover:text-white transition-colors" onClick={onClose}>Directory</Link>
+                                        <Link href="/map" className="hover:text-white transition-colors" onClick={onClose}>Map</Link>
                                     </div>
                                 </div>
                             </div>
@@ -359,7 +356,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                         className="max-w-5xl mx-auto"
                                     >
                                         <div className="flex items-center gap-3 mb-2">
-                                            <span className="h-8 w-1 bg-[#ed1c24] rounded-full"></span>
+                                            <span className="h-8 w-1 bg-[#ed1c24]"></span>
                                             <span className="text-[#ed1c24] font-semibold tracking-widest text-sm uppercase">{admissionsData.title}</span>
                                         </div>
 
@@ -374,9 +371,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                 <Link
                                                     key={idx}
                                                     href={card.href}
-                                                    className="group bg-[#00224a] border border-white/5 hover:border-[#ed1c24]/50 p-6 rounded-xl flex items-start gap-5 transition-all duration-300 hover:bg-[#002f6c]"
+                                                    className="group bg-[#00224a] border border-white/5 hover:border-[#ed1c24]/50 p-6 flex items-start gap-5 transition-all duration-300 hover:bg-[#002f6c]"
+                                                    onClick={onClose}
                                                 >
-                                                    <div className="bg-[#ed1c24]/10 p-3 rounded-lg text-[#ed1c24] group-hover:bg-[#ed1c24] group-hover:text-white transition-colors">
+                                                    <div className="bg-[#ed1c24]/10 p-3 text-[#ed1c24] group-hover:bg-[#ed1c24] group-hover:text-white transition-colors">
                                                         {card.icon}
                                                     </div>
                                                     <div>
@@ -389,8 +387,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
                                         {/* Event Banner */}
                                         <div className="w-full border-t border-white/10 pt-8">
-                                            <Link href="/open-house" className="group flex items-center gap-6 bg-gradient-to-r from-[#00224a] to-transparent p-1 rounded-2xl hover:from-[#002f6c] transition-all">
-                                                <div className="bg-gray-800 h-20 w-20 rounded-xl flex items-center justify-center shrink-0 border border-white/10 overflow-hidden relative">
+                                            <Link href="/admission/intro-to-photography-exhibition" className="group flex items-center gap-6 bg-gradient-to-r from-[#00224a] to-transparent p-1 hover:from-[#002f6c] transition-all" onClick={onClose}>
+                                                <div className="bg-gray-800 h-20 w-20 flex items-center justify-center shrink-0 border border-white/10 overflow-hidden relative">
                                                     <img
                                                         src="https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg"
                                                         alt="Event"
@@ -419,7 +417,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                         className="max-w-5xl mx-auto"
                                     >
                                         <div className="flex items-center gap-3 mb-6">
-                                            <span className="h-8 w-1 bg-[#ed1c24] rounded-full"></span>
+                                            <span className="h-8 w-1 bg-[#ed1c24]"></span>
                                             <h2 className="font-serif text-5xl text-white tracking-tight">{genericMenuData[activeCategory].title}</h2>
                                         </div>
 
@@ -436,6 +434,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                                     <Link
                                                                         href={link.href}
                                                                         className="text-gray-400 hover:text-[#ed1c24] text-lg transition-colors block"
+                                                                        onClick={onClose}
                                                                     >
                                                                         {link.name}
                                                                     </Link>
@@ -453,7 +452,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                 {activeCategory !== 'Admissions' && !genericMenuData[activeCategory] && (
                                     <div className="h-full flex items-center justify-center">
                                         <div className="text-center">
-                                            <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 text-[#ed1c24]">
+                                            <div className="w-16 h-16 bg-white/5 flex items-center justify-center mx-auto mb-6 text-[#ed1c24]">
                                                 <LayoutGrid className="w-8 h-8" />
                                             </div>
                                             <h2 className="font-serif text-4xl text-white mb-4">Content Area</h2>

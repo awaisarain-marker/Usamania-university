@@ -3,7 +3,7 @@ const blogPosts = [
         title: "Economics for a New Generation: Professor Nikos Fatouros Teaches for the Future",
         image: "https://www.aubg.edu/wp-content/uploads/2025/12/Professor-Nikos-Fatouros-Teaching-Economics-at-AUBG-2-1-489x318.png",
         link: "https://www.aubg.edu/aubg-today/economics-for-a-new-generation-professor-nikos-fatouros-teaches-for-the-future/",
-        description: "Professor Nikos Fatouros joined AUBG in the 2024/2025 academic year and is already serving as the Interim Chair of the Economics Department. His research interests go ...",
+        description: "Professor Nikos Fatouros joined UIT University in the 2024/2025 academic year and is already serving as the Interim Chair of the Economics Department. His research interests go ...",
         category: "Economics",
         featured: true,
     },
@@ -33,7 +33,11 @@ const blogPosts = [
     },
 ];
 
-export default function BlogSection() {
+interface BlogSectionProps {
+    title?: string;
+}
+
+export default function BlogSection({ title = "UIT University Today" }: BlogSectionProps) {
     return (
         <section className="blog-section">
             <div className="container">
@@ -41,13 +45,13 @@ export default function BlogSection() {
                 <div className="blog-section__heading row">
                     <div className="blog-section__heading-text">
                         <div className="section-title">
-                            <h2>UIT University Today</h2>
+                            <h2>{title}</h2>
                         </div>
                         <div className="text-big">
                             <p>Discover what it's like to study at one of Pakistan's top universities, and explore our latest developments, student achievements, and alumni success stories.</p>
                         </div>
                     </div>
-                    <a href="/aubg-today" className="btn-secondary --red --arrow --border">
+                    <a href="/uit-today" className="btn-secondary --red --arrow --border">
                         <span>UIT University Today</span>
                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                             <use xlinkHref="#arrow"></use>

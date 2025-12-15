@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import SiteLayout from "@/components/layout/SiteLayout";
 import SvgSprite from "@/components/icons/Sprite";
 import BodyClassUpdater from "@/components/layout/BodyClassUpdater";
 
@@ -17,8 +16,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "American University in Bulgaria",
-  description: "AUBG Website Clone",
+  title: "UIT University",
+  description: "UIT University Website",
 };
 
 export default function RootLayout({
@@ -34,11 +33,9 @@ export default function RootLayout({
       >
         <BodyClassUpdater />
         <SvgSprite />
-        <Header />
-        <main className="flex-grow">
+        <SiteLayout>
           {children}
-        </main>
-        <Footer />
+        </SiteLayout>
       </body>
     </html>
   );

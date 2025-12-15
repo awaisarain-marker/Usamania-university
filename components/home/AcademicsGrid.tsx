@@ -1,3 +1,6 @@
+import React from 'react';
+import Link from 'next/link';
+
 const programs = [
     {
         title: "Bachelor's Degrees",
@@ -48,23 +51,17 @@ export default function AcademicsGrid() {
 
                     {/* Program Cards */}
                     {programs.map((program, index) => (
-                        <a
-                            key={index}
-                            href={program.link}
-                            className="col-4 academics-section__item"
-                            aria-label={`Go to ${program.title} page`}
-                        >
-                            <div className="academics-section__item-title">
-                                <h3 className="font-secondary">{program.title}</h3>
+                        <div key={index} className="col-4 academics-section__item">
+                            <div className="academics-section__item-image">
+                                <Link className="image-hover" href={program.link}>
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src={program.image} alt={program.alt} />
+                                </Link>
                             </div>
-                            <img
-                                className="academics-section__item-image"
-                                alt={program.alt}
-                                width="481"
-                                height="385"
-                                src={program.image}
-                            />
-                        </a>
+                            <div className="academics-section__item-title">
+                                <h3><Link href={program.link}>{program.title}</Link></h3>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

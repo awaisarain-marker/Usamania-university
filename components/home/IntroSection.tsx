@@ -7,7 +7,7 @@ export default function IntroSection() {
                 </h2>
                 <div className="w-24 h-1 bg-primary-red mx-auto mb-8"></div>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                    AUBG offers high-quality U.S. education that is recognized in Bulgaria and around the world.
+                    UIT University offers high-quality education that is recognized in Pakistan and around the world.
                     We are a unique community of students, faculty, and staff from over 40 countries,
                     dedicated to the values of liberal arts education, critical thinking, and global citizenship.
                 </p>

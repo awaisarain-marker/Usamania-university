@@ -34,7 +34,7 @@ export default function Header() {
                         >
                             <img
                                 src="https://uitu.edu.pk/wp-content/uploads/2023/12/logo_with_text_final__6_-removebg-preview.png"
-                                alt="AUBG"
+                                alt="UIT University"
                                 width={491}
                                 height={52}
                                 className={`max-w-full h-auto transition-all duration-300 ease-in-out ${isScrolled ? '' : 'brightness-0 invert'}`}

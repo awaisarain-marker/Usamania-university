@@ -18,7 +18,7 @@ export default function AlumniSection() {
                     </div>
 
                     <div className="text-big">
-                        <p className="text-white">Read more about the remarkable achievements of the AUBG alumni</p>
+                        <p className="text-white">Read more about the remarkable achievements of the UIT alumni</p>
                     </div>
 
                     <a href="https://www.aubg.edu/aubg-today/category/alumni/" className="btn-secondary --red --arrow --border">

@@ -6,6 +6,8 @@ import TabAccordion from '@/components/layout/TabAccordion';
 import PageHero from '@/components/layout/PageHero';
 import StickyNav from '@/components/corporate-liaison/StickyNav';
 import LeadershipSection from '@/components/layout/LeadershipSection';
+import BlogSection from '@/components/home/BlogSection';
+import EventsSection from '@/components/home/EventsSection';
 
 interface ExpandableTextProps {
     children: React.ReactNode;
@@ -452,17 +454,8 @@ export default function CorporateLiaisonPage() {
             </div>
 
             {/* Corporate Liaison Events Section */}
-            <div id="corporate-liaison-events" className="py-8 md:py-12 bg-[#e6eef4] border-t border-gray-200">
-                <div className="container">
-                    <div className="w-full bg-white p-8 md:p-12   shadow-sm border border-gray-100">
-                        <div className="section-title mb-6">
-                            <h2>Corporate Liaison Events</h2>
-                        </div>
-                        <div className="prose max-w-none text-gray-600">
-                            <p>Information about Corporate Liaison Events will appear here.</p>
-                        </div>
-                    </div>
-                </div>
+            <div id="corporate-liaison-events">
+                <EventsSection title="Corporate Liaison Events" />
             </div>
 
             {/* Corporate Social Responsibility Section */}
@@ -500,19 +493,30 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>Blood-Mental</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Blood Donation to Mental Health Consultations</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for Blood-Mental will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>At AT UIT University, we recognize the life-saving impact of blood donation. By organizing regular blood donation drives, we encourage our community members to give the gift of life. Each donation has the potential to save multiple lives, and our events provide a safe and supportive environment for donors. Whether you are a first-time donor or a regular participant, your contribution is invaluable to those in need.</p>
+                                                <p className="mt-4">Mental well-being is a critical aspect of overall health, and at AT UIT University, we are committed to supporting our community's mental health needs. Our mental health consultations offer a confidential and compassionate space for individuals to discuss their concerns with professional counselors. We believe that mental health is just as important as physical health, and we are dedicated to providing resources and support to help our community thrive emotionally and psychologically.</p>
+                                                <p className="mt-4">Good oral health is essential to overall well-being, and AT UIT University is pleased to offer dental checkups as part of our health initiatives. Our dental checkup events provide convenient access to professional dental care, ensuring that our community members can maintain healthy teeth and gums. Regular checkups help prevent dental issues and promote long-term oral health, contributing to a brighter, healthier smile.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for Blood-Mental',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        '/campus-hero.png',
-                                        'https://images.unsplash.com/photo-1541339907198-e021fc9e2752?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438164726_837927338369047_6413795879715098054_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/441570487_837927351702379_6870174041047606825_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438102756_837927301702384_4448664194524296717_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/440850163_837927385035709_7460598634136219380_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438095636_837927378369043_8202368150023819495_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438093164_837927335035714_4276649413611866615_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/441503811_837927321702382_4316450968097127693_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/441582066_837928135035634_8427555750267253362_n-e1724817153179.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438059238_837928138368967_4669975231452044154_n-e1724817218959.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/438109201_837927381702376_4611814987736188732_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/442435389_837927341702380_1295562625127509078_n.jpg'
                                     ]
                                 },
                                 {
@@ -521,19 +525,23 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>Social Work</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Iftar on the Streets - Social Work</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for Social Work will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>In a heartwarming demonstration of compassion and practical learning, our 𝐁𝐁𝐀 students at AT UIT University took to the streets of Karachi to embody the spirit of community and togetherness where it’s needed most. As part of their community development coursework, they organized an iftar for the people of Karachi.</p>
+                                                <p className="mt-4">This event was not just about serving meals; it was about serving hope, fostering understanding, and creating a shared sense of humanity. As the sun set and the fast was broken together, it became a moment of reflection and connection for both the students and the grateful recipients.</p>
+                                                <p className="mt-4">Kudos to our students for exemplifying the true spirit of Ramadan and showcasing what it means to be a part of AT UIT University. Their actions are a testament to our values and commitment to making a meaningful impact on society.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for Social Work',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-                                        '/campus-hero.png'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417702580_399815122985290_2320212913418288834_n-e1724816834168.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/419542024_399815139651955_5301415090745846318_n-1-e1724816929734.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/418981943_399815112985291_5059139849380083911_n-e1724816996931.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/419039104_399815142985288_2032704901841049706_n-e1724817045624.jpg'
                                     ]
                                 },
                                 {
@@ -542,19 +550,28 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>Test Ride</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Atlas Honda Limited - Escooty Test Ride Activity</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for Test Ride will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>Atlas Honda Limited recently conducted a Test Ride Activity for the Honda BENLY e at AT UIT University, leveraging the institution's renowned reputation for exceptional student final-year projects (FYPs) and significant faculty contributions in engineering and technology. This event provided a unique opportunity for participants to experience the innovative electric vehicle firsthand, allowing them to explore its advanced features and eco-friendly design.</p>
+                                                <p className="mt-4">The test ride also served as a valuable platform for Atlas Honda to gather insightful feedback from UIT University's esteemed faculty. By engaging with a knowledgeable and forward-thinking audience, the company aimed to refine and enhance the Honda BENLY e based on expert evaluations. This collaboration underscores the strong relationship between industry and academia, highlighting both the innovative spirit of UIT University and Atlas Honda's commitment to advancing sustainable automotive solutions.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for Test Ride',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        'https://images.unsplash.com/photo-1599687351724-dfa3c4ff81b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-                                        'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417519406_786819790146469_1981514447470178057_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417485978_786819786813136_9209348090859839246_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417434239_786819843479797_569825191881941605_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417453256_786819873479794_6997279604545754562_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417476767_786819706813144_4658583730451752446_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417496513_786819886813126_2335924768207011419_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417691734_786819716813143_3623853440184573600_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417487765_786819693479812_5392052015515603709_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417413859_786819646813150_2362894689777801088_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/417687421_786820093479772_4771061540580939670_n.jpg'
                                     ]
                                 },
                                 {
@@ -563,19 +580,24 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>Cleaning</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Cleaning Drive 2023</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for Cleaning will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>UIT University recently organized a Cleaning Drive, where our dedicated students took to the streets to promote a healthier and cleaner environment. This initiative was a testament to our community’s commitment to environmental stewardship, as students actively participated in removing litter and improving public spaces.</p>
+                                                <p className="mt-4">A heartfelt thanks to the enthusiastic students and faculty who rolled up their sleeves to contribute to this vital cause. Your unwavering commitment to enhancing environmental well-being is truly inspiring and reflects the university's values of fostering a sustainable and positive impact on our community.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for Cleaning',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        'https://images.unsplash.com/photo-1581578731117-10d521878dfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-                                        '/campus-hero.png'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411588764_336844829282320_3964379204016866072_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411609131_336844802615656_8706796812211973200_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411600303_336844652615671_3627557699661594083_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411641458_336844625949007_5119486706546881417_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411595917_336844789282324_3638924443103725461_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/411597093_336844762615660_2852183050214123939_n.jpg'
                                     ]
                                 },
                                 {
@@ -584,19 +606,23 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>Blood Drive</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Blood Donation Drive</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for Blood Drive will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>UIT University is thrilled to announce the success of our recent Blood Donation Drive, held in collaboration with the KITCC (Kashif Iqbal Thalassemia Care Centre) Trust. This impactful event played a crucial role in saving lives and providing essential support to Thalassemia patients through the generous donation of blood.</p>
+                                                <p className="mt-4">We extend our deepest gratitude to all the donors and volunteers whose contributions made this event a tremendous success. Your kindness and dedication have profoundly benefited our community, showcasing the power of collective effort in making a meaningful difference.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for Blood Drive',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        'https://images.unsplash.com/photo-1615461066841-6116e61058f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-                                        '/campus-hero.png'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/397087117_307658445534292_3633512680107889719_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/397096681_307658458867624_4594203551081753278_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/397191443_307658515534285_8338240381990533505_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/397063237_307658412200962_3742616658057312630_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/397182502_307658335534303_4263617317255318876_n.jpg'
                                     ]
                                 },
                                 {
@@ -605,19 +631,23 @@ export default function CorporateLiaisonPage() {
                                     content: (
                                         <div>
                                             <div className="section-title">
-                                                <h2>BRF</h2>
+                                                <h2 className="text-[#002856] mb-[15px] font-serif text-[40px]">Blind Resource Foundation</h2>
                                             </div>
-                                            <div className="text-big">
-                                                <p>Content for BRF will be added here later.</p>
-                                            </div>
+                                            <ExpandableText>
+                                                <p>UIT University is honored to have hosted the Blind Resource Foundation Pakistan for a transformative training initiative. On Pakistan's 76th Independence Day, the foundation conducted an engaging two-day capacity-building program titled "Main Bhi Pakistan Hoon."</p>
+                                                <p className="mt-4">This program demonstrated a profound commitment to empowerment and upliftment by providing visually impaired individuals with essential skills and tools to navigate and overcome societal challenges. Through this comprehensive training session, participants gained valuable knowledge and resources to enhance their independence and effectiveness in various aspects of life.</p>
+                                            </ExpandableText>
                                         </div>
                                     ),
                                     rightImage: '/campus-hero.png', // Placeholder
                                     rightQuote: 'Quote for BRF',
                                     rightQuoteAuthor: 'Author',
                                     rightImages: [
-                                        'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-                                        '/campus-hero.png'
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/379916608_280756011557869_75062399165391705_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/380433169_280756031557867_230312219695871416_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/379872948_280756028224534_8062607259043773882_n.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/380000899_280756301557840_3702179569480941533_n-1.jpg',
+                                        'https://uitu.edu.pk/wp-content/uploads/2024/08/380000899_280756301557840_3702179569480941533_n.jpg'
                                     ]
                                 }
                             ]}
@@ -629,17 +659,8 @@ export default function CorporateLiaisonPage() {
 
 
             {/* Day Trip Learning Section */}
-            <div id="day-trip-learning" className="py-8 md:py-12 bg-[#e6eef4] border-t border-gray-200">
-                <div className="container">
-                    <div className="w-full bg-white p-8 md:p-12   shadow-sm border border-gray-100">
-                        <div className="section-title mb-6">
-                            <h2>Day Trip Learning</h2>
-                        </div>
-                        <div className="prose max-w-none text-gray-600">
-                            <p>Information about Day Trip Learning will appear here.</p>
-                        </div>
-                    </div>
-                </div>
+            <div id="day-trip-learning">
+                <BlogSection title="Day Trip Learning" />
             </div>
         </div >
     );

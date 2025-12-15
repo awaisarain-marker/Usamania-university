@@ -22,7 +22,7 @@ const events = [
     {
         day: "10",
         month: "December",
-        title: "AUBG Evening in New England",
+        title: "UIT Evening in New England",
         time: "7:00 pm",
         location: "310 River Street, Billerica, MA",
         link: "https://www.aubg.edu/events/aubg-evening-in-new-england/",
@@ -45,7 +45,11 @@ const events = [
     },
 ];
 
-export default function EventsSection() {
+interface EventsSectionProps {
+    title?: string;
+}
+
+export default function EventsSection({ title = "Upcoming Events" }: EventsSectionProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handlePrev = () => {
@@ -63,7 +67,7 @@ export default function EventsSection() {
                 {/* Header */}
                 <div className="events-section__heading row">
                     <div className="section-title">
-                        <h2>Upcoming Events</h2>
+                        <h2>{title}</h2>
                     </div>
                     <a href="/event-calendar/" className="btn-secondary --red --arrow --border">
                         <span className="uppercase">View events calendar</span>

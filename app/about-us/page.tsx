@@ -50,7 +50,7 @@ export default function AboutUs() {
                 </div>
             </section>
 
-            {/* AUBG Leadership Section */}
+            {/* Leadership Section */}
             <LeadershipSection />
 
             {/* Facilities Section */}
