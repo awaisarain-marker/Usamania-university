@@ -4018,3 +4018,8 @@ body {
   grid-column: 1 / span 8;
   width: 50%;
 }
+
+h3.ma-courses-inner-heading {
+  font-size: 28px;
+  font-weight: 600;
+}
