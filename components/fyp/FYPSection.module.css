@@ -1,0 +1,145 @@
+/* ==== STICKY CONTROLS ==== */
+.stickyControls {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background-color: #e6eef4;
+    /* Matches section background */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+/* ==== FILTER BOXES ==== */
+.filterContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filterBox {
+    background: #fff;
+    border-radius: 0;
+    /* Sharp corners */
+    padding: 10px 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filterBox select {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    border-radius: 0;
+    /* Sharp corners */
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* FULL-WIDTH SEARCH BOX */
+.searchInput {
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 0;
+    /* Sharp corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: block;
+    margin-bottom: 0;
+}
+
+/* ==== TABLE ==== */
+.tableWrapper {
+    overflow-x: visible;
+    /* Allows sticky header to stick to window */
+}
+
+/* On mobile, we need scrolling, which breaks window-sticky, but that's a necessary trade-off */
+@media(max-width: 1024px) {
+    .tableWrapper {
+        overflow-x: auto;
+    }
+}
+
+.fypTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.fypTable th {
+    background: #1e293b;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    /* Sticky removed as requested */
+}
+
+.fypTable td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* striped rows */
+.fypTable tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+/* hover */
+.fypTable tr:hover {
+    background: #e2e8f0;
+    transition: 0.2s;
+}
+
+/* ==== ABSTRACT COLLAPSE ==== */
+.abstractWrapper {
+    max-width: 300px;
+    /* Adjust width as needed */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.abstractText {
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    white-space: normal;
+    /* Must be normal to wrap and animate height */
+    display: block;
+}
+
+.abstractCollapsed {
+    max-height: 24px;
+    /* Approx 1.5em/1 line */
+    /* To mimic ellipsis roughly, we just cut off. 
+       True ellipsis with smooth transition is very complex in pure CSS. */
+}
+
+.abstractExpanded {
+    max-height: 1000px;
+    /* Arbitrary large height */
+}
+
+.showMoreBtn {
+    color: #1d4ed8;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+/* ==== MOBILE RESPONSIVE ==== */
+@media(max-width: 768px) {
+    .filterContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .abstractShort {
+        max-width: 150px;
+    }
+}

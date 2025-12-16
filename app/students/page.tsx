@@ -4,6 +4,9 @@ import React from 'react';
 import PageHero from '@/components/layout/PageHero';
 import StickyNav from '@/components/students/StickyNav';
 import StudentPortalSection from '@/components/students/StudentPortalSection';
+import StudentAffairsSection from '@/components/students/StudentAffairsSection';
+import LibrarySection from '@/components/students/LibrarySection';
+import ScholarshipSection from '@/components/students/ScholarshipSection';
 
 export default function StudentsPage() {
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
@@ -65,28 +68,16 @@ export default function StudentsPage() {
                 <StudentPortalSection />
             </section>
 
-            <section id="student-affairs" className="py-20 bg-[#e6eef4] min-h-[400px]">
-                <div className="container">
-                    <div className="section-title text-center mb-8">
-                        <h2>Student Affairs</h2>
-                    </div>
-                </div>
+            <section className="py-20 bg-[#e6eef4] min-h-[400px]">
+                <StudentAffairsSection />
             </section>
 
-            <section id="library" className="py-20 bg-[#e6eef4] min-h-[400px]">
-                <div className="container">
-                    <div className="section-title text-center mb-8">
-                        <h2>Library</h2>
-                    </div>
-                </div>
+            <section className="py-20 bg-[#e6eef4] min-h-[400px]">
+                <LibrarySection />
             </section>
 
-            <section id="scholarship" className="py-20 bg-[#e6eef4] min-h-[400px]">
-                <div className="container">
-                    <div className="section-title text-center mb-8">
-                        <h2>Scholarship</h2>
-                    </div>
-                </div>
+            <section className="py-20 bg-[#e6eef4] min-h-[400px]">
+                <ScholarshipSection />
             </section>
         </div>
     );

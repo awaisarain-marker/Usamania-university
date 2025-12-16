@@ -22,7 +22,7 @@ export default function Home() {
       <EventsSection />
       <CtaSection />
       <CampusExperienceSection />
-      <CampusExperienceSection />
+
     </div>
   );
 }
