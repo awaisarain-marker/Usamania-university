@@ -90,14 +90,17 @@ async function fetchCoursesFromSanity(): Promise<Program[]> {
             *[_type == "course"] | order(title asc) {
                 title,
                 "slug": slug.current,
+                cardImageUrl,
+                heroImageUrl,
                 "heroImage": heroImage.asset->url
             }
         `);
 
         if (courses && courses.length > 0) {
-            return courses.map((course: { title: string; slug: string; heroImage?: string }) => ({
+            return courses.map((course: { title: string; slug: string; cardImageUrl?: string; heroImageUrl?: string; heroImage?: string }) => ({
                 title: course.title,
-                image: course.heroImage || "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
+                // Priority: cardImageUrl > heroImageUrl > heroImage (uploaded) > fallback
+                image: course.cardImageUrl || course.heroImageUrl || course.heroImage || "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
                 link: `/courses/${course.slug}`,
                 alt: course.title,
             }));

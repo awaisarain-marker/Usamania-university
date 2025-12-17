@@ -29,18 +29,42 @@ export const course = defineType({
             type: 'string',
             description: 'e.g., Empowering the Next Generation of Tech Leaders',
         }),
+        // External URL for card image (grid on admission page)
+        defineField({
+            name: 'cardImageUrl',
+            title: 'Card Image URL (Grid)',
+            type: 'url',
+            description: 'External image URL for the card in the UIT Academics grid. Paste any image URL here.',
+        }),
+        // External URL for hero banner
+        defineField({
+            name: 'heroImageUrl',
+            title: 'Hero Banner Image URL',
+            type: 'url',
+            description: 'External image URL for the big banner at top of course page. Paste any image URL here.',
+        }),
+        // Upload option for hero image (optional)
         defineField({
             name: 'heroImage',
-            title: 'Hero Banner Image',
+            title: 'Hero Banner Image (Upload)',
             type: 'image',
+            description: 'Or upload an image directly (optional - URL above takes priority)',
             options: {
                 hotspot: true,
             },
         }),
+        // External URL for overview image
+        defineField({
+            name: 'overviewImageUrl',
+            title: 'Overview Section Image URL',
+            type: 'url',
+            description: 'External image URL for the overview section',
+        }),
         defineField({
             name: 'overviewImage',
-            title: 'Overview Section Image',
+            title: 'Overview Section Image (Upload)',
             type: 'image',
+            description: 'Or upload an image directly (optional)',
             options: {
                 hotspot: true,
             },
@@ -138,6 +162,14 @@ export const course = defineType({
             title: 'title',
             subtitle: 'subtitle',
             media: 'heroImage',
+            cardImageUrl: 'cardImageUrl',
+        },
+        prepare({ title, subtitle, media, cardImageUrl }) {
+            return {
+                title,
+                subtitle,
+                media: media || (cardImageUrl ? undefined : undefined),
+            }
         },
     },
 })

@@ -25,6 +25,9 @@ const courses = [
         title: 'BS Computer Science',
         slug: { _type: 'slug', current: 'bs-computer-science' },
         subtitle: 'Empowering the Next Generation of Tech Leaders',
+        cardImageUrl: 'https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg',
+        heroImageUrl: 'https://uitu.edu.pk/wp-content/uploads/2024/08/cs-2048x1152.jpg',
+        overviewImageUrl: 'https://uitu.edu.pk/wp-content/uploads/2024/08/cs-2048x1152.jpg',
         overviewContent: [
             createBlock('This 4-year program provides a comprehensive foundation in theoretical and algorithmic concepts, data structures, computer network design, information processing, and artificial intelligence. It emphasizes both the mathematical and engineering aspects of computing, preparing students for diverse roles in the tech industry.'),
         ],
