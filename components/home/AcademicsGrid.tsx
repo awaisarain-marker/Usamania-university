@@ -91,17 +91,15 @@ async function fetchCoursesFromSanity(): Promise<Program[]> {
                 title,
                 "slug": slug.current,
                 cardImageUrl,
-                "cardImage": cardImage.asset->url,
-                heroImageUrl,
-                "heroImage": heroImage.asset->url
+                "cardImage": cardImage.asset->url
             }
         `);
 
         if (courses && courses.length > 0) {
-            return courses.map((course: { title: string; slug: string; cardImageUrl?: string; cardImage?: string; heroImageUrl?: string; heroImage?: string }) => ({
+            return courses.map((course: { title: string; slug: string; cardImageUrl?: string; cardImage?: string }) => ({
                 title: course.title,
-                // Priority: cardImageUrl > cardImage (uploaded) > heroImageUrl > heroImage (uploaded) > fallback
-                image: course.cardImageUrl || course.cardImage || course.heroImageUrl || course.heroImage || "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
+                // Priority: cardImageUrl > cardImage (uploaded) > fallback
+                image: course.cardImageUrl || course.cardImage || "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
                 link: `/courses/${course.slug}`,
                 alt: course.title,
             }));

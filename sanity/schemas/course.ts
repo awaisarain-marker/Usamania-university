@@ -41,7 +41,7 @@ export const course = defineType({
             description: 'e.g., Empowering the Next Generation of Tech Leaders',
         }),
 
-        // IMAGES GROUP - Card Image (for grid)
+        // IMAGES GROUP - Card Image (for grid on admission page)
         defineField({
             name: 'cardImageUrl',
             title: '📷 Card Image - Option 1: Paste URL',
@@ -55,23 +55,6 @@ export const course = defineType({
             type: 'image',
             group: 'images',
             description: 'Or upload an image directly (URL takes priority if both provided)',
-            options: { hotspot: true },
-        }),
-
-        // IMAGES GROUP - Hero Banner
-        defineField({
-            name: 'heroImageUrl',
-            title: '🖼️ Hero Banner - Option 1: Paste URL',
-            type: 'url',
-            group: 'images',
-            description: 'External URL for the big banner at top of course page',
-        }),
-        defineField({
-            name: 'heroImage',
-            title: '🖼️ Hero Banner - Option 2: Upload',
-            type: 'image',
-            group: 'images',
-            description: 'Or upload directly (URL takes priority if both provided)',
             options: { hotspot: true },
         }),
 
