@@ -43,3 +43,31 @@ export async function getAllCourseSlugs() {
         }
     `)
 }
+
+// Get navigation menu
+export async function getNavigation() {
+    return client.fetch(`
+        *[_type == "navigation"][0] {
+            menuItems[] {
+                _key,
+                label,
+                href,
+                children[] {
+                    _key,
+                    label,
+                    href,
+                    children[] {
+                        _key,
+                        label,
+                        href,
+                        children[] {
+                            _key,
+                            label,
+                            href
+                        }
+                    }
+                }
+            }
+        }
+    `)
+}
