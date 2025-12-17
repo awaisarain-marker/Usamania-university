@@ -71,3 +71,19 @@ export async function getNavigation() {
         }
     `)
 }
+
+// Get header settings
+export async function getHeaderSettings() {
+    return client.fetch(`
+        *[_type == "headerSettings"][0] {
+            logoUrl,
+            "logo": logo.asset->url,
+            announcementText,
+            announcementLink,
+            announcementVisible,
+            applyNowText,
+            applyNowLink,
+            exploreText
+        }
+    `)
+}
