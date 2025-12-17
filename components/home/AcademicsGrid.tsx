@@ -1,11 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { client } from '@/sanity/lib/client';
 
-const allPrograms = [
+interface Program {
+    title: string;
+    image: string;
+    link: string;
+    alt: string;
+}
+
+// Fallback hardcoded programs (used when no Sanity courses exist)
+const fallbackPrograms: Program[] = [
     {
         title: "BS Computer Science",
         image: "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
@@ -74,9 +83,50 @@ const allPrograms = [
     },
 ];
 
+// Fetch courses from Sanity
+async function fetchCoursesFromSanity(): Promise<Program[]> {
+    try {
+        const courses = await client.fetch(`
+            *[_type == "course"] | order(title asc) {
+                title,
+                "slug": slug.current,
+                "heroImage": heroImage.asset->url
+            }
+        `);
+
+        if (courses && courses.length > 0) {
+            return courses.map((course: { title: string; slug: string; heroImage?: string }) => ({
+                title: course.title,
+                image: course.heroImage || "https://www.aubg.edu/wp-content/uploads/2022/03/138-480x320.jpg",
+                link: `/courses/${course.slug}`,
+                alt: course.title,
+            }));
+        }
+        return [];
+    } catch (error) {
+        console.error('Error fetching courses from Sanity:', error);
+        return [];
+    }
+}
+
 export default function AcademicsGrid() {
+    const [allPrograms, setAllPrograms] = useState<Program[]>(fallbackPrograms);
     const [visibleCount, setVisibleCount] = useState(5);
     const [isLoading, setIsLoading] = useState(false);
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadCourses() {
+            const sanityCourses = await fetchCoursesFromSanity();
+            if (sanityCourses.length > 0) {
+                // Use Sanity courses if available
+                setAllPrograms(sanityCourses);
+            }
+            // Keep fallback programs if no Sanity courses
+            setIsInitialLoading(false);
+        }
+        loadCourses();
+    }, []);
 
     const handleLoadMore = async () => {
         setIsLoading(true);
@@ -100,31 +150,40 @@ export default function AcademicsGrid() {
                         </div>
                     </div>
 
-                    {/* Program Cards */}
-                    {allPrograms.slice(0, visibleCount).map((program, index) => (
-                        <motion.div
-                            key={program.title} // Use unique key for animation
-                            layout
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: index >= 5 ? 0.1 : 0 }}
-                            className="col-4 academics-section__item"
-                        >
-                            <div className="academics-section__item-image">
-                                <Link className="image-hover" href={program.link}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={program.image} alt={program.alt} />
-                                </Link>
-                            </div>
-                            <div className="academics-section__item-title">
-                                <h3><Link href={program.link}>{program.title}</Link></h3>
-                            </div>
-                        </motion.div>
-                    ))}
+                    {/* Loading State */}
+                    {isInitialLoading ? (
+                        <div className="col-8 flex items-center justify-center py-12">
+                            <Loader2 className="w-8 h-8 animate-spin text-[#002856]" />
+                        </div>
+                    ) : (
+                        <>
+                            {/* Program Cards */}
+                            {allPrograms.slice(0, visibleCount).map((program, index) => (
+                                <motion.div
+                                    key={program.title}
+                                    layout
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: index >= 5 ? 0.1 : 0 }}
+                                    className="col-4 academics-section__item"
+                                >
+                                    <div className="academics-section__item-image">
+                                        <Link className="image-hover" href={program.link}>
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img src={program.image} alt={program.alt} />
+                                        </Link>
+                                    </div>
+                                    <div className="academics-section__item-title">
+                                        <h3><Link href={program.link}>{program.title}</Link></h3>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </>
+                    )}
                 </div>
 
                 {/* Load More Button */}
-                {visibleCount < allPrograms.length && (
+                {!isInitialLoading && visibleCount < allPrograms.length && (
                     <div className="row mt-8">
                         <div className="col-12 text-center">
                             <button
