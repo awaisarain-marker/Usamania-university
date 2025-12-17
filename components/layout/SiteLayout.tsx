@@ -8,8 +8,9 @@ import Footer from './Footer';
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdmin = pathname?.startsWith('/admin');
+    const isStudio = pathname?.startsWith('/studio');
 
-    if (isAdmin) {
+    if (isAdmin || isStudio) {
         return <>{children}</>;
     }
 
