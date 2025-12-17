@@ -1,99 +1,112 @@
 import Link from 'next/link';
 
-export default function Hero() {
+interface HeroButton {
+    text: string;
+    link: string;
+    style: 'red' | 'transparent';
+}
+
+interface HeroStat {
+    value: string;
+    label: string;
+}
+
+interface HeroQuickLink {
+    title: string;
+    subtitle: string;
+    link: string;
+    linkText: string;
+    imageUrl?: string | null;
+}
+
+interface HeroProps {
+    videoUrl?: string;
+    title?: string;
+    subtitle?: string;
+    buttons?: HeroButton[];
+    stats?: HeroStat[];
+    quickLinks?: HeroQuickLink[];
+}
+
+export default function Hero({
+    videoUrl = "https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4",
+    title = "Expand your world,",
+    subtitle = "shape its future",
+    buttons = [
+        { text: "Admission", link: "/admission", style: "red" as const },
+        { text: "How to apply", link: "/admission#how-to-apply", style: "transparent" as const }
+    ],
+    stats = [
+        { value: "Global Standards", label: "delivered in Pakistan" },
+        { value: "5+", label: "nationalities represented on campus" },
+        { value: "Education", label: "Relevant, modern learning" },
+        { value: "#1", label: "in career success" }
+    ],
+    quickLinks = [
+        { title: "MERL", subtitle: "Medical Engineering Research Lab", link: "/merl", linkText: "Learn more", imageUrl: null },
+        { title: "Final Year Projects", subtitle: "Innovative Student Projects", link: "/final-year-projects", linkText: "Explore Projects", imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/08/Blagoevgrad-96x69.jpg" },
+        { title: "Scholarship", subtitle: "Financial Aid Opportunities", link: "/students#scholarship", linkText: "Discover here", imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg" }
+    ]
+}: HeroProps) {
     return (
         <section className="hero">
             <div className="hero__media">
-                <video className="jsHomeVideo hero__video lazy video loaded" autoPlay muted loop playsInline poster="" src="https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4" id="html5_video_r7pbe8hd22a">
-                    <source type="video/mp4" src="https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4" />
-                    <source type="video/ogg" src="https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4" />
-                    <source type="video/mp4" src="https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4" />
+                <video className="jsHomeVideo hero__video lazy video loaded" autoPlay muted loop playsInline poster="" src={videoUrl} id="html5_video_r7pbe8hd22a">
+                    <source type="video/mp4" src={videoUrl} />
+                    <source type="video/ogg" src={videoUrl} />
+                    <source type="video/mp4" src={videoUrl} />
                 </video>
             </div>
 
             <div className="container">
                 <div className="hero__content">
                     <div className="page-title">
-                        <h1>Expand your world, <span className="block">shape its future</span></h1>
+                        <h1>{title} <span className="block">{subtitle}</span></h1>
                     </div>
-                    <Link href="/admission" className="btn-secondary --red --border --arrow ma-margin-right">
-                        <span>Admission</span>
-                        <svg width="25" height="25" className="icon icon-arrow " aria-hidden="true" role="img"><use href="#arrow"></use></svg>
-                    </Link>
-                    <Link href="/admission#how-to-apply" className="btn-secondary --border --transparent --arrow">
-                        <span>How to apply</span>
-                        <svg width="25" height="25" className="icon icon-arrow " aria-hidden="true" role="img"><use href="#arrow"></use></svg>
-                    </Link>
+                    {buttons.map((button, index) => (
+                        <Link
+                            key={index}
+                            href={button.link}
+                            className={`btn-secondary ${button.style === 'red' ? '--red' : '--transparent'} --border --arrow ${index === 0 ? 'ma-margin-right' : ''}`}
+                        >
+                            <span>{button.text}</span>
+                            <svg width="25" height="25" className="icon icon-arrow " aria-hidden="true" role="img"><use href="#arrow"></use></svg>
+                        </Link>
+                    ))}
                 </div>
 
                 {/* Text Groups */}
                 <div className="hero__groups-list">
-                    <div className="hero__groups-item">
-                        <div className="section-title text-white">
-                            <p>Global Standards</p>
+                    {stats.map((stat, index) => (
+                        <div key={index} className="hero__groups-item">
+                            <div className="section-title text-white">
+                                <p>{stat.value}</p>
+                            </div>
+                            <p className="text-bold">{stat.label}</p>
                         </div>
-                        <p className="text-bold">delivered in Pakistan</p>
-                    </div>
-                    <div className="hero__groups-item">
-                        <div className="section-title text-white">
-                            <p>5+</p>
-                        </div>
-                        <p className="text-bold">nationalities represented on campus </p>
-                    </div>
-                    <div className="hero__groups-item">
-                        <div className="section-title text-white">
-                            <p>Education</p>
-                        </div>
-                        <p className="text-bold">Relevant, modern learning</p>                    </div>
-                    <div className="hero__groups-item">
-                        <div className="section-title text-white">
-                            <p>#1</p>
-                        </div>
-                        <p className="text-bold">in career success</p>
-                    </div>
+                    ))}
                 </div>
 
                 <div className="hero__list">
-                    <Link href="/merl" className="hero__item" aria-label="MERL">
-                        <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">MERL</p>
-                            <p className="font-secondary text-tiny">Medical Engineering Research Lab</p>
-                            <span className="btn-link --red --small">
-                                Learn more
-                                <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
-                            </span>
-                        </div>
-                    </Link>
-                    <Link href="/final-year-projects" className="hero__item" aria-label="Final Year Projects">
-                        <div className="hero__item-img">
-                            <figure className="hero__item-img-wrap">
-                                <img className="image lazy loaded" alt="FYP Thumbnail" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/08/Blagoevgrad-96x69.jpg" />
-                            </figure>
-                        </div>
-                        <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">Final Year Projects</p>
-                            <p className="font-secondary text-tiny">Innovative Student Projects</p>
-                            <span className="btn-link --red --small">
-                                Explore Projects
-                                <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
-                            </span>
-                        </div>
-                    </Link>
-                    <Link href="/students#scholarship" className="hero__item" aria-label="Scholarship">
-                        <div className="hero__item-img">
-                            <figure className="hero__item-img-wrap">
-                                <img className="image lazy loaded" alt="Scholarship Thumbnail" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg" />
-                            </figure>
-                        </div>
-                        <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">Scholarship</p>
-                            <p className="font-secondary text-tiny">Financial Aid Opportunities</p>
-                            <span className="btn-link --red --small">
-                                Discover here
-                                <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
-                            </span>
-                        </div>
-                    </Link>
+                    {quickLinks.map((link, index) => (
+                        <Link key={index} href={link.link} className="hero__item" aria-label={link.title}>
+                            {link.imageUrl && (
+                                <div className="hero__item-img">
+                                    <figure className="hero__item-img-wrap">
+                                        <img className="image lazy loaded" alt={`${link.title} Thumbnail`} width="96" height="69" src={link.imageUrl} />
+                                    </figure>
+                                </div>
+                            )}
+                            <div className="hero__item-content">
+                                <p className="font-secondary text-small text-bold">{link.title}</p>
+                                <p className="font-secondary text-tiny">{link.subtitle}</p>
+                                <span className="btn-link --red --small">
+                                    {link.linkText}
+                                    <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
+                                </span>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
 
                 <div className="hero__scroll">

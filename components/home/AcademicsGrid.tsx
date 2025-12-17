@@ -111,7 +111,15 @@ async function fetchCoursesFromSanity(): Promise<Program[]> {
     }
 }
 
-export default function AcademicsGrid() {
+interface AcademicsGridProps {
+    title?: string;
+    description?: string;
+}
+
+export default function AcademicsGrid({
+    title = "UIT <br /> Academics",
+    description = "Discover the program that sparks your passion and sets you up for success. Your academic journey awaits!"
+}: AcademicsGridProps) {
     const [allPrograms, setAllPrograms] = useState<Program[]>(fallbackPrograms);
     const [visibleCount, setVisibleCount] = useState(5);
     const [isLoading, setIsLoading] = useState(false);
@@ -145,10 +153,10 @@ export default function AcademicsGrid() {
                     {/* Heading Column */}
                     <div className="col-4 academics-section__heading --center-v">
                         <div className="section-title">
-                            <h2>UIT <br /> Academics</h2>
+                            <h2 dangerouslySetInnerHTML={{ __html: title }} />
                         </div>
                         <div className="text-big">
-                            <p>Discover the program that sparks your passion and sets you up for success. Your academic journey awaits!</p>
+                            <p>{description}</p>
                         </div>
                     </div>
 

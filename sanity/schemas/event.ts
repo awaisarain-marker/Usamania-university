@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-    name: 'post',
-    title: 'Post',
+    name: 'event',
+    title: 'Event',
     type: 'document',
     fields: [
         defineField({
@@ -20,44 +20,20 @@ export default defineType({
             },
         }),
         defineField({
+            name: 'date',
+            title: 'Event Date',
+            type: 'datetime',
+        }),
+        defineField({
+            name: 'location',
+            title: 'Location',
+            type: 'string',
+        }),
+        defineField({
             name: 'externalUrl',
             title: 'External URL',
             type: 'url',
-            description: 'If provided, the post card will link to this URL instead of the internal blog page.',
-        }),
-        defineField({
-            name: 'description',
-            title: 'Short Description',
-            type: 'text',
-            rows: 3,
-            validation: Rule => Rule.max(200),
-        }),
-        defineField({
-            name: 'publishedAt',
-            title: 'Published at',
-            type: 'datetime',
-            initialValue: (new Date()).toISOString(),
-        }),
-        defineField({
-            name: 'author',
-            title: 'Author',
-            type: 'string',
-        }),
-        defineField({
-            name: 'category',
-            title: 'Category',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Academics', value: 'Academics' },
-                    { title: 'Economics', value: 'Economics' },
-                    { title: 'Alumni', value: 'Alumni' },
-                    { title: 'European Studies', value: 'European Studies' },
-                    { title: 'Politics', value: 'Politics' },
-                    { title: 'Events', value: 'Events' },
-                    { title: 'Achievements', value: 'Achievements' },
-                ],
-            },
+            description: 'If provided, the event card will link to this URL instead of the internal event page.',
         }),
         defineField({
             name: 'mainImage',

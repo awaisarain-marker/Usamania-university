@@ -2,63 +2,44 @@
 
 import { motion } from "framer-motion";
 
-export default function CampusExperienceSection() {
-    const galleryImages = [
-        {
-            src: "https://www.aubg.edu/wp-content/uploads/2022/09/Untitled-design-19-400x400.jpg",
-            alt: "Gallery Image 1"
-        },
-        {
-            src: "https://www.aubg.edu/wp-content/uploads/2022/09/All-campus-picnic-400x400.jpg",
-            alt: "Gallery Image 2"
-        },
-        {
-            src: "https://www.aubg.edu/wp-content/uploads/2022/09/Untitled-design-17-400x400.jpg",
-            alt: "Gallery Image 3"
-        },
-        {
-            src: "https://www.aubg.edu/wp-content/uploads/2022/09/Commencement-2022-400x400.jpg",
-            alt: "Gallery Image 4"
-        },
-        {
-            src: "https://www.aubg.edu/wp-content/uploads/2022/09/Move-in-day-2022-400x400.jpg",
-            alt: "Gallery Image 5"
-        }
-    ];
+interface GalleryImage {
+    imageUrl: string;
+    alt: string;
+}
 
+interface CampusExperienceSectionProps {
+    title?: string;
+    gallery?: GalleryImage[];
+}
+
+const defaultGallery: GalleryImage[] = [
+    { imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/09/Untitled-design-19-400x400.jpg", alt: "Gallery Image 1" },
+    { imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/09/All-campus-picnic-400x400.jpg", alt: "Gallery Image 2" },
+    { imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/09/Untitled-design-17-400x400.jpg", alt: "Gallery Image 3" },
+    { imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/09/Commencement-2022-400x400.jpg", alt: "Gallery Image 4" },
+    { imageUrl: "https://www.aubg.edu/wp-content/uploads/2022/09/Move-in-day-2022-400x400.jpg", alt: "Gallery Image 5" }
+];
+
+export default function CampusExperienceSection({
+    title = "Study Hard & Enjoy Your Campus Experience",
+    gallery = defaultGallery
+}: CampusExperienceSectionProps) {
     // CSS Transform values for each image
     const imageVariants = {
         hidden: (index: number) => {
-            // Center image (index 2) just fades/scales
             if (index === 2) return { opacity: 0, scale: 0.8, rotate: 0 };
-            // Others start at the center (50% 50% of container)
-            // Since they are absolute top:50% left:50%, translate(-50%, -50%) centers them perfectly
             return { x: "-50%", y: "-50%", opacity: 0, scale: 0.8, rotate: 0 };
         },
         visible: (index: number) => {
             const transforms = [
-                // Image 1 (Far Left): Absolute, starts at left: 50%.
-                // To reach far left edge (-660px from center), we need x: -170%
-                // (-50% centers it, -120% moves it left).
                 { x: "-170%", y: "-40%", rotate: -5 },
-
-                // Image 2 (Left):
-                // -50% centers it, -60% moves it left. Total -110%.
                 { x: "-110%", y: "-45%", rotate: -2 },
-
-                // Image 3 (Center): Relative, starts at 0.
                 { x: "0%", y: "0%", rotate: 0 },
-
-                // Image 4 (Right): Absolute, starts at left: 50%.
-                // -50% centers it, +60% moves it right. Total +10%.
                 { x: "10%", y: "-45%", rotate: 2 },
-
-                // Image 5 (Far Right):
-                // -50% centers it, +120% moves it right. Total +70%.
                 { x: "70%", y: "-40%", rotate: 5 }
             ];
 
-            const t = transforms[index];
+            const t = transforms[index] || transforms[2];
 
             return {
                 x: t.x,
@@ -69,11 +50,15 @@ export default function CampusExperienceSection() {
                 transition: {
                     duration: 0.8,
                     ease: "easeOut",
-                    delay: index * 0.1 // Stagger effect
+                    delay: index * 0.1
                 }
-            } as any; // Cast to any to avoid strict typing issues with Variants for now
+            } as any;
         }
     };
+
+    // Parse the title to add the ampersand styling
+    const titleParts = title.split('&');
+    const hasAmpersand = titleParts.length > 1;
 
     return (
         <section
@@ -86,14 +71,20 @@ export default function CampusExperienceSection() {
                 <div className="campus-experience__wrap">
                     <div className="section-title">
                         <h2 className="text-white">
-                            Study Hard
-                            <span className="campus-experience__char">&amp;</span>
-                            Enjoy Your Campus Experience
+                            {hasAmpersand ? (
+                                <>
+                                    {titleParts[0]}
+                                    <span className="campus-experience__char">&amp;</span>
+                                    {titleParts[1]}
+                                </>
+                            ) : (
+                                title
+                            )}
                         </h2>
                     </div>
 
                     <div className="campus-experience__gallery">
-                        {galleryImages.map((image, index) => (
+                        {gallery.map((image, index) => (
                             <motion.img
                                 key={index}
                                 custom={index}
@@ -105,7 +96,7 @@ export default function CampusExperienceSection() {
                                 alt={image.alt}
                                 width="384"
                                 height="384"
-                                src={image.src}
+                                src={image.imageUrl}
                             />
                         ))}
                     </div>

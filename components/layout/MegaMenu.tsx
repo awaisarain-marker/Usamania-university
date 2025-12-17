@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, ChevronRight, ChevronDown, LayoutGrid } from 'lucide-react';
 import { menuData, MenuItem } from './menuData';
+import { getNavigation } from '@/sanity/lib/queries';
 
 interface MegaMenuProps {
     isOpen: boolean;
@@ -10,15 +11,58 @@ interface MegaMenuProps {
 }
 
 const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
+    // State for menu items (defaults to hardcoded data)
+    const [menuItems, setMenuItems] = useState<MenuItem[]>(menuData);
+
     // Determine the default active category (first item's ID)
-    const [activeCategory, setActiveCategory] = useState<string>(menuData[0]?.id || 'about-us');
+    const [activeCategory, setActiveCategory] = useState<string>(menuItems[0]?.id || 'about-us');
+
+    // Fetch navigation from Sanity on mount
+    useEffect(() => {
+        async function fetchMenu() {
+            try {
+                const data = await getNavigation();
+                if (data && data.menuItems && data.menuItems.length > 0) {
+                    // Transform Sanity data to match MenuItem interface
+                    const sanityMenu: MenuItem[] = data.menuItems.map((item: any) => ({
+                        id: item._key,
+                        label: item.label,
+                        href: item.href,
+                        children: item.children?.map((child: any) => ({
+                            id: child._key,
+                            label: child.label,
+                            href: child.href,
+                            children: child.children?.map((subChild: any) => ({
+                                id: subChild._key,
+                                label: subChild.label,
+                                href: subChild.href,
+                                children: subChild.children?.map((leaf: any) => ({
+                                    id: leaf._key,
+                                    label: leaf.label,
+                                    href: leaf.href
+                                }))
+                            }))
+                        }))
+                    }));
+                    setMenuItems(sanityMenu);
+                    // Update active category if it was using the default
+                    if (activeCategory === 'about-us' || !menuItems.find(i => i.id === activeCategory)) {
+                        setActiveCategory(sanityMenu[0]?.id || '');
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching navigation from Sanity:', error);
+            }
+        }
+        fetchMenu();
+    }, []);
 
     // Reset active category when menu opens
     useEffect(() => {
         if (isOpen) {
-            setActiveCategory(menuData[0]?.id || 'about-us');
+            setActiveCategory(menuItems[0]?.id || '');
         }
-    }, [isOpen]);
+    }, [isOpen, menuItems]);
 
     // Recursive helper to render submenu items
     const renderSubItems = (items: MenuItem[], level: number = 0) => {
@@ -49,7 +93,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     };
 
     // Find the currently active parent item data
-    const activeData = menuData.find(item => item.id === activeCategory);
+    const activeData = menuItems.find(item => item.id === activeCategory);
 
     return (
         <AnimatePresence>
@@ -95,7 +139,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                             {/* MOBILE NAVIGATION (< lg) */}
                             <div className="lg:hidden col-span-1 h-full overflow-y-auto no-scrollbar py-6">
                                 <div className="space-y-1">
-                                    {menuData.map((item) => (
+                                    {menuItems.map((item) => (
                                         <div key={item.id} className="border-b border-white/5 last:border-0">
                                             <button
                                                 onClick={() => setActiveCategory(activeCategory === item.id ? '' : item.id)}
@@ -133,7 +177,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                             {/* DESKTOP LEFT SIDE: Sticky Navigation Menu (lg+) */}
                             <div className="hidden lg:flex lg:col-span-3 flex-col border-r border-white/10 h-full overflow-y-auto no-scrollbar py-8 pr-4">
                                 <nav className="space-y-1">
-                                    {menuData.map((item) => (
+                                    {menuItems.map((item) => (
                                         <div
                                             key={item.id}
                                             onMouseEnter={() => setActiveCategory(item.id)}

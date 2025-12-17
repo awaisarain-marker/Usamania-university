@@ -33,8 +33,8 @@ export const headerSettings = defineType({
             name: 'announcementText',
             title: '📢 Announcement Button - Text',
             type: 'string',
-            description: 'e.g., "Admission Open Spring 2026!"',
-            initialValue: 'Admission Open Spring 2026!',
+            description: 'e.g., "Admission Open Springs 2026!"',
+            initialValue: 'Admission Open Springs 2026!',
         }),
         defineField({
             name: 'announcementLink',

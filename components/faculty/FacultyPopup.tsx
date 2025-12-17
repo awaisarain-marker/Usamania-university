@@ -1,9 +1,35 @@
 import React, { useState } from 'react';
 
+interface FacultyMember {
+    name: string;
+    designation: string;
+    imageUrl?: string;
+    image?: string;
+    email?: string;
+    ext?: string;
+    overview?: string[];
+    qualificationDetails?: string[];
+    specialization?: string[];
+    experience?: string[];
+    certifications?: string[];
+    courses?: string[];
+    // Legacy support for popupData structure
+    popupData?: {
+        email?: string;
+        ext?: string;
+        overview?: string[];
+        qualification_details?: string[];
+        specialization?: string[];
+        experience?: string[];
+        certifications?: string[];
+        courses?: string[];
+    };
+}
+
 interface FacultyPopupProps {
     isOpen: boolean;
     onClose: () => void;
-    data: any;
+    data: FacultyMember | null;
 }
 
 export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProps) {
@@ -11,7 +37,17 @@ export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProp
 
     if (!isOpen || !data) return null;
 
+    // Support both new Sanity structure and legacy popupData structure
     const popup = data.popupData || {};
+    const email = data.email || popup.email;
+    const ext = data.ext || popup.ext;
+    const overview = data.overview || popup.overview || [];
+    const qualificationDetails = data.qualificationDetails || popup.qualification_details || [];
+    const specialization = data.specialization || popup.specialization || [];
+    const experience = data.experience || popup.experience || [];
+    const certifications = data.certifications || popup.certifications || [];
+    const courses = data.courses || popup.courses || [];
+    const imageUrl = data.imageUrl || data.image;
 
     const renderSection = (title: string | null, items: string[] | undefined) => {
         if (!items || items.length === 0) return null;
@@ -27,25 +63,24 @@ export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProp
 
     const overviewContent = (
         <div>
-            {renderSection(null, popup.overview)}
-            {renderSection('Qualification', popup.qualification_details)}
-            {renderSection('Area of Specialization', popup.specialization)}
-            {renderSection('Work Experience', popup.experience)}
+            {renderSection(null, overview)}
+            {renderSection('Qualification', qualificationDetails)}
+            {renderSection('Area of Specialization', specialization)}
+            {renderSection('Work Experience', experience)}
         </div>
     );
 
     const tabs = [
         { name: 'Overview', content: overviewContent },
-        { name: 'Certifications', content: renderSection(null, popup.certifications) },
-        { name: 'Course Taught', content: renderSection(null, popup.courses) }
+        { name: 'Certifications', content: renderSection(null, certifications) },
+        { name: 'Course Taught', content: renderSection(null, courses) }
     ];
 
-    const hasOverviewData = (popup.overview?.length || 0) + (popup.qualification_details?.length || 0) + (popup.specialization?.length || 0) + (popup.experience?.length || 0) > 0;
+    const hasOverviewData = overview.length + qualificationDetails.length + specialization.length + experience.length > 0;
 
     // Filter out tabs with no content
     const visibleTabs = tabs.filter(tab => {
         if (tab.name === 'Overview') return hasOverviewData;
-        // For others, content is the result of renderSection which returns null if empty
         return tab.content !== null;
     });
 
@@ -65,22 +100,22 @@ export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProp
                 {/* Left Side: Profile Info */}
                 <div className="w-full md:w-1/3 bg-white p-8 border-r border-gray-200 flex flex-col items-center text-center overflow-y-auto popup-scroll-hide">
                     <div className="w-48 h-56 mb-6 shadow-md bg-gray-200">
-                        <img src={data.image} alt={data.name} className="w-full h-full object-cover" />
+                        <img src={imageUrl} alt={data.name} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-2xl font-bold text-[#002856] mb-2 font-lato">{data.name}</h3>
                     <p className="text-[#d32f2f] font-medium mb-4 uppercase tracking-wide text-sm">{data.designation}</p>
 
                     <div className="w-full text-left space-y-3 text-sm text-gray-600 mt-4 border-t pt-6">
                         <p><strong>Department of Computer Science</strong></p>
-                        {popup.email && (
+                        {email && (
                             <p>
                                 <strong>Email:</strong>{' '}
-                                <a href={`mailto:${popup.email}`} className="animated-link text-base">
-                                    {popup.email}
+                                <a href={`mailto:${email}`} className="animated-link text-base">
+                                    {email}
                                 </a>
                             </p>
                         )}
-                        {popup.ext && <p><strong>Ext.:</strong> {popup.ext}</p>}
+                        {ext && <p><strong>Ext.:</strong> {ext}</p>}
                     </div>
                 </div>
 

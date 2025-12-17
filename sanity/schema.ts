@@ -1,11 +1,22 @@
 import { type SchemaTypeDefinition } from 'sanity'
 
-import hero from './schemas/hero'
-import post from './schemas/post'
-import { course } from './schemas/course'
-import { navigation, menuItem } from './schemas/navigation'
 import { headerSettings } from './schemas/headerSettings'
+import { navigation, menuItem } from './schemas/navigation'
+import hero from './schemas/hero'
+import { course } from './schemas/course'
+import post from './schemas/post'
+import { footer } from './schemas/footer'
+import doubleImage from './schemas/doubleImage'
+
+import quote from './schemas/quote'
+import twoColumnImageGrid from './schemas/twoColumnImageGrid'
+import event from './schemas/event'
+import homePage from './schemas/homePage'
+import aboutPage from './schemas/aboutPage'
+import facultyMember from './schemas/facultyMember'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [hero, post, course, navigation, menuItem, headerSettings],
+    types: [homePage, aboutPage, facultyMember, post, hero, course, navigation, menuItem, headerSettings, footer, doubleImage, quote, twoColumnImageGrid, event],
 }
+
+

@@ -1,36 +1,81 @@
 'use client';
 
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { getFooter } from '@/sanity/lib/queries';
 
 export default function Footer() {
+    const [footerData, setFooterData] = useState<any>(null);
+
+    useEffect(() => {
+        async function fetchFooter() {
+            try {
+                const data = await getFooter();
+                if (data) {
+                    setFooterData(data);
+                }
+            } catch (error) {
+                console.error('Error fetching footer data:', error);
+            }
+        }
+        fetchFooter();
+    }, []);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const contactInfo = [
-        {
-            title: "UIT University",
-            address: "ST-13, Block 7, Gulshan-e-Iqbal, Abul Hasan Isphahani Road, Off Main University Road, Karachi – 75300",
-            email: "info@uitu.edu.pk",
-            phone: null,
-            uan: "(92-21) 111-978-275, 34994305, 34978274-5",
-            admissions: "0333-0399113"
-        }
-    ];
+    // Fallback data
+    const defaultContactInfo = {
+        title: "UIT University",
+        address: "ST-13, Block 7, Gulshan-e-Iqbal, Abul Hasan Isphahani Road, Off Main University Road, Karachi – 75300",
+        email: "info@uitu.edu.pk",
+        phone: null,
+        uan: "(92-21) 111-978-275, 34994305, 34978274-5",
+        admissions: "0333-0399113"
+    };
 
-    const socialLinks = [
+    const defaultSocialLinks = [
         { href: "https://www.facebook.com/UITUniversityOfficial", icon: Facebook, alt: "Facebook" },
         { href: "https://x.com/UITUniversity?t=D7cpW-xoK5evI43-SWdnDw&s=09", icon: Twitter, alt: "X (Twitter)" },
         { href: "https://www.linkedin.com/school/uitu/", icon: Linkedin, alt: "LinkedIn" },
         { href: "https://www.instagram.com/invites/contact/?i=injsg9prvu9k&utm_content=2pjgkg6", icon: Instagram, alt: "Instagram" }
     ];
 
-    const footerMenuItems = [
+    const defaultFooterMenuItems = [
         { href: "/staff-and-faculty-members/", label: "Contact us" },
         { href: "/careers/", label: "Careers at UIT" },
+        { href: "/events/", label: "Events" },
         { href: "/open-tenders/", label: "Open Tenders" },
         { href: "/privacy-notices/", label: "Privacy Notices" }
     ];
+
+    // Use Sanity data or fallback
+    const contact = footerData?.contactInfo || defaultContactInfo;
+    const copyright = footerData?.copyrightText || "Copyright 2025. All rights reserved.";
+    const universityDescription = footerData?.universityDescription || "Pakistan University in Karachi";
+    const slogan = footerData?.slogan || "Expand your world";
+    // Priority: Uploaded Image > URL > Default
+    const bgImage = footerData?.footerImage || footerData?.footerImageUrl || "https://ik.imagekit.io/byat8clceo/Web%20Footer.png";
+
+    // Process social links (map platform names to icons if needed, or just use generic)
+    const getSocialIcon = (platform: string) => {
+        switch (platform?.toLowerCase()) {
+            case 'facebook': return Facebook;
+            case 'twitter': return Twitter;
+            case 'linkedin': return Linkedin;
+            case 'instagram': return Instagram;
+            default: return Facebook;
+        }
+    };
+
+    const socialLinks = footerData?.socialLinks?.map((link: any) => ({
+        href: link.url,
+        icon: getSocialIcon(link.platform),
+        alt: link.platform
+    })) || defaultSocialLinks;
+
+    const quickLinks = footerData?.quickLinks || defaultFooterMenuItems;
 
     return (
         <footer className="site-footer" role="contentinfo">
@@ -50,18 +95,18 @@ export default function Footer() {
                         {/* Left Column - Info & Socials */}
                         <div className="col col-4 footer-top__info">
                             <div className="footer-top__title-top">
-                                <p className="text-blue">Pakistan University in Karachi</p>
+                                <p className="text-blue">{universityDescription}</p>
                             </div>
                             <div className="footer-top__title">
-                                <p className="text-blue">Expand your world</p>
+                                <p className="text-blue">{slogan}</p>
                             </div>
                             <div className="footer-top__copyright mb-6">
-                                <p className="text-blue">Copyright 2025. All rights reserved.</p>
+                                <p className="text-blue">{copyright}</p>
                             </div>
 
                             {/* Social Icons moved here */}
                             <div className="socials socials-footer !justify-start">
-                                {socialLinks.map((social, index) => {
+                                {socialLinks.map((social: any, index: number) => {
                                     const Icon = social.icon;
                                     return (
                                         <a
@@ -86,32 +131,37 @@ export default function Footer() {
                                 {/* Column 1: Locations (Existing Contact Info) */}
                                 <div className="footer-section col-span-2">
                                     <h3 className="text-blue font-bold text-xl mb-6 uppercase">Locations</h3>
-                                    {contactInfo.map((contact, index) => (
-                                        <div key={index} className="mb-6">
-                                            <p className="text-blue font-bold text-lg mb-1">{contact.title}</p>
-                                            <p className="text-blue text-sm mb-4 max-w-md">{contact.address}</p>
+                                    <div className="mb-6">
+                                        <p className="text-blue font-bold text-lg mb-1">{contact.title}</p>
+                                        <p className="text-blue text-sm mb-4 max-w-md">{contact.address}</p>
 
-                                            {contact.email && (
-                                                <p className="mb-1">
-                                                    <a href={`mailto:${contact.email}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.email}</a>
-                                                </p>
-                                            )}
+                                        {contact.email && (
+                                            <p className="mb-1">
+                                                <a href={`mailto:${contact.email}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.email}</a>
+                                            </p>
+                                        )}
 
-                                            {contact.uan && (
-                                                <p className="mb-1">
-                                                    <span className="text-blue font-bold text-sm">UAN: </span>
-                                                    <span className="text-blue text-sm">{contact.uan}</span>
-                                                </p>
-                                            )}
+                                        {contact.phone && (
+                                            <p className="mb-1">
+                                                <span className="text-blue font-bold text-sm">Phone: </span>
+                                                <a href={`tel:${contact.phone}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.phone}</a>
+                                            </p>
+                                        )}
 
-                                            {contact.admissions && (
-                                                <p className="mb-1">
-                                                    <span className="text-blue font-bold text-sm">Admissions: </span>
-                                                    <a href={`tel:${contact.admissions}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.admissions}</a>
-                                                </p>
-                                            )}
-                                        </div>
-                                    ))}
+                                        {contact.uan && (
+                                            <p className="mb-1">
+                                                <span className="text-blue font-bold text-sm">UAN: </span>
+                                                <span className="text-blue text-sm">{contact.uan}</span>
+                                            </p>
+                                        )}
+
+                                        {contact.admissions && (
+                                            <p className="mb-1">
+                                                <span className="text-blue font-bold text-sm">Admissions: </span>
+                                                <a href={`tel:${contact.admissions}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.admissions}</a>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Column 3: Quick Links (Moved to replace unused cols) */}
@@ -119,9 +169,9 @@ export default function Footer() {
                                     <div className="mb-8">
                                         <h3 className="text-blue font-bold text-xl mb-6 uppercase">Quick Links</h3>
                                         <ul className="space-y-3">
-                                            {footerMenuItems.map((item, index) => (
+                                            {quickLinks.map((item: any, index: number) => (
                                                 <li key={index}>
-                                                    <a href={item.href} className="text-blue hover:text-blue transition-colors">{item.label}</a>
+                                                    <a href={item.url || item.href} className="text-blue hover:text-blue transition-colors">{item.label}</a>
                                                 </li>
                                             ))}
                                         </ul>
@@ -141,7 +191,7 @@ export default function Footer() {
                     alt="Footer Background"
                     width="1920"
                     height="733"
-                    src="https://ik.imagekit.io/byat8clceo/Web%20Footer.png"
+                    src={bgImage}
                 />
             </div>
         </footer>

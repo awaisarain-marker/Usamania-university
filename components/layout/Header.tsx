@@ -21,7 +21,7 @@ interface HeaderSettings {
 // Default values (fallback if Sanity data not loaded)
 const defaultSettings: HeaderSettings = {
     logoUrl: 'https://uitu.edu.pk/wp-content/uploads/2023/12/logo_with_text_final__6_-removebg-preview.png',
-    announcementText: 'Admission Open Spring 2026!',
+    announcementText: 'Admission Open Springs 2026!',
     announcementLink: 'https://eduboard.uit.edu/AdmissionPortal/Login',
     announcementVisible: true,
     applyNowText: 'Apply Now',
@@ -55,6 +55,7 @@ export default function Header() {
                         exploreText
                     }
                 `);
+                console.log('Sanity Header Settings:', data);
                 if (data) {
                     setSettings({ ...defaultSettings, ...data });
                 }

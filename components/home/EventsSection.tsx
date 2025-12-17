@@ -1,56 +1,40 @@
 'use client';
 
-import { useState } from 'react';
-
-const events = [
-    {
-        day: "08",
-        month: "December",
-        title: "Students' Day",
-        time: "8:00 am",
-        location: "Bulgaria",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-    },
-    {
-        day: "09",
-        month: "December",
-        title: "Intro To Photography Exhibition",
-        time: "7:00 pm",
-        location: "Main Building",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-    },
-    {
-        day: "10",
-        month: "December",
-        title: "UIT Evening in New England",
-        time: "7:00 pm",
-        location: "310 River Street, Billerica, MA",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-    },
-    {
-        day: "10",
-        month: "December",
-        title: "Application & Scholarships Explained Webinar",
-        time: "6:00 pm",
-        location: "Online",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-    },
-    {
-        day: "11",
-        month: "December",
-        title: "Rooms We Carry Film Festival | Day 3",
-        time: "4:00 pm",
-        location: "BAC Auditorium",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-    },
-];
+import { useState, useEffect } from 'react';
+import { getAllEvents } from '@/sanity/lib/queries';
 
 interface EventsSectionProps {
     title?: string;
 }
 
 export default function EventsSection({ title = "Upcoming Events" }: EventsSectionProps) {
+    const [events, setEvents] = useState<any[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        async function fetchEvents() {
+            try {
+                const data = await getAllEvents();
+                // Map Sanity data to component format
+                const formattedEvents = data.map((event: any) => {
+                    const date = new Date(event.date);
+                    return {
+                        day: date.getDate().toString().padStart(2, '0'),
+                        month: date.toLocaleString('default', { month: 'long' }),
+                        title: event.title,
+                        time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+                        location: event.location,
+                        link: event.externalUrl || `/events/${event.slug}`,
+                        externalUrl: event.externalUrl
+                    };
+                });
+                setEvents(formattedEvents);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        }
+        fetchEvents();
+    }, []);
 
     const handlePrev = () => {
         setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
@@ -61,6 +45,8 @@ export default function EventsSection({ title = "Upcoming Events" }: EventsSecti
         setCurrentIndex((prev) => (prev < events.length - 2 ? prev + 1 : prev));
     };
 
+    if (events.length === 0) return null;
+
     return (
         <section className="events-section">
             <div className="container">
@@ -69,7 +55,7 @@ export default function EventsSection({ title = "Upcoming Events" }: EventsSecti
                     <div className="section-title">
                         <h2>{title}</h2>
                     </div>
-                    <a href="/event-calendar/" className="btn-secondary --red --arrow --border">
+                    <a href="/events/" className="btn-secondary --red --arrow --border">
                         <span className="uppercase">View events calendar</span>
                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                             <use xlinkHref="#arrow"></use>
@@ -82,7 +68,11 @@ export default function EventsSection({ title = "Upcoming Events" }: EventsSecti
                     <div className="swiper-wrapper" style={{ transform: `translateX(-${currentIndex * 50}%)` }}>
                         {events.map((event, index) => (
                             <div key={index} className="swiper-slide events-section__slide">
-                                <a href={event.link} className="events-section__item">
+                                <a
+                                    href={event.link}
+                                    className="events-section__item"
+                                    target={event.externalUrl ? "_blank" : "_self"}
+                                >
                                     <div className="events-section__item-date">
                                         <div className="events-section__item-day">
                                             <span>{event.day}</span>

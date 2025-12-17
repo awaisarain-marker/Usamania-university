@@ -222,7 +222,8 @@ export const menuData: MenuItem[] = [
         label: "News & Media",
         children: [
             { id: "media-press", label: "Media / Press", href: "/uit-today" },
-            { id: "news-events", label: "News and Events", href: "/uit-today" },
+            { id: "news", label: "News", href: "/uit-today" },
+            { id: "events", label: "Events", href: "/events" },
             { id: "newsletter", label: "Newsletter", href: "/uit-today" },
             { id: "views-opinions", label: "Views and Opinions", href: "/uit-today" },
             { id: "bio-symposium", label: "Bio Symposium 2023", href: "/uit-today" }
