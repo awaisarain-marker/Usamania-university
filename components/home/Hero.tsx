@@ -30,21 +30,21 @@ export default function Hero() {
                 <div className="hero__groups-list">
                     <div className="hero__groups-item">
                         <div className="section-title text-white">
-                            <p>US + EU</p>
+                            <p>Global Standards</p>
                         </div>
-                        <p className="text-bold">diploma</p>
+                        <p className="text-bold">delivered in Pakistan</p>
                     </div>
                     <div className="hero__groups-item">
                         <div className="section-title text-white">
-                            <p>40+</p>
+                            <p>5+</p>
                         </div>
                         <p className="text-bold">nationalities represented on campus </p>
                     </div>
                     <div className="hero__groups-item">
                         <div className="section-title text-white">
-                            <p>Liberal Arts</p>
+                            <p>Education</p>
                         </div>
-                        <p className="text-bold">education</p>                    </div>
+                        <p className="text-bold">Relevant, modern learning</p>                    </div>
                     <div className="hero__groups-item">
                         <div className="section-title text-white">
                             <p>#1</p>
@@ -54,46 +54,46 @@ export default function Hero() {
                 </div>
 
                 <div className="hero__list">
-                    <a href="https://www.aubg.edu/admissions/bachelors/study-in-europe/" className="hero__item" aria-label="Study in Europe">
+                    <Link href="/merl" className="hero__item" aria-label="MERL">
                         <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">Study in Europe</p>
-                            <p className="font-secondary text-tiny">Graduate with a U.S. Degree</p>
+                            <p className="font-secondary text-small text-bold">MERL</p>
+                            <p className="font-secondary text-tiny">Medical Engineering Research Lab</p>
                             <span className="btn-link --red --small">
                                 Learn more
                                 <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
                             </span>
                         </div>
-                    </a>
-                    <a href="https://www.aubg.edu/blagoevgrad-and-bulgaria/" className="hero__item" aria-label="Your European Home Away from Home">
+                    </Link>
+                    <Link href="/final-year-projects" className="hero__item" aria-label="Final Year Projects">
                         <div className="hero__item-img">
                             <figure className="hero__item-img-wrap">
-                                <img className="image lazy loaded" alt="Life in Blagoevgrad, Bulgaria, and Beyond Thumb Image" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/08/Blagoevgrad-96x69.jpg" />
+                                <img className="image lazy loaded" alt="FYP Thumbnail" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/08/Blagoevgrad-96x69.jpg" />
                             </figure>
                         </div>
                         <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">Your European Home Away from Home</p>
-                            <p className="font-secondary text-tiny">Your European Home Away from Home</p>
+                            <p className="font-secondary text-small text-bold">Final Year Projects</p>
+                            <p className="font-secondary text-tiny">Innovative Student Projects</p>
                             <span className="btn-link --red --small">
-                                Explore our location
+                                Explore Projects
                                 <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
                             </span>
                         </div>
-                    </a>
-                    <a href="https://www.aubg.edu/admissions/bachelors/cost-aid/loans/loans-for-u-s-students/" className="hero__item" aria-label="FAFSA">
+                    </Link>
+                    <Link href="/students#scholarship" className="hero__item" aria-label="Scholarship">
                         <div className="hero__item-img">
                             <figure className="hero__item-img-wrap">
-                                <img className="image lazy loaded" alt="Loans for U.S. Students Thumb Image" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg" />
+                                <img className="image lazy loaded" alt="Scholarship Thumbnail" width="96" height="69" src="https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg" />
                             </figure>
                         </div>
                         <div className="hero__item-content">
-                            <p className="font-secondary text-small text-bold">FAFSA</p>
-                            <p className="font-secondary text-tiny">Federal Direct Loans</p>
+                            <p className="font-secondary text-small text-bold">Scholarship</p>
+                            <p className="font-secondary text-tiny">Financial Aid Opportunities</p>
                             <span className="btn-link --red --small">
                                 Discover here
                                 <svg width="25" height="25" className="icon icon-arrow-top-right " aria-hidden="true" role="img"><use href="#arrow-top-right"></use></svg>
                             </span>
                         </div>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="hero__scroll">

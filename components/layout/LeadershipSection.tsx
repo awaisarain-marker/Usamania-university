@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface ExpandableTextProps {
     children: React.ReactNode;
@@ -90,33 +91,34 @@ interface LeadershipSectionProps {
 
 export default function LeadershipSection({ hideHeader = false, introTabConfig, customTabs, customBottomSection }: LeadershipSectionProps) {
     const [activeTab, setActiveTab] = useState(0);
+    const searchParams = useSearchParams();
+    const sectionRef = useRef<HTMLElement>(null);
 
-    // Effect to handle hash-based navigation for tabs
+    // Effect to handle query param-based navigation for tabs
     useEffect(() => {
-        const handleHashChange = () => {
-            const hash = window.location.hash.replace('#', '').toLowerCase();
-            if (!hash) return;
+        const tabParam = searchParams.get('tab');
+        if (!tabParam) return;
 
-            const currentTabs = customTabs || defaultTabs;
-            const index = currentTabs.findIndex(t =>
-                t.id.toLowerCase() === hash ||
-                t.label.toLowerCase().replace(/\s+/g, '-') === hash
-            );
+        const currentTabs = customTabs || defaultTabs;
+        const index = currentTabs.findIndex(t => {
+            const normalizedId = t.id.toLowerCase().replace(/\s+/g, '-');
+            const normalizedLabel = t.label.toLowerCase().replace(/\s+/g, '-');
+            return normalizedId === tabParam || normalizedLabel === tabParam;
+        });
 
-            if (index !== -1) {
-                setActiveTab(index);
-                // Optional: smooth scroll to section if needed, but the hash link usually handles scrolling. 
-                // We might need to adjust for fixed header offset later.
-            }
-        };
-
-        // Check on mount
-        handleHashChange();
-
-        // Listen for hash changes
-        window.addEventListener('hashchange', handleHashChange);
-        return () => window.removeEventListener('hashchange', handleHashChange);
-    }, [customTabs]); // customTabs is a dependency, defaultTabs is stable enough or reconstructed.
+        if (index !== -1) {
+            setActiveTab(index);
+            // Scroll to the section with a slight delay to allow for rendering
+            setTimeout(() => {
+                sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        } else if (tabParam === 'accreditation') {
+            setTimeout(() => {
+                const accreditationSection = document.getElementById('accreditation-section');
+                accreditationSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [searchParams, customTabs]); // Dependencies need to include searchParams and customTabs
 
     const defaultTabs = [
         {
@@ -662,7 +664,7 @@ export default function LeadershipSection({ hideHeader = false, introTabConfig, 
     const tabs = customTabs || defaultTabs;
 
     return (
-        <div className="flexible --border">
+        <div ref={sectionRef as React.RefObject<HTMLDivElement>} className="flexible --border">
             <div className="container">
                 <div className="flexible__wrap --white">
                     <article className="flexible__content">
@@ -718,7 +720,7 @@ export default function LeadershipSection({ hideHeader = false, introTabConfig, 
                         {customBottomSection !== undefined ? (
                             customBottomSection
                         ) : (
-                            <section className="image-cta">
+                            <section id="accreditation-section" className="image-cta">
                                 <div className="container">
                                     <div className="image-cta__wrap">
                                         <div className="image-cta__head">

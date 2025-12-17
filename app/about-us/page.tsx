@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PageHero from '@/components/layout/PageHero';
 import TabAccordion from '@/components/layout/TabAccordion';
 import LeadershipSection from '@/components/layout/LeadershipSection';
@@ -27,10 +27,12 @@ export default function AboutUs() {
             </PageHero>
 
             {/* Tabbed Content Section */}
-            <TabAccordion />
+            <Suspense fallback={<div className="container py-12 text-center">Loading tabs...</div>}>
+                <TabAccordion />
+            </Suspense>
 
             {/* Our Journey Section */}
-            <section className="pb-16 md:pb-24 pt-0 md:pt-0">
+            <section className="pb-16 md:pb-24 pt-12 md:pt-16">
                 <div className="container">
                     <h2 className="text-[#002856] font-serif text-4xl md:text-5xl mb-12 text-center">Our Journey</h2>
                     <div className="grid md:grid-cols-4 gap-6">
@@ -51,10 +53,14 @@ export default function AboutUs() {
             </section>
 
             {/* Leadership Section */}
-            <LeadershipSection />
+            <Suspense fallback={<div className="container py-12 text-center">Loading leadership section...</div>}>
+                <LeadershipSection />
+            </Suspense>
 
             {/* Facilities Section */}
-            <FacilitiesSection />
+            <Suspense fallback={<div className="container py-12 text-center">Loading facilities...</div>}>
+                <FacilitiesSection />
+            </Suspense>
         </main>
     );
 }

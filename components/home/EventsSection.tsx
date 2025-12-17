@@ -9,7 +9,7 @@ const events = [
         title: "Students' Day",
         time: "8:00 am",
         location: "Bulgaria",
-        link: "https://www.aubg.edu/events/students-day/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
     },
     {
         day: "09",
@@ -17,7 +17,7 @@ const events = [
         title: "Intro To Photography Exhibition",
         time: "7:00 pm",
         location: "Main Building",
-        link: "https://www.aubg.edu/events/intro-to-photography-exhibition/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
     },
     {
         day: "10",
@@ -25,7 +25,7 @@ const events = [
         title: "UIT Evening in New England",
         time: "7:00 pm",
         location: "310 River Street, Billerica, MA",
-        link: "https://www.aubg.edu/events/aubg-evening-in-new-england/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
     },
     {
         day: "10",
@@ -33,7 +33,7 @@ const events = [
         title: "Application & Scholarships Explained Webinar",
         time: "6:00 pm",
         location: "Online",
-        link: "https://www.aubg.edu/events/application-scholarships-explained/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
     },
     {
         day: "11",
@@ -41,7 +41,7 @@ const events = [
         title: "Rooms We Carry Film Festival | Day 3",
         time: "4:00 pm",
         location: "BAC Auditorium",
-        link: "https://www.aubg.edu/events/rooms-we-carry-film-festival-day-3/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
     },
 ];
 

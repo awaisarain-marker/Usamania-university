@@ -47,9 +47,21 @@ const testimonials = [
 
 export default function TestimonialsSection() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleThumbClick = (index: number) => {
         setActiveIndex(index);
+    };
+
+    const openModal = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsModalOpen(true);
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        document.body.style.overflow = 'unset'; // Restore scrolling
     };
 
     const activeTestimonial = testimonials[activeIndex];
@@ -75,12 +87,16 @@ export default function TestimonialsSection() {
                                     <div className="testimonials-section__slide-quote">
                                         <p>{activeTestimonial.quote}</p>
                                     </div>
-                                    <a href="#" className="btn-secondary --red --arrow --border js-toggle-testimonial">
+                                    <button
+                                        onClick={openModal}
+                                        className="btn-secondary --red --arrow --border js-toggle-testimonial"
+                                        type="button"
+                                    >
                                         <span>Read Entire Testimonial</span>
                                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                                             <use xlinkHref="#arrow"></use>
                                         </svg>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +137,29 @@ export default function TestimonialsSection() {
                             </div>
                         </a>
                     ))}
+                </div>
+            </div>
+
+            {/* Testimonial Modal */}
+            <div className={`modal-overlay ${isModalOpen ? 'is-active' : ''}`} onClick={closeModal}></div>
+            <div className={`modal --testimonials ${isModalOpen ? 'is-active' : ''}`} id="jsTestimonialPopup">
+                <div className="modal__wrap">
+                    <button
+                        id="jsTestimonialPopupClose"
+                        className="exit"
+                        aria-label="Close testimonial"
+                        onClick={closeModal}
+                    >
+                        <span>×</span>
+                    </button>
+                    {/* Modal content */}
+                    <div className="modal__content" id="jsTestimonialPopupContent">
+                        <div className="modal__text jsModalText">
+                            <p>{activeTestimonial.fullText}</p>
+                        </div>
+                        {/* We need this here so that the video plays (if there was one) */}
+                        <div className="jsVideoControls modal__video"></div>
+                    </div>
                 </div>
             </div>
         </section>

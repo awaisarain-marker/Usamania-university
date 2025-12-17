@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, ChevronRight, BookOpen, GraduationCap, DollarSign, MapPin, Calendar, Lock, LayoutGrid } from 'lucide-react';
+import { X, ArrowRight, ChevronRight, ChevronDown, LayoutGrid } from 'lucide-react';
+import { menuData, MenuItem } from './menuData';
 
 interface MegaMenuProps {
     isOpen: boolean;
@@ -9,184 +10,46 @@ interface MegaMenuProps {
 }
 
 const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
-    const [activeCategory, setActiveCategory] = useState('Admissions');
+    // Determine the default active category (first item's ID)
+    const [activeCategory, setActiveCategory] = useState<string>(menuData[0]?.id || 'about-us');
 
-    // Menu Categories for the Left Sidebar
-    const menuItems = [
-        { name: "Admissions", id: "Admissions" },
-        { name: "About", id: "About" },
-        { name: "Academics", id: "Academics" },
-        { name: "Student Life", id: "Student" },
-        { name: "Careers", id: "Careers" },
-        { name: "Alumni", id: "Alumni" },
-        { name: "Corporate", id: "Corporate" },
-        { name: "Media", id: "Media" },
-    ];
-
-    // Data for "Admissions" (Cards View)
-    const admissionsData = {
-        title: "Start Your Journey",
-        heading: "Admissions",
-        description: "Join a diverse community of scholars, innovators, and leaders. Discover how your potential can shape the future at UIT University.",
-        cards: [
-            { icon: <BookOpen className="w-6 h-6" />, title: "Overview", desc: "Admission Guidelines", href: "/admission" },
-            { icon: <GraduationCap className="w-6 h-6" />, title: "BS Computer Science", desc: "Program Details", href: "/admission/bs-computer-science" },
-            { icon: <DollarSign className="w-6 h-6" />, title: "Tuition & Fees", desc: "Fee Structures", href: "/admission#fee" },
-            { icon: <MapPin className="w-6 h-6" />, title: "How to Apply", desc: "Process & Req.", href: "/admission#how-to-apply" },
-        ]
-    };
-
-    // Data for other sections (Column View)
-    const genericMenuData: { [key: string]: { title: string, columns: { title: string, links: { name: string, href: string }[] }[] } } = {
-        'About': {
-            title: 'About UIT University',
-            columns: [
-                {
-                    title: "Overview",
-                    links: [
-                        { name: 'About Us', href: '/about-us' },
-                        { name: 'Contact', href: '/about-us' },
-                        { name: 'News & Events', href: '#' },
-                    ]
-                },
-                {
-                    title: "Governance",
-                    links: [
-                        { name: 'Sustainable Development Goals', href: '/sustainable-development-goals' },
-                        { name: 'News & Media', href: '/oric#news' },
-                    ]
-                },
-                {
-                    title: "Official",
-                    links: [
-                        { name: 'QEC', href: '/qec' },
-                        { name: 'ORIC', href: '/oric' },
-                        { name: 'Tenders', href: '/tenders' },
-                    ]
-                }
-            ]
-        },
-        'Academics': {
-            title: 'Academic Excellence',
-            columns: [
-                {
-                    title: "Programs",
-                    links: [
-                        { name: 'BS Computer Science', href: '/admission/bs-computer-science' },
-                    ]
-                },
-                {
-                    title: "Resources",
-                    links: [
-                        { name: 'Faculty', href: '#' },
-                        { name: 'Library Catalog', href: '#' },
-                        { name: 'MERL', href: '/merl' },
-                    ]
-                },
-                {
-                    title: "Events",
-                    links: [
-                        { name: 'Certificate Distribution', href: '/certificates' },
-                        { name: 'Bio Symposium 2023', href: '/bio-symposium' },
-                    ]
-                }
-            ]
-        },
-        'Student': {
-            title: 'Student Life',
-            columns: [
-                {
-                    title: "Campus Life",
-                    links: [
-                        { name: 'Student Life', href: '/student-life' },
-                        { name: 'Clubs & Activities', href: '/clubs' },
-                        { name: 'Housing', href: '/housing' },
-                    ]
-                },
-                {
-                    title: "Support",
-                    links: [
-                        { name: 'Student Portal', href: '/student-portal' },
-                        { name: 'Student Support S3', href: '/s3' },
-                    ]
-                }
-            ]
-        },
-        'Careers': {
-            title: 'Career Development',
-            columns: [
-                {
-                    title: "Opportunities",
-                    links: [
-                        { name: 'Careers', href: '/careers' },
-                        { name: 'Internships', href: '/internships' },
-                    ]
-                },
-                {
-                    title: "Portals",
-                    links: [
-                        { name: 'Job Portal', href: '/job-portal' },
-                        { name: 'Employee Portal', href: '/employee-portal' },
-                    ]
-                }
-            ]
-        },
-        'Alumni': {
-            title: 'Alumni Network',
-            columns: [
-                {
-                    title: "Connect",
-                    links: [
-                        { name: 'Alumni Engagement', href: '/alumni' },
-                        { name: 'Alumni Stories', href: '/alumni-stories' },
-                    ]
-                },
-                {
-                    title: "Support",
-                    links: [
-                        { name: 'Give Back', href: '/give' },
-                    ]
-                }
-            ]
-        },
-        'Corporate': {
-            title: 'Corporate Partnerships',
-            columns: [
-                {
-                    title: "Collaboration",
-                    links: [
-                        { name: 'Corporate Liaison', href: '/corporate-liaison' },
-                        { name: 'Corporate Events', href: '/corporate-liaison#events' },
-                    ]
-                },
-                {
-                    title: "Learning",
-                    links: [
-                        { name: 'Day Trip Learning', href: '/day-trip' },
-                    ]
-                }
-            ]
-        },
-        'Media': {
-            title: 'Media & Press',
-            columns: [
-                {
-                    title: "News",
-                    links: [
-                        { name: 'Media / Press', href: '/media' },
-                        { name: 'Newsletter', href: '/newsletter' },
-                    ]
-                },
-                {
-                    title: "Resources",
-                    links: [
-                        { name: 'Brand Assets', href: '/brand' },
-                        { name: 'Contact PR', href: '/pr' },
-                    ]
-                }
-            ]
+    // Reset active category when menu opens
+    useEffect(() => {
+        if (isOpen) {
+            setActiveCategory(menuData[0]?.id || 'about-us');
         }
+    }, [isOpen]);
+
+    // Recursive helper to render submenu items
+    const renderSubItems = (items: MenuItem[], level: number = 0) => {
+        return (
+            <ul className={`space-y-2 ${level > 0 ? 'ml-4 border-l border-white/10 pl-4 mt-2' : ''}`}>
+                {items.map((item) => (
+                    <li key={item.id}>
+                        {item.children ? (
+                            <div className="mb-2">
+                                <span className={`block font-medium ${level === 0 ? 'text-white text-lg border-b border-white/10 pb-2 mb-2 uppercase tracking-wide' : 'text-gray-300 text-base'}`}>
+                                    {item.label}
+                                </span>
+                                {renderSubItems(item.children, level + 1)}
+                            </div>
+                        ) : (
+                            <Link
+                                href={item.href || '#'}
+                                className={`block transition-colors hover:text-[#ed1c24] ${level === 0 ? 'text-lg text-gray-300' : 'text-sm text-gray-400'}`}
+                                onClick={onClose}
+                            >
+                                {item.label}
+                            </Link>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        );
     };
+
+    // Find the currently active parent item data
+    const activeData = menuData.find(item => item.id === activeCategory);
 
     return (
         <AnimatePresence>
@@ -231,15 +94,15 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
                             {/* MOBILE NAVIGATION (< lg) */}
                             <div className="lg:hidden col-span-1 h-full overflow-y-auto no-scrollbar py-6">
-                                <div className="space-y-2">
-                                    {menuItems.map((item) => (
-                                        <div key={item.id} className="border-b border-white/10 last:border-0">
+                                <div className="space-y-1">
+                                    {menuData.map((item) => (
+                                        <div key={item.id} className="border-b border-white/5 last:border-0">
                                             <button
                                                 onClick={() => setActiveCategory(activeCategory === item.id ? '' : item.id)}
                                                 className={`w-full flex items-center justify-between py-4 px-2 text-left transition-colors ${activeCategory === item.id ? 'text-[#ed1c24]' : 'text-white'}`}
                                             >
-                                                <span className="font-serif text-2xl">{item.name}</span>
-                                                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${activeCategory === item.id ? 'rotate-90 text-[#ed1c24]' : 'text-gray-500'}`} />
+                                                <span className="font-serif text-xl">{item.label}</span>
+                                                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${activeCategory === item.id ? 'rotate-180 text-[#ed1c24]' : 'text-gray-500'}`} />
                                             </button>
 
                                             {/* Mobile Submenu */}
@@ -250,45 +113,13 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                         animate={{ height: 'auto', opacity: 1 }}
                                                         exit={{ height: 0, opacity: 0 }}
                                                         transition={{ duration: 0.3 }}
-                                                        className="overflow-hidden bg-white/5 mb-4"
+                                                        className="overflow-hidden bg-white/5"
                                                     >
-                                                        <div className="p-4 space-y-6">
-                                                            {/* Admissions Content for Mobile */}
-                                                            {item.id === 'Admissions' && (
-                                                                <div className="space-y-4">
-                                                                    <p className="text-gray-300 text-sm mb-4">{admissionsData.description}</p>
-                                                                    <div className="grid grid-cols-1 gap-3">
-                                                                        {admissionsData.cards.map((card, idx) => (
-                                                                            <Link key={idx} href={card.href} className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 transition-colors" onClick={onClose}>
-                                                                                <div className="text-[#ed1c24]">{card.icon}</div>
-                                                                                <div>
-                                                                                    <div className="text-white font-medium text-sm">{card.title}</div>
-                                                                                    <div className="text-gray-400 text-xs">{card.desc}</div>
-                                                                                </div>
-                                                                            </Link>
-                                                                        ))}
-                                                                    </div>
-                                                                </div>
-                                                            )}
-
-                                                            {/* Generic Content for Mobile */}
-                                                            {item.id !== 'Admissions' && genericMenuData[item.id] && (
-                                                                <div className="space-y-6">
-                                                                    {genericMenuData[item.id].columns.map((col, idx) => (
-                                                                        <div key={idx}>
-                                                                            <h4 className="text-[#ed1c24] text-xs font-bold uppercase tracking-wider mb-3">{col.title}</h4>
-                                                                            <ul className="space-y-2">
-                                                                                {col.links.map((link, lIdx) => (
-                                                                                    <li key={lIdx}>
-                                                                                        <Link href={link.href} className="block text-gray-300 hover:text-white py-1" onClick={onClose}>
-                                                                                            {link.name}
-                                                                                        </Link>
-                                                                                    </li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
+                                                        <div className="p-4">
+                                                            {item.children ? renderSubItems(item.children) : (
+                                                                <Link href={item.href || '#'} className="block text-gray-300 py-2 hover:text-white" onClick={onClose}>
+                                                                    Go to Page
+                                                                </Link>
                                                             )}
                                                         </div>
                                                     </motion.div>
@@ -297,35 +128,24 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                         </div>
                                     ))}
                                 </div>
-
-                                {/* Mobile Footer Links */}
-                                <div className="mt-8 pt-8 border-t border-white/10 space-y-4 px-2">
-                                    <Link href="/admission" className="flex items-center justify-center gap-2 bg-[#ed1c24] text-white w-full py-3 font-medium" onClick={onClose}>
-                                        Apply Now
-                                    </Link>
-                                    <div className="flex justify-center gap-6 text-gray-400 text-sm">
-                                        <Link href="/directory" className="hover:text-white">Directory</Link>
-                                        <Link href="/map" className="hover:text-white">Map</Link>
-                                    </div>
-                                </div>
                             </div>
 
                             {/* DESKTOP LEFT SIDE: Sticky Navigation Menu (lg+) */}
                             <div className="hidden lg:flex lg:col-span-3 flex-col border-r border-white/10 h-full overflow-y-auto no-scrollbar py-8 pr-4">
                                 <nav className="space-y-1">
-                                    {menuItems.map((item) => (
+                                    {menuData.map((item) => (
                                         <div
                                             key={item.id}
                                             onMouseEnter={() => setActiveCategory(item.id)}
-                                            className={`group block py-4 border-l-4 transition-all duration-300 ease-out cursor-pointer pl-6 ${activeCategory === item.id
+                                            className={`group block py-3 border-l-4 transition-all duration-300 ease-out cursor-pointer pl-6 ${activeCategory === item.id
                                                 ? 'border-[#ed1c24] text-white'
                                                 : 'border-transparent text-gray-500 hover:text-gray-300 hover:pl-8'
                                                 }`}
                                         >
                                             <div className="flex items-center justify-between">
-                                                <span className={`font-serif text-3xl tracking-tight transition-opacity duration-300 ${activeCategory === item.id ? 'opacity-100' : 'opacity-60 group-hover:opacity-100'
+                                                <span className={`font-serif text-2xl tracking-tight transition-opacity duration-300 ${activeCategory === item.id ? 'opacity-100' : 'opacity-60 group-hover:opacity-100'
                                                     }`}>
-                                                    {item.name}
+                                                    {item.label}
                                                 </span>
                                                 {activeCategory === item.id && (
                                                     <ChevronRight className="w-5 h-5 text-[#ed1c24]" />
@@ -335,7 +155,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                     ))}
                                 </nav>
 
-                                <div className="mt-auto pt-10 text-gray-500 text-base">
+                                <div className="mt-auto pt-10 text-gray-500 text-sm">
                                     <p>© {new Date().getFullYear()} UIT University</p>
                                     <div className="flex gap-4 mt-4">
                                         <Link href="/directory" className="hover:text-white transition-colors" onClick={onClose}>Directory</Link>
@@ -346,121 +166,92 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
                             {/* DESKTOP RIGHT SIDE: Dynamic Content Area (lg+) */}
                             <div className="hidden lg:block lg:col-span-9 bg-[#00152e] relative h-full overflow-y-auto no-scrollbar p-8 xl:p-12">
-
-                                {/* ADMISSIONS CONTENT (Cards View) */}
-                                {activeCategory === 'Admissions' && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="max-w-5xl mx-auto"
-                                    >
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <span className="h-8 w-1 bg-[#ed1c24]"></span>
-                                            <span className="text-[#ed1c24] font-semibold tracking-widest text-sm uppercase">{admissionsData.title}</span>
-                                        </div>
-
-                                        <h2 className="font-serif text-6xl text-white mb-6 tracking-tight">{admissionsData.heading}</h2>
-                                        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed mb-12 font-light">
-                                            {admissionsData.description}
-                                        </p>
-
-                                        {/* Cards Grid */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                                            {admissionsData.cards.map((card, idx) => (
-                                                <Link
-                                                    key={idx}
-                                                    href={card.href}
-                                                    className="group bg-[#00224a] border border-white/5 hover:border-[#ed1c24]/50 p-6 flex items-start gap-5 transition-all duration-300 hover:bg-[#002f6c]"
-                                                    onClick={onClose}
-                                                >
-                                                    <div className="bg-[#ed1c24]/10 p-3 text-[#ed1c24] group-hover:bg-[#ed1c24] group-hover:text-white transition-colors">
-                                                        {card.icon}
-                                                    </div>
-                                                    <div>
-                                                        <h3 className="text-white font-semibold text-lg mb-1">{card.title}</h3>
-                                                        <p className="text-gray-400 text-base">{card.desc}</p>
-                                                    </div>
-                                                </Link>
-                                            ))}
-                                        </div>
-
-                                        {/* Event Banner */}
-                                        <div className="w-full border-t border-white/10 pt-8">
-                                            <Link href="/admission/intro-to-photography-exhibition" className="group flex items-center gap-6 bg-gradient-to-r from-[#00224a] to-transparent p-1 hover:from-[#002f6c] transition-all" onClick={onClose}>
-                                                <div className="bg-gray-800 h-20 w-20 flex items-center justify-center shrink-0 border border-white/10 overflow-hidden relative">
-                                                    <img
-                                                        src="https://www.aubg.edu/wp-content/uploads/2022/04/about-hero-background-96x69.jpg"
-                                                        alt="Event"
-                                                        className="object-cover w-full h-full opacity-70"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <span className="text-[#ed1c24] text-sm font-semibold tracking-wide uppercase mb-1 block">Upcoming Event</span>
-                                                    <h4 className="text-white text-xl font-serif">Fall Open House 2024</h4>
-                                                    <p className="text-gray-400 text-base mt-1 group-hover:text-gray-200 transition-colors">Experience campus life firsthand this October.</p>
-                                                </div>
-                                                <div className="ml-auto pr-6 text-gray-500 group-hover:text-[#ed1c24] transition-colors">
-                                                    <ArrowRight className="w-6 h-6" />
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </motion.div>
-                                )}
-
-                                {/* GENERIC CONTENT (Columns View) */}
-                                {activeCategory !== 'Admissions' && genericMenuData[activeCategory] && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="max-w-5xl mx-auto"
-                                    >
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <span className="h-8 w-1 bg-[#ed1c24]"></span>
-                                            <h2 className="font-serif text-5xl text-white tracking-tight">{genericMenuData[activeCategory].title}</h2>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
-                                            {genericMenuData[activeCategory].columns.map((col, idx) => (
-                                                <div key={idx} className="space-y-8">
-                                                    <div>
-                                                        <h3 className="text-white font-semibold text-lg mb-4 tracking-wide uppercase border-b border-white/10 pb-2">
-                                                            {col.title}
-                                                        </h3>
-                                                        <ul className="space-y-3">
-                                                            {col.links.map((link, lIdx) => (
-                                                                <li key={lIdx}>
-                                                                    <Link
-                                                                        href={link.href}
-                                                                        className="text-gray-400 hover:text-[#ed1c24] text-lg transition-colors block"
-                                                                        onClick={onClose}
-                                                                    >
-                                                                        {link.name}
-                                                                    </Link>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </motion.div>
-                                )}
-
-                                {/* Fallback for undefined categories */}
-                                {activeCategory !== 'Admissions' && !genericMenuData[activeCategory] && (
-                                    <div className="h-full flex items-center justify-center">
-                                        <div className="text-center">
-                                            <div className="w-16 h-16 bg-white/5 flex items-center justify-center mx-auto mb-6 text-[#ed1c24]">
-                                                <LayoutGrid className="w-8 h-8" />
-                                            </div>
-                                            <h2 className="font-serif text-4xl text-white mb-4">Content Area</h2>
-                                            <p className="text-xl text-gray-500 max-w-md mx-auto">Select a menu item from the left to view details.</p>
-                                        </div>
+                                <motion.div
+                                    key={activeCategory} // Force re-render animation when category changes
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="max-w-6xl mx-auto"
+                                >
+                                    <div className="flex items-center gap-3 mb-8">
+                                        <span className="h-8 w-1 bg-[#ed1c24]"></span>
+                                        <h2 className="font-serif text-5xl text-white tracking-tight">{activeData?.label}</h2>
                                     </div>
-                                )}
 
+                                    {activeData?.children ? (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
+                                            {activeData.children.map((child) => (
+                                                <div key={child.id} className="space-y-4">
+                                                    {/* Level 2 Item - Acts as Column Header if it has children, or a Link if not */}
+                                                    {child.children ? (
+                                                        <div>
+                                                            <h3 className="text-white font-bold text-lg mb-4 tracking-wide uppercase border-b border-white/10 pb-2">
+                                                                {child.label}
+                                                            </h3>
+                                                            {/* Level 3 & 4 Items */}
+                                                            <ul className="space-y-3">
+                                                                {child.children.map((subChild) => (
+                                                                    <li key={subChild.id}>
+                                                                        {/* If Level 3 has children (Level 4) */}
+                                                                        {subChild.children ? (
+                                                                            <div className="mb-4 bg-white/5 border border-white/10 p-4 hover:border-[#ed1c24] transition-colors duration-300">
+                                                                                <span className="block text-white font-bold mb-3 uppercase tracking-wide text-sm border-b border-white/10 pb-2">
+                                                                                    {subChild.label}
+                                                                                </span>
+                                                                                <ul className="space-y-2">
+                                                                                    {subChild.children.map((subSubChild) => (
+                                                                                        <li key={subSubChild.id}>
+                                                                                            <Link
+                                                                                                href={subSubChild.href || '#'}
+                                                                                                className="text-gray-400 hover:text-[#ed1c24] text-sm transition-colors block flex items-center gap-2 group/link"
+                                                                                                onClick={onClose}
+                                                                                            >
+                                                                                                <span className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover/link:bg-[#ed1c24] transition-colors"></span>
+                                                                                                {subSubChild.label}
+                                                                                            </Link>
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <Link
+                                                                                href={subChild.href || '#'}
+                                                                                className="text-gray-400 hover:text-[#ed1c24] text-base transition-colors block"
+                                                                                onClick={onClose}
+                                                                            >
+                                                                                {subChild.label}
+                                                                            </Link>
+                                                                        )}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    ) : (
+                                                        /* If Level 2 has no children, render as a boxed link/card */
+                                                        <Link
+                                                            href={child.href || '#'}
+                                                            className="block bg-white/5 border border-white/5 hover:border-[#ed1c24] p-5 transition-all duration-300 hover:bg-white/10 group"
+                                                            onClick={onClose}
+                                                        >
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-white font-medium text-lg group-hover:text-[#ed1c24] transition-colors">
+                                                                    {child.label}
+                                                                </span>
+                                                                <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-[#ed1c24] transition-colors" />
+                                                            </div>
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        /* Case: Parent has no children (weird, but possible) */
+                                        <div className="text-gray-400">
+                                            No sub-menu items available. <Link href={activeData?.href || '#'} className="text-[#ed1c24] hover:underline" onClick={onClose}>Go to page</Link>
+                                        </div>
+                                    )}
+
+                                </motion.div>
                             </div>
                         </div>
                     </div>

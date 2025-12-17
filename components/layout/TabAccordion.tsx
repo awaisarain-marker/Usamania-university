@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useSearchParams } from 'next/navigation';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -120,10 +121,26 @@ interface TabAccordionProps {
 
 export default function TabAccordion({ customTabs }: TabAccordionProps) {
     const [activeTab, setActiveTab] = useState(0);
+    const searchParams = useSearchParams();
+    const sectionRef = useRef<HTMLElement>(null);
     const displayTabs = customTabs || tabs;
 
+    useEffect(() => {
+        const tabParam = searchParams.get('tab');
+        if (tabParam) {
+            const tabIndex = displayTabs.findIndex(tab => tab.id === tabParam);
+            if (tabIndex !== -1) {
+                setActiveTab(tabIndex);
+                // Wait for the render to complete before scrolling
+                setTimeout(() => {
+                    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+    }, [searchParams, displayTabs]);
+
     return (
-        <section className="tab-accordion jsWhyAubg">
+        <section ref={sectionRef} className="tab-accordion jsWhyAubg">
             <div className="container">
                 <div className="tab-accordion__wrap row">
                     <div className="custom-accordion-tabs nav-tabs col-6 tabs-allowed">

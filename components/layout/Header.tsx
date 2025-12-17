@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Search, Globe, Menu, X } from "lucide-react";
 import MegaMenu from "./MegaMenu";
@@ -8,9 +9,11 @@ import MegaMenu from "./MegaMenu";
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [isLangOpen, setIsLangOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const pathname = usePathname();
+    // Force dark header (white background, dark text) on blog & event pages
+    const isDarkHeader = isScrolled || pathname?.startsWith('/uit-today') || pathname?.startsWith('/events');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,7 +26,7 @@ export default function Header() {
 
     return (
         <>
-            <header className={`site-header fixed top-0 left-0 w-full transition-all duration-300 z-[9999] px-4 md:px-8 lg:px-8 py-4 lg:py-5 ${isScrolled ? 'bg-white border-b border-gray-200' : 'bg-transparent'}`}>
+            <header className={`site-header fixed top-0 left-0 w-full transition-all duration-300 z-[9999] px-4 md:px-8 lg:px-8 py-4 lg:py-5 ${isDarkHeader ? 'bg-white border-b border-gray-200' : 'bg-transparent'}`}>
                 <nav className="flex items-center justify-between">
                     {/* Left: Logo */}
                     <div className="flex items-center">
@@ -37,7 +40,7 @@ export default function Header() {
                                 alt="UIT University"
                                 width={491}
                                 height={52}
-                                className={`max-w-full h-auto transition-all duration-300 ease-in-out ${isScrolled ? '' : 'brightness-0 invert'}`}
+                                className={`max-w-full h-auto transition-all duration-300 ease-in-out ${isDarkHeader ? '' : 'brightness-0 invert'}`}
                             />
                         </Link>
                     </div>
@@ -45,83 +48,63 @@ export default function Header() {
                     {/* Right: Navigation Items */}
                     <div className="flex items-center justify-end flex-1">
                         {/* Language Switcher */}
-                        <div className={`hidden lg:flex items-center ml-4 lg:ml-[clamp(15px,4rem,25px)] mr-auto relative transition-colors duration-300 ${isScrolled ? 'text-[#002856]' : 'text-white'}`}>
+                        {/* Admission Open / Announcement Button */}
+                        <Link
+                            href="https://eduboard.uit.edu/AdmissionPortal/Login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`hidden lg:flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-4 lg:ml-[clamp(15px,4rem,25px)] mr-auto text-sm xl:text-base font-bold transition-all duration-300 ease-in-out uppercase tracking-wide relative overflow-hidden group ${isDarkHeader
+                                ? 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
+                                : 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
+                                }`}
+                        >
+                            <span className="relative z-10 whitespace-nowrap">Admission Open Spring 2026!</span>
+                            {/* Animation Effect */}
+                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-150%] animate-[shimmer_2s_infinite] skew-x-12" />
+                            <span className="absolute inset-0 border-2 border-white/50 animate-pulse rounded-sm" />
+                        </Link>
+
+                        {/* Language Switcher */}
+                        <div className={`hidden lg:flex items-center ml-2 relative transition-all duration-300 ease-in-out whitespace-nowrap ${isDarkHeader ? 'text-[#002856]' : 'text-white'}`}>
                             <Globe className="w-6 h-6 mr-2" aria-hidden="true" />
-                            <div className="relative">
-                                <button
-                                    onClick={() => setIsLangOpen(!isLangOpen)}
-                                    className={`hover:opacity-80 transition-opacity ${isScrolled ? 'text-[#002856]' : 'text-white'}`}
-                                >
-                                    <span>EN</span>
-                                </button>
-                                {isLangOpen && (
-                                    <ul className="absolute top-full left-0 mt-1 bg-white border border-gray-300 min-w-[100px] shadow-lg z-10">
-                                        <li>
-                                            <Link
-                                                href="/bg/"
-                                                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-sm"
-                                            >
-                                                BG
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href="/sq/"
-                                                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-sm"
-                                            >
-                                                Albanian
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href="/ru/"
-                                                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-sm"
-                                            >
-                                                Russian
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                )}
-                            </div>
+                            <span className="font-medium">EN</span>
                         </div>
 
                         {/* Search */}
-                        <div className="hidden lg:flex items-center flex-row-reverse relative ml-2.5">
-                            <button
-                                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                className={`flex items-center justify-center h-10 w-10 lg:h-11 lg:w-11 xl:h-[50px] xl:w-[50px] bg-transparent border transition-all duration-300 ease-in-out p-2 ml-2 ${isScrolled ? 'border-[#002856]/25 text-[#002856] hover:bg-[#002856]/5' : 'border-white/25 text-white hover:bg-white/10'}`}
-                                aria-label="Open Search"
-                            >
-                                <Search className="w-5 h-5" aria-hidden="true" />
-                            </button>
-                            {/* Search Form */}
-                            {isSearchOpen && (
+                        <div className="hidden lg:flex items-center relative ml-2.5">
+                            {/* Search Form - Expands to push content */}
+                            <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isSearchOpen ? 'w-[250px] opacity-100' : 'w-0 opacity-0'}`}>
                                 <form
                                     method="GET"
                                     action="/"
-                                    className="absolute right-14 top-0 h-full transition-all duration-300 max-w-[250px] opacity-100"
+                                    className="h-full w-full flex items-center"
                                 >
-                                    <label className="h-full">
+                                    <label className="h-full w-full block m-0">
                                         <span className="sr-only">Search for:</span>
                                         <input
                                             type="text"
                                             name="s"
                                             placeholder="Search..."
-                                            className="h-full px-2.5 border-none text-base focus:outline-none w-full"
-                                            autoFocus
+                                            className="h-10 lg:h-11 xl:h-[50px] w-full px-4 border-none text-base text-black bg-white focus:outline-none placeholder:text-gray-500 rounded-none"
+                                            autoFocus={isSearchOpen}
                                         />
                                     </label>
                                 </form>
-                            )}
-                        </div>
+                            </div>
 
-                        {/* Donate Button */}
-                        <Link
-                            href="/donate"
-                            className={`hidden lg:flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-2.5 text-sm xl:text-base font-normal border bg-transparent transition-all duration-300 ease-in-out uppercase tracking-wide ${isScrolled ? 'text-[#002856] border-[#002856]/30 hover:bg-[#002856]/5' : 'text-white border-white/30 hover:bg-white/10'}`}
-                        >
-                            Donate
-                        </Link>
+                            {/* Search Button */}
+                            <button
+                                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                                className={`flex items-center justify-center h-10 w-10 lg:h-11 lg:w-11 xl:h-[50px] xl:w-[50px] bg-transparent border-0 transition-all duration-300 ease-in-out p-2 z-10 ${isDarkHeader ? 'text-[#002856]' : 'text-white'}`}
+                                aria-label={isSearchOpen ? "Close Search" : "Open Search"}
+                            >
+                                {isSearchOpen ? (
+                                    <X className="w-5 h-5" aria-hidden="true" />
+                                ) : (
+                                    <Search className="w-5 h-5" aria-hidden="true" />
+                                )}
+                            </button>
+                        </div>
 
                         {/* Apply Now Button */}
                         <Link
@@ -134,7 +117,7 @@ export default function Header() {
                         {/* Explore/Menu Button */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-2.5 cursor-pointer transition-all duration-300 ease-in-out ${isScrolled ? 'border border-[#005092] bg-[#005092] text-white hover:bg-[#003c6e]' : 'border border-white bg-white text-[#005092] hover:bg-gray-100'}`}
+                            className={`flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-2.5 cursor-pointer transition-all duration-300 ease-in-out ${isDarkHeader ? 'border border-[#005092] bg-[#005092] text-white hover:bg-[#003c6e]' : 'border border-white bg-white text-[#005092] hover:bg-gray-100'}`}
                             aria-label="Open extended menu"
                             aria-expanded={isMenuOpen}
                         >

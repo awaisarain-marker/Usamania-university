@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function AlumniSection() {
     return (
         <section className="container alumini-success-container">
@@ -21,12 +23,12 @@ export default function AlumniSection() {
                         <p className="text-white">Read more about the remarkable achievements of the UIT alumni</p>
                     </div>
 
-                    <a href="https://www.aubg.edu/aubg-today/category/alumni/" className="btn-secondary --red --arrow --border">
+                    <Link href="/corporate-liaison#alumni-engagement" className="btn-secondary --red --arrow --border">
                         <span>Check our alumni success stories</span>
                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>

@@ -1,5 +1,7 @@
 'use client';
 
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+
 export default function Footer() {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -7,33 +9,20 @@ export default function Footer() {
 
     const contactInfo = [
         {
-            title: "UIT Main Building",
-            address: "1 Georgi Izmirliev Sq., 2700 Blagoevgrad",
-            phone: null
-        },
-        {
-            title: "English Language Courses",
-            address: "1 Georgi Izmirliev Sq., 2700 Blagoevgrad",
-            phone: "+359 73 888 555"
-        },
-        {
-            title: "UIT Skaptopara Campus",
-            address: "4 - 12 Svoboda Bachvarova St., 2700 Blagoevgrad",
-            phone: "+359 73 888 111"
-        },
-        {
-            title: "Elieff Center for Education and Culture",
-            address: "1 Universitetski Park St., 1700 Sofia",
-            phone: null
+            title: "UIT University",
+            address: "ST-13, Block 7, Gulshan-e-Iqbal, Abul Hasan Isphahani Road, Off Main University Road, Karachi – 75300",
+            email: "info@uitu.edu.pk",
+            phone: null,
+            uan: "(92-21) 111-978-275, 34994305, 34978274-5",
+            admissions: "0333-0399113"
         }
     ];
 
     const socialLinks = [
-        { href: "https://www.tiktok.com/@aubg_edu", icon: "https://www.aubg.edu/wp-content/uploads/2022/03/tiktok.svg", alt: "TikTok" },
-        { href: "https://www.instagram.com/aubg_edu/", icon: "https://www.aubg.edu/wp-content/uploads/2022/08/instagram.svg", alt: "Instagram" },
-        { href: "https://www.facebook.com/AUBGcurious", icon: "https://www.aubg.edu/wp-content/uploads/2022/03/facebook.svg", alt: "Facebook" },
-        { href: "https://www.linkedin.com/edu/10427", icon: "https://www.aubg.edu/wp-content/uploads/2022/03/linkedin.svg", alt: "LinkedIn" },
-        { href: "https://www.youtube.com/user/AUBG1991", icon: "https://www.aubg.edu/wp-content/uploads/2022/03/youtube.svg", alt: "YouTube" }
+        { href: "https://www.facebook.com/UITUniversityOfficial", icon: Facebook, alt: "Facebook" },
+        { href: "https://x.com/UITUniversity?t=D7cpW-xoK5evI43-SWdnDw&s=09", icon: Twitter, alt: "X (Twitter)" },
+        { href: "https://www.linkedin.com/school/uitu/", icon: Linkedin, alt: "LinkedIn" },
+        { href: "https://www.instagram.com/invites/contact/?i=injsg9prvu9k&utm_content=2pjgkg6", icon: Instagram, alt: "Instagram" }
     ];
 
     const footerMenuItems = [
@@ -72,24 +61,21 @@ export default function Footer() {
 
                             {/* Social Icons moved here */}
                             <div className="socials socials-footer !justify-start">
-                                {socialLinks.map((social, index) => (
-                                    <a
-                                        key={index}
-                                        href={social.href}
-                                        className="social-link"
-                                        target="_blank"
-                                        rel="nofollow noopener noreferrer"
-                                        aria-label={social.alt}
-                                    >
-                                        <img
-                                            width="33"
-                                            height="33"
-                                            alt={social.alt}
-                                            className="social-icon"
-                                            src={social.icon}
-                                        />
-                                    </a>
-                                ))}
+                                {socialLinks.map((social, index) => {
+                                    const Icon = social.icon;
+                                    return (
+                                        <a
+                                            key={index}
+                                            href={social.href}
+                                            className="social-link"
+                                            target="_blank"
+                                            rel="nofollow noopener noreferrer"
+                                            aria-label={social.alt}
+                                        >
+                                            <Icon className="social-icon text-[#002856] hover:text-[#ed1c24] transition-colors" size={33} />
+                                        </a>
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -98,42 +84,37 @@ export default function Footer() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                                 {/* Column 1: Locations (Existing Contact Info) */}
-                                <div className="footer-section">
+                                <div className="footer-section col-span-2">
                                     <h3 className="text-blue font-bold text-xl mb-6 uppercase">Locations</h3>
                                     {contactInfo.map((contact, index) => (
                                         <div key={index} className="mb-6">
                                             <p className="text-blue font-bold text-lg mb-1">{contact.title}</p>
-                                            <p className="text-blue text-sm mb-1">{contact.address}</p>
-                                            {contact.phone && (
-                                                <a href={`tel:${contact.phone}`} className="text-blue font-bold text-sm hover:text-blue transition-colors">{contact.phone}</a>
+                                            <p className="text-blue text-sm mb-4 max-w-md">{contact.address}</p>
+
+                                            {contact.email && (
+                                                <p className="mb-1">
+                                                    <a href={`mailto:${contact.email}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.email}</a>
+                                                </p>
+                                            )}
+
+                                            {contact.uan && (
+                                                <p className="mb-1">
+                                                    <span className="text-blue font-bold text-sm">UAN: </span>
+                                                    <span className="text-blue text-sm">{contact.uan}</span>
+                                                </p>
+                                            )}
+
+                                            {contact.admissions && (
+                                                <p className="mb-1">
+                                                    <span className="text-blue font-bold text-sm">Admissions: </span>
+                                                    <a href={`tel:${contact.admissions}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.admissions}</a>
+                                                </p>
                                             )}
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Column 2: Admissions & Academics */}
-                                <div className="footer-section">
-                                    <div className="mb-8">
-                                        <h3 className="text-blue font-bold text-xl mb-6 uppercase">Admissions</h3>
-                                        <ul className="space-y-3">
-                                            <li><a href="/admissions/undergraduate" className="text-blue hover:text-blue transition-colors">Undergraduate</a></li>
-                                            <li><a href="/admissions/graduate" className="text-blue hover:text-blue transition-colors">Graduate</a></li>
-                                            <li><a href="/admissions/tuition-and-aid" className="text-blue hover:text-blue transition-colors">Tuition & Aid</a></li>
-                                            <li><a href="/admissions/visit" className="text-blue hover:text-blue transition-colors">Visit Campus</a></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-blue font-bold text-xl mb-6 uppercase">Academics</h3>
-                                        <ul className="space-y-3">
-                                            <li><a href="/academics/majors" className="text-blue hover:text-blue transition-colors">Majors & Minors</a></li>
-                                            <li><a href="/academics/faculty" className="text-blue hover:text-blue transition-colors">Faculty</a></li>
-                                            <li><a href="/academics/calendar" className="text-blue hover:text-blue transition-colors">Academic Calendar</a></li>
-                                            <li><a href="/library" className="text-blue hover:text-blue transition-colors">Library</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                {/* Column 3: Quick Links & Student Life */}
+                                {/* Column 3: Quick Links (Moved to replace unused cols) */}
                                 <div className="footer-section">
                                     <div className="mb-8">
                                         <h3 className="text-blue font-bold text-xl mb-6 uppercase">Quick Links</h3>
@@ -144,27 +125,6 @@ export default function Footer() {
                                                 </li>
                                             ))}
                                         </ul>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-blue font-bold text-xl mb-6 uppercase">Student Life</h3>
-                                        <ul className="space-y-3">
-                                            <li><a href="/student-life/housing" className="text-blue hover:text-blue transition-colors">Housing & Dining</a></li>
-                                            <li><a href="/student-life/clubs" className="text-blue hover:text-blue transition-colors">Clubs & Activities</a></li>
-                                            <li><a href="/student-life/health" className="text-blue hover:text-blue transition-colors">Health & Wellness</a></li>
-                                            <li><a href="/student-life/career-center" className="text-blue hover:text-blue transition-colors">Career Center</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="mt-8 text-sm">
-                                        <a
-                                            href="https://digitalsilk.com"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-blue group"
-                                        >
-                                            <span>Web design by </span>
-                                            <span className="font-bold underline group-hover:text-blue transition-colors">Digital Silk</span>
-                                        </a>
                                     </div>
                                 </div>
 
@@ -181,7 +141,7 @@ export default function Footer() {
                     alt="Footer Background"
                     width="1920"
                     height="733"
-                    src="https://www.aubg.edu/wp-content/uploads/2022/03/footer-front-bg.png"
+                    src="https://ik.imagekit.io/byat8clceo/Web%20Footer.png"
                 />
             </div>
         </footer>

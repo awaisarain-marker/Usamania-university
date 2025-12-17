@@ -2,7 +2,7 @@ const blogPosts = [
     {
         title: "Economics for a New Generation: Professor Nikos Fatouros Teaches for the Future",
         image: "https://www.aubg.edu/wp-content/uploads/2025/12/Professor-Nikos-Fatouros-Teaching-Economics-at-AUBG-2-1-489x318.png",
-        link: "https://www.aubg.edu/aubg-today/economics-for-a-new-generation-professor-nikos-fatouros-teaches-for-the-future/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
         description: "Professor Nikos Fatouros joined UIT University in the 2024/2025 academic year and is already serving as the Interim Chair of the Economics Department. His research interests go ...",
         category: "Economics",
         featured: true,
@@ -10,25 +10,25 @@ const blogPosts = [
     {
         title: "Ashod Derandonyan ('01) Championing Accessibility Support for the Deaf and Hard of Hearing Community",
         image: "https://www.aubg.edu/wp-content/uploads/2025/12/Ashod-Derandonyan-'01-at-the-AUBG-Civic-Society-Forum-in-2025-254x165.png",
-        link: "https://www.aubg.edu/aubg-today/ashod-derandonyan-01-championing-accessibility-support-for-the-deaf-and-hard-of-hearing-community/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
         category: "Alumni",
     },
     {
         title: "The 2025 Study Trip to Brussels Explores National Security in the EU",
         image: "https://www.aubg.edu/wp-content/uploads/2025/12/AUBG-European-Studies-Study-Trip-to-Brussels-2025-1-254x165.png",
-        link: "https://www.aubg.edu/aubg-today/the-2025-eur-study-trip-to-brussels-explores-national-security-in-the-eu/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
         category: "European Studies",
     },
     {
-        title: "What to Do with a Major in Economics: Career Prospects and Future Jobs",
+        title: "What to Do with a Major in Business Administration: Career Prospects",
         image: "https://www.aubg.edu/wp-content/uploads/2025/11/What-to-Do-with-a-Major-in-Economics-254x165.png",
-        link: "https://www.aubg.edu/aubg-today/what-to-do-with-a-major-in-economics-career-prospects-and-future-jobs/",
-        category: "Economics",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
+        category: "Business",
     },
     {
         title: "What to Do with a Major in Political Science & International Relations and European Studies",
         image: "https://www.aubg.edu/wp-content/uploads/2025/11/What-to-Do-with-a-Major-in-Political-Science-254x165.png",
-        link: "https://www.aubg.edu/aubg-today/what-to-do-with-a-major-in-political-science-international-relations/",
+        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
         category: "Politics",
     },
 ];

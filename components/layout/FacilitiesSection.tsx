@@ -1,9 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function FacilitiesSection() {
     const [activeTab, setActiveTab] = useState(0);
+    const searchParams = useSearchParams();
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const tabParam = searchParams.get('tab');
+        if (tabParam === 'facilities' && sectionRef.current) {
+            setTimeout(() => {
+                sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [searchParams]);
 
     const tabs = [
         {
@@ -229,7 +241,7 @@ export default function FacilitiesSection() {
     ];
 
     return (
-        <section className="facilities-section" style={{ padding: '4rem 0', backgroundColor: '#e6eef4' }}>
+        <section ref={sectionRef} className="facilities-section" style={{ padding: '4rem 0', backgroundColor: '#e6eef4' }}>
             <div className="container">
                 <div className="section-title" style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h2 style={{ color: '#002856', fontSize: '2.5rem', fontWeight: '700' }}>Facilities & Campus Life</h2>
