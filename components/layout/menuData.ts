@@ -40,7 +40,7 @@ export const menuData: MenuItem[] = [
                 id: "office-registrar",
                 label: "Office of the Registrar",
                 children: [
-                    { id: "academic-calendar", label: "Academic Calendar", href: "#" }
+                    { id: "academic-calendar", label: "Academic Calendar", href: "/academic-calendar" }
                 ]
             },
             {

@@ -16,11 +16,11 @@ export default function Hero() {
                     <div className="page-title">
                         <h1>Expand your world, <span className="block">shape its future</span></h1>
                     </div>
-                    <Link href="/academics" className="btn-secondary --red --border --arrow ma-margin-right">
-                        <span>Academics</span>
+                    <Link href="/admission" className="btn-secondary --red --border --arrow ma-margin-right">
+                        <span>Admission</span>
                         <svg width="25" height="25" className="icon icon-arrow " aria-hidden="true" role="img"><use href="#arrow"></use></svg>
                     </Link>
-                    <Link href="/admissions/" className="btn-secondary --border --transparent --arrow">
+                    <Link href="/admission#how-to-apply" className="btn-secondary --border --transparent --arrow">
                         <span>How to apply</span>
                         <svg width="25" height="25" className="icon icon-arrow " aria-hidden="true" role="img"><use href="#arrow"></use></svg>
                     </Link>
