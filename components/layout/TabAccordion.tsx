@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useSearchParams } from 'next/navigation';
@@ -121,84 +121,94 @@ interface TabAccordionProps {
 
 export default function TabAccordion({ customTabs }: TabAccordionProps) {
     const [activeTab, setActiveTab] = useState(0);
-    const searchParams = useSearchParams();
     const sectionRef = useRef<HTMLElement>(null);
     const displayTabs = customTabs || tabs;
 
-    useEffect(() => {
-        const tabParam = searchParams.get('tab');
-        if (tabParam) {
-            const tabIndex = displayTabs.findIndex(tab => tab.id === tabParam);
-            if (tabIndex !== -1) {
-                setActiveTab(tabIndex);
-                // Wait for the render to complete before scrolling
-                setTimeout(() => {
-                    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
+    // Inner component for useSearchParams
+    function TabAccordionParamHandler() {
+        const searchParams = useSearchParams();
+
+        useEffect(() => {
+            const tabParam = searchParams.get('tab');
+            if (tabParam) {
+                const tabIndex = displayTabs.findIndex(tab => tab.id === tabParam);
+                if (tabIndex !== -1) {
+                    setActiveTab(tabIndex);
+                    setTimeout(() => {
+                        sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
             }
-        }
-    }, [searchParams, displayTabs]);
+        }, [searchParams]);
+
+        return null;
+    }
 
     return (
-        <section ref={sectionRef} className="tab-accordion jsWhyAubg">
-            <div className="container">
-                <div className="tab-accordion__wrap row">
-                    <div className="custom-accordion-tabs nav-tabs col-6 tabs-allowed">
-                        <ul role="tablist" className="custom-accordion-tabs__list tabs-tab-list row">
-                            {displayTabs.map((tab, index) => (
-                                <li key={tab.id} role="presentation" className="custom-accordion-tabs__item jsTabItem">
-                                    <button
-                                        role="tab"
-                                        aria-selected={activeTab === index}
-                                        className={`custom-accordion-tabs__link tabs-trigger js-tabs-trigger ${activeTab === index ? 'is-selected' : ''}`}
-                                        onClick={() => setActiveTab(index)}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-
-                        {displayTabs.map((tab, index) => (
-                            <section
-                                key={tab.id}
-                                role="tabpanel"
-                                className={`tabs-panel js-tabs-panel jsTabSection ${activeTab === index ? 'is-open' : ''}`}
-                            >
-                                <div className="content custom-accordion-tabs__wrap">
-                                    {tab.content}
-                                </div>
-                            </section>
-                        ))}
-                    </div>
-
-                    <div className="testimonial-box col-6">
-                        <div className="testimonial-box__image">
-                            <Swiper
-                                modules={[Navigation, Pagination, Autoplay]}
-                                spaceBetween={0}
-                                slidesPerView={1}
-                                navigation
-                                pagination={{ clickable: true }}
-                                autoplay={{ delay: 5000, disableOnInteraction: false }}
-                                loop={true}
-                                className="h-full w-full"
-                            >
-                                {(displayTabs[activeTab].rightImages || [displayTabs[activeTab].rightImage]).map((imgSrc, idx) => (
-                                    <SwiperSlide key={idx}>
-                                        <img
-                                            className="image lazy loaded w-full h-full object-cover"
-                                            alt={displayTabs[activeTab].label}
-                                            src={imgSrc}
-                                        />
-                                    </SwiperSlide>
+        <>
+            <Suspense fallback={null}>
+                <TabAccordionParamHandler />
+            </Suspense>
+            <section ref={sectionRef} className="tab-accordion jsWhyAubg">
+                <div className="container">
+                    <div className="tab-accordion__wrap row">
+                        <div className="custom-accordion-tabs nav-tabs col-6 tabs-allowed">
+                            <ul role="tablist" className="custom-accordion-tabs__list tabs-tab-list row">
+                                {displayTabs.map((tab, index) => (
+                                    <li key={tab.id} role="presentation" className="custom-accordion-tabs__item jsTabItem">
+                                        <button
+                                            role="tab"
+                                            aria-selected={activeTab === index}
+                                            className={`custom-accordion-tabs__link tabs-trigger js-tabs-trigger ${activeTab === index ? 'is-selected' : ''}`}
+                                            onClick={() => setActiveTab(index)}
+                                        >
+                                            {tab.label}
+                                        </button>
+                                    </li>
                                 ))}
-                            </Swiper>
+                            </ul>
+
+                            {displayTabs.map((tab, index) => (
+                                <section
+                                    key={tab.id}
+                                    role="tabpanel"
+                                    className={`tabs-panel js-tabs-panel jsTabSection ${activeTab === index ? 'is-open' : ''}`}
+                                >
+                                    <div className="content custom-accordion-tabs__wrap">
+                                        {tab.content}
+                                    </div>
+                                </section>
+                            ))}
                         </div>
 
+                        <div className="testimonial-box col-6">
+                            <div className="testimonial-box__image">
+                                <Swiper
+                                    modules={[Navigation, Pagination, Autoplay]}
+                                    spaceBetween={0}
+                                    slidesPerView={1}
+                                    navigation
+                                    pagination={{ clickable: true }}
+                                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                                    loop={true}
+                                    className="h-full w-full"
+                                >
+                                    {(displayTabs[activeTab].rightImages || [displayTabs[activeTab].rightImage]).map((imgSrc, idx) => (
+                                        <SwiperSlide key={idx}>
+                                            <img
+                                                className="image lazy loaded w-full h-full object-cover"
+                                                alt={displayTabs[activeTab].label}
+                                                src={imgSrc}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }

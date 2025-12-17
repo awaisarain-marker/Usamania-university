@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function FacilitiesSection() {
-    const [activeTab, setActiveTab] = useState(0);
+// Inner component that uses useSearchParams - must be wrapped in Suspense
+function FacilitiesParamHandler({ sectionRef }: { sectionRef: React.RefObject<HTMLElement | null> }) {
     const searchParams = useSearchParams();
-    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const tabParam = searchParams.get('tab');
@@ -15,7 +14,14 @@ export default function FacilitiesSection() {
                 sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
         }
-    }, [searchParams]);
+    }, [searchParams, sectionRef]);
+
+    return null;
+}
+
+export default function FacilitiesSection() {
+    const [activeTab, setActiveTab] = useState(0);
+    const sectionRef = useRef<HTMLElement>(null);
 
     const tabs = [
         {
@@ -241,68 +247,73 @@ export default function FacilitiesSection() {
     ];
 
     return (
-        <section ref={sectionRef} className="facilities-section" style={{ padding: '4rem 0', backgroundColor: '#e6eef4' }}>
-            <div className="container">
-                <div className="section-title" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                    <h2 style={{ color: '#002856', fontSize: '2.5rem', fontWeight: '700' }}>Facilities & Campus Life</h2>
-                </div>
+        <>
+            <Suspense fallback={null}>
+                <FacilitiesParamHandler sectionRef={sectionRef} />
+            </Suspense>
+            <section ref={sectionRef} className="facilities-section" style={{ padding: '4rem 0', backgroundColor: '#e6eef4' }}>
+                <div className="container">
+                    <div className="section-title" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                        <h2 style={{ color: '#002856', fontSize: '2.5rem', fontWeight: '700' }}>Facilities & Campus Life</h2>
+                    </div>
 
-                <div className="facilities-tabs" style={{
-                    backgroundColor: '#fff',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                    overflow: 'hidden'
-                }}>
-                    {/* Tab Headers */}
-                    <div className="facilities-tabs__header" style={{
-                        display: 'flex',
-                        flexWrap: 'nowrap',
-                        overflowX: 'auto',
-                        backgroundColor: '#002856',
-                        borderBottom: '2px solid #ed1c24',
-                        scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                        msOverflowStyle: 'none'  // Hide scrollbar for IE/Edge
+                    <div className="facilities-tabs" style={{
+                        backgroundColor: '#fff',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                        overflow: 'hidden'
                     }}>
-                        {tabs.map((tab, index) => (
-                            <button
-                                key={tab.id}
-                                role="tab"
-                                aria-selected={activeTab === index}
-                                className={`facilities-tab-btn ${activeTab === index ? 'is-active' : ''}`}
-                                onClick={() => setActiveTab(index)}
-                                style={{
-                                    padding: '1rem 1.5rem',
-                                    border: 'none',
-                                    background: activeTab === index ? '#ed1c24' : 'transparent',
-                                    color: '#fff',
-                                    fontWeight: '600',
-                                    fontSize: '1rem',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease',
-                                    flex: '1 1 auto',
-                                    minWidth: '150px',
-                                    textAlign: 'center'
-                                }}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
-                    </div>
+                        {/* Tab Headers */}
+                        <div className="facilities-tabs__header" style={{
+                            display: 'flex',
+                            flexWrap: 'nowrap',
+                            overflowX: 'auto',
+                            backgroundColor: '#002856',
+                            borderBottom: '2px solid #ed1c24',
+                            scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                            msOverflowStyle: 'none'  // Hide scrollbar for IE/Edge
+                        }}>
+                            {tabs.map((tab, index) => (
+                                <button
+                                    key={tab.id}
+                                    role="tab"
+                                    aria-selected={activeTab === index}
+                                    className={`facilities-tab-btn ${activeTab === index ? 'is-active' : ''}`}
+                                    onClick={() => setActiveTab(index)}
+                                    style={{
+                                        padding: '1rem 1.5rem',
+                                        border: 'none',
+                                        background: activeTab === index ? '#ed1c24' : 'transparent',
+                                        color: '#fff',
+                                        fontWeight: '600',
+                                        fontSize: '1rem',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        flex: '1 1 auto',
+                                        minWidth: '150px',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
 
-                    {/* Tab Content */}
-                    <div className="facilities-tabs__content" style={{ padding: '2rem' }}>
-                        {tabs.map((tab, index) => (
-                            <div
-                                key={tab.id}
-                                role="tabpanel"
-                                style={{ display: activeTab === index ? 'block' : 'none' }}
-                            >
-                                {tab.content}
-                            </div>
-                        ))}
+                        {/* Tab Content */}
+                        <div className="facilities-tabs__content" style={{ padding: '2rem' }}>
+                            {tabs.map((tab, index) => (
+                                <div
+                                    key={tab.id}
+                                    role="tabpanel"
+                                    style={{ display: activeTab === index ? 'block' : 'none' }}
+                                >
+                                    {tab.content}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }

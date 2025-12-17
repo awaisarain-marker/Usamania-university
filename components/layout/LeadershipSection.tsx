@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -73,6 +73,46 @@ function ExpandableText({ children, renderTrigger }: ExpandableTextProps) {
     );
 }
 
+// Component that uses useSearchParams - must be wrapped in Suspense
+function TabParamHandler({
+    customTabs,
+    defaultTabs,
+    setActiveTab,
+    sectionRef
+}: {
+    customTabs?: { id: string; label: string; content: React.ReactNode }[];
+    defaultTabs: { id: string; label: string; content: React.ReactNode }[];
+    setActiveTab: (index: number) => void;
+    sectionRef: React.RefObject<HTMLElement | null>;
+}) {
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const tabParam = searchParams.get('tab');
+        if (!tabParam) return;
+
+        const currentTabs = customTabs || defaultTabs;
+        const index = currentTabs.findIndex(t => {
+            const normalizedId = t.id.toLowerCase().replace(/\s+/g, '-');
+            const normalizedLabel = t.label.toLowerCase().replace(/\s+/g, '-');
+            return normalizedId === tabParam || normalizedLabel === tabParam;
+        });
+
+        if (index !== -1) {
+            setActiveTab(index);
+            setTimeout(() => {
+                sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        } else if (tabParam === 'accreditation') {
+            setTimeout(() => {
+                const accreditationSection = document.getElementById('accreditation-section');
+                accreditationSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [searchParams, customTabs, defaultTabs, setActiveTab, sectionRef]);
+
+    return null;
+}
 
 interface LeadershipSectionProps {
     hideHeader?: boolean;
@@ -91,34 +131,7 @@ interface LeadershipSectionProps {
 
 export default function LeadershipSection({ hideHeader = false, introTabConfig, customTabs, customBottomSection }: LeadershipSectionProps) {
     const [activeTab, setActiveTab] = useState(0);
-    const searchParams = useSearchParams();
     const sectionRef = useRef<HTMLElement>(null);
-
-    // Effect to handle query param-based navigation for tabs
-    useEffect(() => {
-        const tabParam = searchParams.get('tab');
-        if (!tabParam) return;
-
-        const currentTabs = customTabs || defaultTabs;
-        const index = currentTabs.findIndex(t => {
-            const normalizedId = t.id.toLowerCase().replace(/\s+/g, '-');
-            const normalizedLabel = t.label.toLowerCase().replace(/\s+/g, '-');
-            return normalizedId === tabParam || normalizedLabel === tabParam;
-        });
-
-        if (index !== -1) {
-            setActiveTab(index);
-            // Scroll to the section with a slight delay to allow for rendering
-            setTimeout(() => {
-                sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        } else if (tabParam === 'accreditation') {
-            setTimeout(() => {
-                const accreditationSection = document.getElementById('accreditation-section');
-                accreditationSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
-    }, [searchParams, customTabs]); // Dependencies need to include searchParams and customTabs
 
     const defaultTabs = [
         {
@@ -664,131 +677,141 @@ export default function LeadershipSection({ hideHeader = false, introTabConfig, 
     const tabs = customTabs || defaultTabs;
 
     return (
-        <div ref={sectionRef as React.RefObject<HTMLDivElement>} className="flexible --border">
-            <div className="container">
-                <div className="flexible__wrap --white">
-                    <article className="flexible__content">
+        <>
+            <Suspense fallback={null}>
+                <TabParamHandler
+                    customTabs={customTabs}
+                    defaultTabs={defaultTabs}
+                    setActiveTab={setActiveTab}
+                    sectionRef={sectionRef}
+                />
+            </Suspense>
+            <div ref={sectionRef as React.RefObject<HTMLDivElement>} className="flexible --border">
+                <div className="container">
+                    <div className="flexible__wrap --white">
+                        <article className="flexible__content">
 
-                        <section className="residence">
-                            <div className="residence__wrap lazy loaded" style={{ backgroundImage: hideHeader ? 'none' : 'url("https://www.aubg.edu/wp-content/themes/digitalsilk/assets/_dist/images/grifon-blue.svg")' }}>
-                                {/* Conditionally render header content */}
-                                {!hideHeader && (
-                                    <div className="residence__content">
-                                        <div className="section-title">
-                                            <h2>UIT Leadership</h2>
-                                        </div>
-                                        <div className="text-big">
-                                            <p>"Education is the most powerful weapon which you can use to change the world."</p>
-                                            <p>Learn more below.</p>
-                                        </div>
-                                    </div>
-                                )}
-                                <div className="custom-accordion-tabs accordion-tabs js-tabs is-initialized tabs-allowed">
-                                    <ul role="tablist" className="custom-accordion-tabs__list --scroll row tabs-tab-list">
-                                        {tabs.map((tab, index) => (
-                                            <li key={tab.id} role="presentation" className="custom-accordion-tabs__item">
-                                                <button
-                                                    role="tab"
-                                                    aria-selected={activeTab === index}
-                                                    className={`custom-accordion-tabs__link tabs-trigger js-tabs-trigger ${activeTab === index ? 'is-selected' : ''}`}
-                                                    onClick={() => setActiveTab(index)}
-                                                >
-                                                    {tab.label}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    {tabs.map((tab, index) => (
-                                        <section
-                                            key={tab.id}
-                                            id={`restabsection${index}`}
-                                            role="tabpanel"
-                                            className={`tabs-panel js-tabs-panel ${activeTab === index ? 'is-open' : 'is-hidden'}`}
-                                            aria-labelledby={`residencetab${index}`}
-                                        >
-
-                                            <div className={`content ${activeTab === index ? 'is-open' : 'is-hidden'}`} aria-hidden={activeTab !== index}>
-                                                {tab.content}
-                                            </div>
-                                        </section>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-
-                        {customBottomSection !== undefined ? (
-                            customBottomSection
-                        ) : (
-                            <section id="accreditation-section" className="image-cta">
-                                <div className="container">
-                                    <div className="image-cta__wrap">
-                                        <div className="image-cta__head">
-                                            <figure className="image-cta__head-image">
-                                                <img
-                                                    className="image lazy loaded"
-                                                    alt="Accreditations & Recognition Image"
-                                                    width="1256"
-                                                    height="605"
-                                                    src="/commesion-about-img-001.webp"
-                                                    srcSet="/commesion-about-img-001.webp 150w, /commesion-about-img-001.webp 300w, /commesion-about-img-001.webp 600w, /commesion-about-img-001.webp 1000w"
-                                                    sizes="(min-width: 75rem) 60rem, (min-width: 50rem) 40rem, (min-width: 40rem) calc(100vw - 10rem), 100vw"
-                                                />
-                                            </figure>
-                                        </div>
-
-                                        <div className="image-cta__body">
+                            <section className="residence">
+                                <div className="residence__wrap lazy loaded" style={{ backgroundImage: hideHeader ? 'none' : 'url("https://www.aubg.edu/wp-content/themes/digitalsilk/assets/_dist/images/grifon-blue.svg")' }}>
+                                    {/* Conditionally render header content */}
+                                    {!hideHeader && (
+                                        <div className="residence__content">
                                             <div className="section-title">
-                                                <h2>Accreditations & Recognition</h2>
+                                                <h2>UIT Leadership</h2>
                                             </div>
-                                            <ExpandableText
-                                                renderTrigger={(expanded, toggle) => (
-                                                    <button
-                                                        className="btn-secondary --red --arrow --border"
-                                                        onClick={toggle}
-                                                        style={{ marginTop: '20px', cursor: 'pointer' }}
-                                                    >
-                                                        <span>{expanded ? 'Read Less' : 'Read More'}</span>
-                                                        <svg
-                                                            width="25"
-                                                            height="25"
-                                                            className="icon icon-arrow"
-                                                            aria-hidden="true"
-                                                            role="img"
-                                                            style={{
-                                                                transform: expanded ? 'rotate(-90deg)' : 'rotate(90deg)',
-                                                                transition: 'transform 0.3s'
-                                                            }}
-                                                        >
-                                                            <use xlinkHref="#arrow"></use>
-                                                        </svg>
-                                                    </button>
-                                                )}
-                                            >
-                                                <div style={{ marginTop: '1rem' }}>
-                                                    <h3 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#002856', marginBottom: '0.5rem' }}>Government of Sindh</h3>
-                                                    <p style={{ marginBottom: '1rem' }}>
-                                                        UITU was chartered vide The UIT University Act, 2017 [Sindh Act No. XXXIV of 2018] of Government of Sindh and was notified in The Sindh Government Gazette vide Notification no. PLS/LEGIS-PB-07/2017 dated Karachi, Monday, May 28, 2018.
-                                                        <br />
-                                                        <a href="http://www.sindhlaws.gov.pk/setup/publications/PUB-18-000114.pdf" target="_blank" rel="noopener noreferrer" style={{ color: '#ed1c24', textDecoration: 'underline' }}>View Notification</a>
-                                                    </p>
-
-                                                    <h3 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#002856', marginBottom: '0.5rem' }}>Higher Education Commission (HEC)</h3>
-                                                    <p>
-                                                        UITU is recognized by Higher Education Commission, Pakistan.
-                                                        <br />
-                                                        <a href="https://www.hec.gov.pk//english/universities/Pages/Sindh/UIT%20University,%20Karachi.aspx" target="_blank" rel="noopener noreferrer" style={{ color: '#ed1c24', textDecoration: 'underline' }}>View Recognition</a>
-                                                    </p>
-                                                </div>
-                                            </ExpandableText>
+                                            <div className="text-big">
+                                                <p>"Education is the most powerful weapon which you can use to change the world."</p>
+                                                <p>Learn more below.</p>
+                                            </div>
                                         </div>
+                                    )}
+                                    <div className="custom-accordion-tabs accordion-tabs js-tabs is-initialized tabs-allowed">
+                                        <ul role="tablist" className="custom-accordion-tabs__list --scroll row tabs-tab-list">
+                                            {tabs.map((tab, index) => (
+                                                <li key={tab.id} role="presentation" className="custom-accordion-tabs__item">
+                                                    <button
+                                                        role="tab"
+                                                        aria-selected={activeTab === index}
+                                                        className={`custom-accordion-tabs__link tabs-trigger js-tabs-trigger ${activeTab === index ? 'is-selected' : ''}`}
+                                                        onClick={() => setActiveTab(index)}
+                                                    >
+                                                        {tab.label}
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        {tabs.map((tab, index) => (
+                                            <section
+                                                key={tab.id}
+                                                id={`restabsection${index}`}
+                                                role="tabpanel"
+                                                className={`tabs-panel js-tabs-panel ${activeTab === index ? 'is-open' : 'is-hidden'}`}
+                                                aria-labelledby={`residencetab${index}`}
+                                            >
+
+                                                <div className={`content ${activeTab === index ? 'is-open' : 'is-hidden'}`} aria-hidden={activeTab !== index}>
+                                                    {tab.content}
+                                                </div>
+                                            </section>
+                                        ))}
                                     </div>
                                 </div>
                             </section>
-                        )}
-                    </article>
+
+                            {customBottomSection !== undefined ? (
+                                customBottomSection
+                            ) : (
+                                <section id="accreditation-section" className="image-cta">
+                                    <div className="container">
+                                        <div className="image-cta__wrap">
+                                            <div className="image-cta__head">
+                                                <figure className="image-cta__head-image">
+                                                    <img
+                                                        className="image lazy loaded"
+                                                        alt="Accreditations & Recognition Image"
+                                                        width="1256"
+                                                        height="605"
+                                                        src="/commesion-about-img-001.webp"
+                                                        srcSet="/commesion-about-img-001.webp 150w, /commesion-about-img-001.webp 300w, /commesion-about-img-001.webp 600w, /commesion-about-img-001.webp 1000w"
+                                                        sizes="(min-width: 75rem) 60rem, (min-width: 50rem) 40rem, (min-width: 40rem) calc(100vw - 10rem), 100vw"
+                                                    />
+                                                </figure>
+                                            </div>
+
+                                            <div className="image-cta__body">
+                                                <div className="section-title">
+                                                    <h2>Accreditations & Recognition</h2>
+                                                </div>
+                                                <ExpandableText
+                                                    renderTrigger={(expanded, toggle) => (
+                                                        <button
+                                                            className="btn-secondary --red --arrow --border"
+                                                            onClick={toggle}
+                                                            style={{ marginTop: '20px', cursor: 'pointer' }}
+                                                        >
+                                                            <span>{expanded ? 'Read Less' : 'Read More'}</span>
+                                                            <svg
+                                                                width="25"
+                                                                height="25"
+                                                                className="icon icon-arrow"
+                                                                aria-hidden="true"
+                                                                role="img"
+                                                                style={{
+                                                                    transform: expanded ? 'rotate(-90deg)' : 'rotate(90deg)',
+                                                                    transition: 'transform 0.3s'
+                                                                }}
+                                                            >
+                                                                <use xlinkHref="#arrow"></use>
+                                                            </svg>
+                                                        </button>
+                                                    )}
+                                                >
+                                                    <div style={{ marginTop: '1rem' }}>
+                                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#002856', marginBottom: '0.5rem' }}>Government of Sindh</h3>
+                                                        <p style={{ marginBottom: '1rem' }}>
+                                                            UITU was chartered vide The UIT University Act, 2017 [Sindh Act No. XXXIV of 2018] of Government of Sindh and was notified in The Sindh Government Gazette vide Notification no. PLS/LEGIS-PB-07/2017 dated Karachi, Monday, May 28, 2018.
+                                                            <br />
+                                                            <a href="http://www.sindhlaws.gov.pk/setup/publications/PUB-18-000114.pdf" target="_blank" rel="noopener noreferrer" style={{ color: '#ed1c24', textDecoration: 'underline' }}>View Notification</a>
+                                                        </p>
+
+                                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#002856', marginBottom: '0.5rem' }}>Higher Education Commission (HEC)</h3>
+                                                        <p>
+                                                            UITU is recognized by Higher Education Commission, Pakistan.
+                                                            <br />
+                                                            <a href="https://www.hec.gov.pk//english/universities/Pages/Sindh/UIT%20University,%20Karachi.aspx" target="_blank" rel="noopener noreferrer" style={{ color: '#ed1c24', textDecoration: 'underline' }}>View Recognition</a>
+                                                        </p>
+                                                    </div>
+                                                </ExpandableText>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            )}
+                        </article>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
