@@ -205,16 +205,13 @@ export default function BBAPage() {
                                 </div>
                             )
                         }
-                                    </div>
-        </div>
-    )
-}
                     ]}
                 />
-            </div >
-    {/* Blog and Events Sections */ }
-    < BlogSection title = "Latest News" />
-        <EventsSection title="Upcoming Events" />
-        </div >
+            </div>
+
+            {/* Blog and Events Sections */}
+            <BlogSection title="Latest News" />
+            <EventsSection title="Upcoming Events" />
+        </div>
     );
 }
