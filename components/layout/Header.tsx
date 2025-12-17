@@ -5,15 +5,65 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Search, Globe, Menu, X } from "lucide-react";
 import MegaMenu from "./MegaMenu";
+import { client } from "@/sanity/lib/client";
+
+interface HeaderSettings {
+    logoUrl?: string;
+    logo?: string;
+    announcementText?: string;
+    announcementLink?: string;
+    announcementVisible?: boolean;
+    applyNowText?: string;
+    applyNowLink?: string;
+    exploreText?: string;
+}
+
+// Default values (fallback if Sanity data not loaded)
+const defaultSettings: HeaderSettings = {
+    logoUrl: 'https://uitu.edu.pk/wp-content/uploads/2023/12/logo_with_text_final__6_-removebg-preview.png',
+    announcementText: 'Admission Open Spring 2026!',
+    announcementLink: 'https://eduboard.uit.edu/AdmissionPortal/Login',
+    announcementVisible: true,
+    applyNowText: 'Apply Now',
+    applyNowLink: '/admission',
+    exploreText: 'Explore',
+};
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [settings, setSettings] = useState<HeaderSettings>(defaultSettings);
     const pathname = usePathname();
+
     // Force dark header (white background, dark text) on blog & event pages
     const isDarkHeader = isScrolled || pathname?.startsWith('/uit-today') || pathname?.startsWith('/events');
+
+    // Fetch header settings from Sanity
+    useEffect(() => {
+        async function fetchSettings() {
+            try {
+                const data = await client.fetch(`
+                    *[_type == "headerSettings"][0] {
+                        logoUrl,
+                        "logo": logo.asset->url,
+                        announcementText,
+                        announcementLink,
+                        announcementVisible,
+                        applyNowText,
+                        applyNowLink,
+                        exploreText
+                    }
+                `);
+                if (data) {
+                    setSettings({ ...defaultSettings, ...data });
+                }
+            } catch (error) {
+                console.error('Error fetching header settings:', error);
+            }
+        }
+        fetchSettings();
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,6 +73,9 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Use logo URL or uploaded logo
+    const logoSrc = settings.logoUrl || settings.logo || defaultSettings.logoUrl;
 
     return (
         <>
@@ -36,7 +89,7 @@ export default function Header() {
                             aria-label="company logo that leads to home page"
                         >
                             <img
-                                src="https://uitu.edu.pk/wp-content/uploads/2023/12/logo_with_text_final__6_-removebg-preview.png"
+                                src={logoSrc}
                                 alt="UIT University"
                                 width={491}
                                 height={52}
@@ -47,22 +100,25 @@ export default function Header() {
 
                     {/* Right: Navigation Items */}
                     <div className="flex items-center justify-end flex-1">
-                        {/* Language Switcher */}
                         {/* Admission Open / Announcement Button */}
-                        <Link
-                            href="https://eduboard.uit.edu/AdmissionPortal/Login"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`hidden lg:flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-4 lg:ml-[clamp(15px,4rem,25px)] mr-auto text-sm xl:text-base font-bold transition-all duration-300 ease-in-out uppercase tracking-wide relative overflow-hidden group ${isDarkHeader
-                                ? 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
-                                : 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
-                                }`}
-                        >
-                            <span className="relative z-10 whitespace-nowrap">Admission Open Spring 2026!</span>
-                            {/* Animation Effect */}
-                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-150%] animate-[shimmer_2s_infinite] skew-x-12" />
-                            <span className="absolute inset-0 border-2 border-white/50 animate-pulse rounded-sm" />
-                        </Link>
+                        {settings.announcementVisible !== false && (
+                            <Link
+                                href={settings.announcementLink || defaultSettings.announcementLink!}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`hidden lg:flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-4 lg:ml-[clamp(15px,4rem,25px)] mr-auto text-sm xl:text-base font-bold transition-all duration-300 ease-in-out uppercase tracking-wide relative overflow-hidden group ${isDarkHeader
+                                    ? 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
+                                    : 'text-white bg-[#ed1c24] hover:bg-[#c41219]'
+                                    }`}
+                            >
+                                <span className="relative z-10 whitespace-nowrap">
+                                    {settings.announcementText || defaultSettings.announcementText}
+                                </span>
+                                {/* Animation Effect */}
+                                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-150%] animate-[shimmer_2s_infinite] skew-x-12" />
+                                <span className="absolute inset-0 border-2 border-white/50 animate-pulse rounded-sm" />
+                            </Link>
+                        )}
 
                         {/* Language Switcher */}
                         <div className={`hidden lg:flex items-center ml-2 relative transition-all duration-300 ease-in-out whitespace-nowrap ${isDarkHeader ? 'text-[#002856]' : 'text-white'}`}>
@@ -108,10 +164,10 @@ export default function Header() {
 
                         {/* Apply Now Button */}
                         <Link
-                            href="/admissions/"
+                            href={settings.applyNowLink || defaultSettings.applyNowLink!}
                             className="hidden md:flex items-center justify-center h-11 xl:h-[50px] px-4 xl:px-6 ml-2.5 bg-[#ed1c24] text-white text-sm xl:text-base font-bold border border-[#ed1c24] hover:bg-red-700 transition-all duration-300 ease-in-out uppercase tracking-wide"
                         >
-                            Apply Now
+                            {settings.applyNowText || defaultSettings.applyNowText}
                         </Link>
 
                         {/* Explore/Menu Button */}
@@ -123,7 +179,7 @@ export default function Header() {
                         >
                             <Menu className="w-[19px] mr-0 md:mr-2.5 mb-0.5" aria-hidden="true" />
                             <span className="hidden md:inline uppercase text-sm xl:text-base font-normal tracking-wide">
-                                Explore
+                                {settings.exploreText || defaultSettings.exploreText}
                             </span>
                         </button>
                     </div>
