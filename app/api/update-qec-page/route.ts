@@ -64,119 +64,91 @@ const qecPage = {
             showReadMore: true,
             backgroundColor: 'light'
         },
+        // Vision Statement - using visionBoxBlock with paragraph
         {
-            _type: 'richTextBlock',
+            _type: 'visionBoxBlock',
             _key: createKey(),
-            title: 'Vision',
-            backgroundColor: 'light-blue',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: 'To be recognized as a center of excellence in quality assurance, fostering an environment where academic programs meet international standards and produce graduates who excel in their respective fields.'
-                    }]
-                }
-            ]
-        },
-        {
-            _type: 'richTextBlock',
-            _key: createKey(),
-            title: 'Mission',
+            sectionId: 'vision',
+            title: 'Vision Statement',
+            contentType: 'paragraph',
+            paragraphText: 'To be the pioneer in leading QECs in Pakistan by supporting the academic programs via academic excellence, relevant research, ingenious pedagogies, institutional strengthening, and compliance with HEC and international standards.',
             backgroundColor: 'white',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: 'To implement and monitor quality enhancement initiatives across all academic and administrative functions of the university, ensuring compliance with HEC guidelines and international best practices.'
-                    }]
-                }
-            ]
         },
+        // Mission Statement - using visionBoxBlock with bullets
         {
-            _type: 'richTextBlock',
+            _type: 'visionBoxBlock',
             _key: createKey(),
+            sectionId: 'mission',
+            title: 'Mission Statement',
+            contentType: 'bullets',
+            bulletItems: [
+                { _key: createKey(), text: 'To develop and implement a university-wide quality assurance system aligned with the HEC Pakistan\'s QAA standards.' },
+                { _key: createKey(), text: 'To support the university in achieving its academic and research goals.' },
+                { _key: createKey(), text: 'To promote a culture of continuous quality improvement within the university.' },
+                { _key: createKey(), text: 'To build capacity within the university for quality assurance and enhancement.' },
+            ],
+            backgroundColor: 'white',
+        },
+        // Objectives - using visionBoxBlock with bullets
+        {
+            _type: 'visionBoxBlock',
+            _key: createKey(),
+            sectionId: 'objectives',
             title: 'Objectives',
-            backgroundColor: 'light-blue',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: '• Develop and implement quality assurance policies and procedures\n• Conduct regular program reviews and assessments\n• Facilitate faculty development and training programs\n• Monitor student feedback and satisfaction\n• Ensure compliance with accreditation requirements\n• Promote a culture of continuous improvement\n• Maintain documentation and quality records\n• Coordinate with external quality assurance bodies'
-                    }]
-                }
-            ]
-        },
-        {
-            _type: 'richTextBlock',
-            _key: createKey(),
-            title: 'Activity Calendars',
+            contentType: 'bullets',
+            bulletItems: [
+                { _key: createKey(), text: 'To develop and implement quality assurance standards and procedures for all aspects of the university\'s operations, including teaching, learning, assessment, research, and governance.' },
+                { _key: createKey(), text: 'To regularly review the university\'s academic programs and services to ensure they meet the highest standards.' },
+                { _key: createKey(), text: 'To support the university in improving the quality of its teaching and learning.' },
+                { _key: createKey(), text: 'To provide training and development opportunities to faculty and staff on quality assurance and enhancement.' },
+                { _key: createKey(), text: 'To promote a culture of continuous quality improvement within the university through self-assessment, peer review, and other quality assurance mechanisms.' },
+                { _key: createKey(), text: 'To work with the HEC and other quality assurance agencies to ensure that the university\'s quality assurance system meets the highest international standards.' },
+                { _key: createKey(), text: 'To collaborate with other QECs in Pakistan to share best practices and promote quality assurance in higher education.' },
+            ],
             backgroundColor: 'white',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: 'QEC maintains annual activity calendars for quality assurance activities including:\n\n• Faculty Evaluation Surveys (Every Semester)\n• Exit Surveys (End of Academic Year)\n• Alumni Surveys (Annual)\n• Employer Surveys (Annual)\n• Course File Audits (Every Semester)\n• Self-Assessment Reports (Per HEC Schedule)'
-                    }]
-                }
-            ]
         },
+        // Activity Calendars - using visionBoxBlock with files
         {
-            _type: 'richTextBlock',
+            _type: 'visionBoxBlock',
             _key: createKey(),
+            sectionId: 'activity-calendars',
+            title: 'QEC Activity Calendars',
+            contentType: 'files',
+            fileItems: [
+                { _key: createKey(), fileName: 'QAA Calendar 2025-2026', fileUrl: 'https://uitu.edu.pk/wp-content/uploads/2025/11/QAA-Calendar-2025-2026.pdf' },
+                { _key: createKey(), fileName: 'QAA Calendar 2024-25', fileUrl: 'https://uitu.edu.pk/wp-content/uploads/2025/11/QAA-Calendar-2024-25.pdf' },
+                { _key: createKey(), fileName: 'QEC Calendar for HEC 2023-2024', fileUrl: 'https://uitu.edu.pk/wp-content/uploads/2025/11/QEC-Calendar-for-HEC-2023-2024.pdf' },
+            ],
+            backgroundColor: 'white',
+        },
+        // QEC Team
+        {
+            _type: 'visionBoxBlock',
+            _key: createKey(),
+            sectionId: 'team',
             title: 'QEC Team',
-            backgroundColor: 'light-blue',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: 'Director QEC:\nDr. [Name]\nEmail: qec@uit.edu\n\nAssistant Director:\nMr./Ms. [Name]\nEmail: qec.assistant@uit.edu\n\nQEC Coordinator:\nMr./Ms. [Name]\nEmail: qec.coordinator@uit.edu'
-                    }]
-                }
-            ]
-        },
-        {
-            _type: 'richTextBlock',
-            _key: createKey(),
-            title: 'UITU Policies',
+            contentType: 'paragraph',
+            paragraphText: 'Director QEC:\nDr. [Name]\nEmail: qec@uit.edu\n\nAssistant Director:\nMr./Ms. [Name]\nEmail: qec.assistant@uit.edu\n\nQEC Coordinator:\nMr./Ms. [Name]\nEmail: qec.coordinator@uit.edu',
             backgroundColor: 'white',
-            content: [
-                {
-                    _type: 'block',
-                    _key: createKey(),
-                    style: 'normal',
-                    markDefs: [],
-                    children: [{
-                        _type: 'span',
-                        _key: createKey(),
-                        text: '• Academic Integrity Policy\n• Examination Policy\n• Grading Policy\n• Faculty Evaluation Policy\n• Program Review Policy\n• Student Feedback Policy\n• Plagiarism Policy\n• Research Ethics Policy'
-                    }]
-                }
-            ]
+        },
+        // UITU Policies
+        {
+            _type: 'visionBoxBlock',
+            _key: createKey(),
+            sectionId: 'policies',
+            title: 'UITU Policies',
+            contentType: 'bullets',
+            bulletItems: [
+                { _key: createKey(), text: 'Academic Integrity Policy' },
+                { _key: createKey(), text: 'Examination Policy' },
+                { _key: createKey(), text: 'Grading Policy' },
+                { _key: createKey(), text: 'Faculty Evaluation Policy' },
+                { _key: createKey(), text: 'Program Review Policy' },
+                { _key: createKey(), text: 'Student Feedback Policy' },
+                { _key: createKey(), text: 'Plagiarism Policy' },
+                { _key: createKey(), text: 'Research Ethics Policy' },
+            ],
+            backgroundColor: 'white',
         }
     ]
 }
