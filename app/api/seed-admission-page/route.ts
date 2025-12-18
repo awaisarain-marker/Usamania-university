@@ -18,8 +18,8 @@ const admissionPageData = {
     _type: 'page',
     title: 'Admissions',
     slug: { current: 'admission' },
-    metaTitle: 'Admissions - UIT University',
-    metaDescription: 'Apply to UIT University. Explore undergraduate and graduate programs in Computer Science, Electrical Engineering, and Management Sciences.',
+    seoTitle: 'Admissions - UIT University',
+    seoDescription: 'Apply to UIT University. Explore undergraduate and graduate programs in Computer Science, Electrical Engineering, and Management Sciences.',
     sections: [
         // Page Hero
         {
@@ -243,8 +243,8 @@ export async function GET() {
             result = await writeClient.patch(existingPage)
                 .set({
                     title: admissionPageData.title,
-                    metaTitle: admissionPageData.metaTitle,
-                    metaDescription: admissionPageData.metaDescription,
+                    seoTitle: admissionPageData.seoTitle,
+                    seoDescription: admissionPageData.seoDescription,
                     sections: admissionPageData.sections,
                 })
                 .commit();
