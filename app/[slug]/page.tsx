@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { getPageBySlug } from '@/sanity/lib/queries';
@@ -18,6 +18,10 @@ import EventsSection from '@/components/home/EventsSection';
 import AcademicsGrid from '@/components/home/AcademicsGrid';
 import CampusExperienceSection from '@/components/home/CampusExperienceSection';
 import FacultyGrid from '@/components/faculty/FacultyGrid';
+// About page components
+import TabAccordion from '@/components/layout/TabAccordion';
+import LeadershipSection from '@/components/layout/LeadershipSection';
+import FacilitiesSection from '@/components/layout/FacilitiesSection';
 
 // Define the section type
 interface Section {
@@ -39,6 +43,10 @@ const ComponentMap: Record<string, React.ComponentType<any>> = {
     academicsGridBlock: AcademicsGrid,
     campusExperienceBlock: CampusExperienceSection,
     facultyGridBlock: FacultyGrid,
+    // About page components
+    tabAccordionBlock: TabAccordion,
+    leadershipBlock: LeadershipSection,
+    facilitiesBlock: FacilitiesSection,
 };
 
 // Spacer Component
@@ -123,6 +131,34 @@ function FaqsAccordionComponent({
     );
 }
 
+// Journey Timeline Component
+function JourneyTimelineComponent({
+    title = 'Our Journey',
+    milestones = [],
+}: {
+    title?: string;
+    milestones?: Array<{ title: string; description: string }>;
+}) {
+    return (
+        <section className="pb-16 md:pb-24 pt-12 md:pt-16">
+            <div className="container">
+                <h2 className="text-[#002856] font-serif text-4xl md:text-5xl mb-12 text-center">
+                    {title}
+                </h2>
+                <div className="grid md:grid-cols-4 gap-6">
+                    {milestones.map((item, index) => (
+                        <div key={index} className="relative pl-8 md:pl-0 md:pt-8 border-l-2 md:border-l-0 md:border-t-2 border-[#005092]">
+                            <div className="absolute top-0 left-[-9px] md:top-[-9px] md:left-0 w-4 h-4 rounded-full bg-[#ed1c24]"></div>
+                            <h3 className="text-[#002856] font-bold text-xl mb-2">{item.title}</h3>
+                            <p className="text-gray-600 text-sm">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
 // Render a single section
 function RenderSection({ section }: { section: Section }) {
     const { _type, ...props } = section;
@@ -140,6 +176,10 @@ function RenderSection({ section }: { section: Section }) {
         return <FaqsAccordionComponent {...props} />;
     }
 
+    if (_type === 'journeyTimelineBlock') {
+        return <JourneyTimelineComponent {...props} />;
+    }
+
     // Look up component in map
     const Component = ComponentMap[_type];
 
@@ -149,6 +189,15 @@ function RenderSection({ section }: { section: Section }) {
             <div className="container py-8 text-center text-gray-500">
                 <p>Unknown section type: {_type}</p>
             </div>
+        );
+    }
+
+    // Wrap complex components in Suspense
+    if (_type === 'tabAccordionBlock' || _type === 'leadershipBlock' || _type === 'facilitiesBlock') {
+        return (
+            <Suspense fallback={<div className="container py-12 text-center">Loading...</div>}>
+                <Component {...props} />
+            </Suspense>
         );
     }
 

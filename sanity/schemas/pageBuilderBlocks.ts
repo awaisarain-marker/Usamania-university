@@ -412,6 +412,105 @@ export const richTextBlock = defineType({
     },
 })
 
+// ============================================
+// ABOUT PAGE COMPONENTS
+// ============================================
+
+// Tab Accordion Block - Tabbed content section
+export const tabAccordionBlock = defineType({
+    name: 'tabAccordionBlock',
+    title: 'Tab Accordion',
+    type: 'object',
+    fields: [
+        defineField({
+            name: 'tabs',
+            title: 'Tabs',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'id', type: 'string', title: 'Tab ID (e.g., "mission")' }),
+                        defineField({ name: 'label', type: 'string', title: 'Tab Label' }),
+                        defineField({ name: 'content', type: 'text', title: 'Tab Content' }),
+                        defineField({ name: 'rightImage', type: 'url', title: 'Right Image URL' }),
+                        defineField({ name: 'rightQuote', type: 'text', title: 'Quote Text' }),
+                        defineField({ name: 'rightQuoteAuthor', type: 'string', title: 'Quote Author' }),
+                    ],
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { tabs: 'tabs' },
+        prepare({ tabs }) {
+            const count = tabs?.length || 0
+            return { title: 'Tab Accordion', subtitle: `${count} tabs` }
+        },
+    },
+})
+
+// Leadership Section Block
+export const leadershipBlock = defineType({
+    name: 'leadershipBlock',
+    title: 'Leadership Section',
+    type: 'object',
+    fields: [
+        defineField({ name: 'hideHeader', title: 'Hide Header', type: 'boolean', initialValue: false }),
+    ],
+    preview: {
+        prepare() {
+            return { title: 'Leadership Section', subtitle: 'University Leadership Team' }
+        },
+    },
+})
+
+// Facilities Section Block
+export const facilitiesBlock = defineType({
+    name: 'facilitiesBlock',
+    title: 'Facilities Section',
+    type: 'object',
+    fields: [
+        defineField({ name: 'title', title: 'Section Title', type: 'string', initialValue: 'Our Facilities' }),
+    ],
+    preview: {
+        prepare() {
+            return { title: 'Facilities Section', subtitle: 'Campus Facilities Showcase' }
+        },
+    },
+})
+
+// Journey Timeline Block
+export const journeyTimelineBlock = defineType({
+    name: 'journeyTimelineBlock',
+    title: 'Journey Timeline',
+    type: 'object',
+    fields: [
+        defineField({ name: 'title', title: 'Section Title', type: 'string', initialValue: 'Our Journey' }),
+        defineField({
+            name: 'milestones',
+            title: 'Milestones',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'title', type: 'string', title: 'Milestone Title' }),
+                        defineField({ name: 'description', type: 'text', title: 'Description' }),
+                    ],
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { milestones: 'milestones' },
+        prepare({ milestones }) {
+            const count = milestones?.length || 0
+            return { title: 'Journey Timeline', subtitle: `${count} milestones` }
+        },
+    },
+})
+
 // Export all blocks
 export const pageBuilderBlocks = [
     heroBlock,
@@ -428,4 +527,10 @@ export const pageBuilderBlocks = [
     faqsAccordionBlock,
     spacerBlock,
     richTextBlock,
+    // About page blocks
+    tabAccordionBlock,
+    leadershipBlock,
+    facilitiesBlock,
+    journeyTimelineBlock,
 ]
+

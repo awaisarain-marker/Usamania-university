@@ -40,6 +40,7 @@ export default defineType({
             description: 'Drag and drop sections to build your page',
             type: 'array',
             of: [
+                // Home page blocks
                 { type: 'heroBlock' },
                 { type: 'pageHeroBlock' },
                 { type: 'worldClassBlock' },
@@ -52,6 +53,12 @@ export default defineType({
                 { type: 'campusExperienceBlock' },
                 { type: 'facultyGridBlock' },
                 { type: 'faqsAccordionBlock' },
+                // About page blocks
+                { type: 'tabAccordionBlock' },
+                { type: 'leadershipBlock' },
+                { type: 'facilitiesBlock' },
+                { type: 'journeyTimelineBlock' },
+                // Utility blocks
                 { type: 'spacerBlock' },
                 { type: 'richTextBlock' },
             ],
