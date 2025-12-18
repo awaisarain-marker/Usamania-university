@@ -36,18 +36,11 @@ export default defineType({
             description: 'Background image for the hero section',
         }),
         defineField({
-            name: 'categorySlug',
-            title: 'Faculty Member Category',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Computing Sciences', value: 'computing-sciences' },
-                    { title: 'Engineering & Technology', value: 'engineering-technology' },
-                    { title: 'Management & Social Sciences', value: 'management-social-sciences' },
-                ],
-                layout: 'dropdown',
-            },
-            description: 'This links to faculty members with this category',
+            name: 'category',
+            title: 'Faculty Category',
+            type: 'reference',
+            to: [{ type: 'facultyCategory' }],
+            description: 'Select the category - faculty members with this category will be displayed',
             validation: Rule => Rule.required(),
         }),
         defineField({

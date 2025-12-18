@@ -421,7 +421,8 @@ export async function getFacultyBySlug(slug: string) {
             "slug": slug.current,
             subtitle,
             heroImageUrl,
-            categorySlug,
+            "categorySlug": category->slug.current,
+            "categoryTitle": category->title,
             facultyGridTitle
         }
     `, { slug })
@@ -435,7 +436,8 @@ export async function getAllFacultyDepartments() {
             "slug": slug.current,
             subtitle,
             heroImageUrl,
-            categorySlug,
+            "categorySlug": category->slug.current,
+            "categoryTitle": category->title,
             facultyGridTitle
         }
     `)
@@ -447,4 +449,51 @@ export async function getAllFacultySlugs() {
             "slug": slug.current
         }
     `)
+}
+
+// Faculty Category Queries
+export async function getAllFacultyCategories() {
+    return client.fetch(`
+        *[_type == "facultyCategory"] | order(order asc) {
+            _id,
+            title,
+            "slug": slug.current
+        }
+    `)
+}
+
+export async function getFacultyCategoryBySlug(slug: string) {
+    return client.fetch(`
+        *[_type == "facultyCategory" && slug.current == $slug][0] {
+            _id,
+            title,
+            "slug": slug.current
+        }
+    `, { slug })
+}
+
+// Get faculty members by category slug (updated to use reference)
+export async function getFacultyMembersByCategorySlug(categorySlug: string) {
+    return client.fetch(`
+        *[_type == "facultyMember" && category->slug.current == $categorySlug] | order(order asc, name asc) {
+            _id,
+            name,
+            designation,
+            qualification,
+            imageUrl,
+            "category": category->slug.current,
+            externalLink,
+            order,
+            isDean,
+            deanMessage,
+            email,
+            ext,
+            overview,
+            qualificationDetails,
+            specialization,
+            experience,
+            certifications,
+            courses
+        }
+    `, { categorySlug })
 }

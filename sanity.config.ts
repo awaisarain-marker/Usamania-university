@@ -43,6 +43,10 @@ const deskStructure = (S: any) =>
                         .title('Faculty')
                         .items([
                             S.listItem()
+                                .title('Faculty Categories')
+                                .schemaType('facultyCategory')
+                                .child(S.documentTypeList('facultyCategory').title('Faculty Categories')),
+                            S.listItem()
                                 .title('Faculty Departments')
                                 .schemaType('faculty')
                                 .child(S.documentTypeList('faculty').title('Faculty Departments')),

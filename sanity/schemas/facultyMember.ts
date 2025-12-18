@@ -33,15 +33,9 @@ export default defineType({
         defineField({
             name: 'category',
             title: 'Category',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Computing Sciences', value: 'computing-sciences' },
-                    { title: 'Engineering & Technology', value: 'engineering-technology' },
-                    { title: 'Management & Social Sciences', value: 'management-social-sciences' },
-                ],
-                layout: 'dropdown',
-            },
+            type: 'reference',
+            to: [{ type: 'facultyCategory' }],
+            description: 'Select the faculty category this member belongs to',
             validation: Rule => Rule.required(),
         }),
         defineField({

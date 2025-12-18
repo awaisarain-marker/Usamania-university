@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import PageHero from '@/components/layout/PageHero';
 import FacultyPopup from '@/components/faculty/FacultyPopup';
-import { getFacultyBySlug, getFacultyByCategory } from '@/sanity/lib/queries';
+import { getFacultyBySlug, getFacultyMembersByCategorySlug } from '@/sanity/lib/queries';
 
 interface FacultyMember {
     _id: string;
@@ -56,13 +56,13 @@ export default function FacultyDepartmentPage() {
                 if (deptData) {
                     setDepartment(deptData);
                     // Fetch faculty members for this category
-                    const membersData = await getFacultyByCategory(deptData.categorySlug);
-                    setFacultyMembers(membersData);
+                    const membersData = await getFacultyMembersByCategorySlug(deptData.categorySlug);
+                    setFacultyMembers(membersData || []);
                 } else {
                     // Fallback for when Sanity doesn't have the data yet
                     // Use slug as category slug directly
-                    const membersData = await getFacultyByCategory(slug);
-                    setFacultyMembers(membersData);
+                    const membersData = await getFacultyMembersByCategorySlug(slug);
+                    setFacultyMembers(membersData || []);
 
                     // Create a fallback department object
                     const titleMap: Record<string, string> = {
