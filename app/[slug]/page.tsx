@@ -25,6 +25,7 @@ import FacilitiesSection from '@/components/layout/FacilitiesSection';
 // Content components
 import AccordionSection from '@/components/layout/AccordionSection';
 import VisionBox from '@/components/layout/VisionBox';
+import TabbedContent from '@/components/layout/TabbedContent';
 
 // Define the section type
 interface Section {
@@ -53,6 +54,7 @@ const ComponentMap: Record<string, React.ComponentType<any>> = {
     // Content components
     accordionSectionBlock: AccordionSection,
     visionBoxBlock: VisionBox,
+    tabbedContentBlock: TabbedContent,
 };
 
 // Spacer Component

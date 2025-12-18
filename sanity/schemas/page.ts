@@ -61,6 +61,10 @@ export default defineType({
                 // Content blocks
                 { type: 'accordionSectionBlock' },
                 { type: 'visionBoxBlock' },
+                { type: 'organogramBlock' },
+                { type: 'teamGridBlock' },
+                { type: 'policyLinksBlock' },
+                { type: 'tabbedContentBlock' },
                 // Utility blocks
                 { type: 'spacerBlock' },
                 { type: 'richTextBlock' },

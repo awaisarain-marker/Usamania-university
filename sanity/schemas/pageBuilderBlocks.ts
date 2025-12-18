@@ -763,6 +763,254 @@ export const visionBoxBlock = defineType({
     },
 })
 
+// Organogram Block - For organizational hierarchy tree
+export const organogramBlock = defineType({
+    name: 'organogramBlock',
+    title: 'Organogram (Org Chart)',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', initialValue: 'Organogram' }),
+        defineField({
+            name: 'nodes',
+            title: 'Organization Nodes',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'name', type: 'string', title: 'Position/Name' }),
+                        defineField({ name: 'level', type: 'number', title: 'Level (0=Top, 1=Second, etc.)' }),
+                        defineField({ name: 'parentIndex', type: 'number', title: 'Parent Node Index (-1 for root)' }),
+                    ],
+                    preview: {
+                        select: { name: 'name', level: 'level' },
+                        prepare({ name, level }) {
+                            return { title: name || 'Node', subtitle: `Level ${level}` }
+                        },
+                    },
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { title: 'title', nodes: 'nodes' },
+        prepare({ title, nodes }) {
+            return { title: title || 'Organogram', subtitle: `${nodes?.length || 0} positions` }
+        },
+    },
+})
+
+// Team Grid Block - For team member cards
+export const teamGridBlock = defineType({
+    name: 'teamGridBlock',
+    title: 'Team Grid',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', initialValue: 'Our Team' }),
+        defineField({ name: 'imageUrl', title: 'Header Image URL', type: 'url' }),
+        defineField({ name: 'imageAlt', title: 'Image Alt Text', type: 'string' }),
+        defineField({
+            name: 'members',
+            title: 'Team Members',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'name', type: 'string', title: 'Name' }),
+                        defineField({ name: 'position', type: 'string', title: 'Position/Role' }),
+                        defineField({ name: 'phone', type: 'string', title: 'Phone Number' }),
+                        defineField({ name: 'email', type: 'string', title: 'Email Address' }),
+                    ],
+                    preview: {
+                        select: { name: 'name', position: 'position' },
+                        prepare({ name, position }) {
+                            return { title: name || 'Member', subtitle: position }
+                        },
+                    },
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { title: 'title', members: 'members' },
+        prepare({ title, members }) {
+            return { title: title || 'Team Grid', subtitle: `${members?.length || 0} members` }
+        },
+    },
+})
+
+// Policy Links Block - For categorized policy documents
+export const policyLinksBlock = defineType({
+    name: 'policyLinksBlock',
+    title: 'Policy Links',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', initialValue: 'Policies' }),
+        defineField({
+            name: 'categories',
+            title: 'Policy Categories',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'categoryName', type: 'string', title: 'Category Name' }),
+                        defineField({
+                            name: 'policies',
+                            title: 'Policies',
+                            type: 'array',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'policyName', type: 'string', title: 'Policy Name' }),
+                                        defineField({ name: 'policyUrl', type: 'url', title: 'Policy URL (PDF link)' }),
+                                    ],
+                                    preview: {
+                                        select: { policyName: 'policyName' },
+                                        prepare({ policyName }) {
+                                            return { title: policyName || 'Policy' }
+                                        },
+                                    },
+                                }),
+                            ],
+                        }),
+                    ],
+                    preview: {
+                        select: { categoryName: 'categoryName', policies: 'policies' },
+                        prepare({ categoryName, policies }) {
+                            return { title: categoryName || 'Category', subtitle: `${policies?.length || 0} policies` }
+                        },
+                    },
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { title: 'title', categories: 'categories' },
+        prepare({ title, categories }) {
+            return { title: title || 'Policy Links', subtitle: `${categories?.length || 0} categories` }
+        },
+    },
+})
+
+// Tabbed Content Block - Container for tabs with different content
+export const tabbedContentBlock = defineType({
+    name: 'tabbedContentBlock',
+    title: 'Tabbed Content Section',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID', type: 'string' }),
+        defineField({
+            name: 'tabs',
+            title: 'Tabs',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'tabTitle', type: 'string', title: 'Tab Title' }),
+                        defineField({
+                            name: 'contentType',
+                            title: 'Content Type',
+                            type: 'string',
+                            options: {
+                                list: [
+                                    { title: 'Organogram', value: 'organogram' },
+                                    { title: 'Team Grid', value: 'teamGrid' },
+                                    { title: 'Policy Links', value: 'policyLinks' },
+                                    { title: 'Vision Box', value: 'visionBox' },
+                                ],
+                            },
+                        }),
+                        // Organogram content
+                        defineField({
+                            name: 'organogramNodes',
+                            title: 'Organogram Nodes',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'organogram',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'name', type: 'string', title: 'Position/Name' }),
+                                        defineField({ name: 'level', type: 'number', title: 'Level (0=Top)' }),
+                                        defineField({ name: 'parentIndex', type: 'number', title: 'Parent Index (-1 for root)' }),
+                                    ],
+                                }),
+                            ],
+                        }),
+                        // Team Grid content
+                        defineField({ name: 'teamImageUrl', title: 'Team Image URL', type: 'url', hidden: ({ parent }) => parent?.contentType !== 'teamGrid' }),
+                        defineField({
+                            name: 'teamMembers',
+                            title: 'Team Members',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'teamGrid',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'name', type: 'string', title: 'Name' }),
+                                        defineField({ name: 'position', type: 'string', title: 'Position' }),
+                                        defineField({ name: 'phone', type: 'string', title: 'Phone' }),
+                                        defineField({ name: 'email', type: 'string', title: 'Email' }),
+                                    ],
+                                }),
+                            ],
+                        }),
+                        // Policy Links content
+                        defineField({
+                            name: 'policyCategories',
+                            title: 'Policy Categories',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'policyLinks',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'categoryName', type: 'string', title: 'Category Name' }),
+                                        defineField({
+                                            name: 'policies',
+                                            title: 'Policies',
+                                            type: 'array',
+                                            of: [
+                                                defineArrayMember({
+                                                    type: 'object',
+                                                    fields: [
+                                                        defineField({ name: 'policyName', type: 'string', title: 'Policy Name' }),
+                                                        defineField({ name: 'policyUrl', type: 'url', title: 'Policy URL' }),
+                                                    ],
+                                                }),
+                                            ],
+                                        }),
+                                    ],
+                                }),
+                            ],
+                        }),
+                    ],
+                    preview: {
+                        select: { tabTitle: 'tabTitle', contentType: 'contentType' },
+                        prepare({ tabTitle, contentType }) {
+                            return { title: tabTitle || 'Tab', subtitle: contentType }
+                        },
+                    },
+                }),
+            ],
+        }),
+    ],
+    preview: {
+        select: { tabs: 'tabs' },
+        prepare({ tabs }) {
+            return { title: 'Tabbed Content', subtitle: `${tabs?.length || 0} tabs` }
+        },
+    },
+})
+
 // Export all blocks
 export const pageBuilderBlocks = [
     heroBlock,
@@ -787,4 +1035,8 @@ export const pageBuilderBlocks = [
     // Content blocks
     accordionSectionBlock,
     visionBoxBlock,
+    organogramBlock,
+    teamGridBlock,
+    policyLinksBlock,
+    tabbedContentBlock,
 ]
