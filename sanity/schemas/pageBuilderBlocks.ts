@@ -82,7 +82,7 @@ export const heroBlock = defineType({
     },
 })
 
-// Page Hero Block - Simple hero for inner pages
+// Page Hero Block - Hero for inner pages with breadcrumbs and CTA buttons
 export const pageHeroBlock = defineType({
     name: 'pageHeroBlock',
     title: 'Page Hero',
@@ -105,11 +105,45 @@ export const pageHeroBlock = defineType({
                 }),
             ],
         }),
+        defineField({
+            name: 'heroButtons',
+            title: 'Hero Buttons',
+            description: 'CTA buttons displayed in the hero section',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'text', type: 'string', title: 'Button Text' }),
+                        defineField({ name: 'link', type: 'string', title: 'Button Link (e.g., #introduction)' }),
+                        defineField({
+                            name: 'style',
+                            type: 'string',
+                            title: 'Button Style',
+                            options: {
+                                list: [
+                                    { title: 'Red Button (Primary)', value: 'red' },
+                                    { title: 'White Link (Secondary)', value: 'white' },
+                                ],
+                            },
+                            initialValue: 'white',
+                        }),
+                    ],
+                    preview: {
+                        select: { text: 'text', style: 'style' },
+                        prepare({ text, style }) {
+                            return { title: text || 'Button', subtitle: style === 'red' ? 'Primary (Red)' : 'Secondary (White)' }
+                        },
+                    },
+                }),
+            ],
+        }),
     ],
     preview: {
-        select: { title: 'title' },
-        prepare({ title }) {
-            return { title: title || 'Page Hero', subtitle: 'Inner Page Hero' }
+        select: { title: 'title', buttons: 'heroButtons' },
+        prepare({ title, buttons }) {
+            const count = buttons?.length || 0
+            return { title: title || 'Page Hero', subtitle: `${count} buttons` }
         },
     },
 })
