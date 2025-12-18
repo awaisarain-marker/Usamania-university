@@ -868,7 +868,7 @@ export const policyLinksBlock = defineType({
                                     type: 'object',
                                     fields: [
                                         defineField({ name: 'policyName', type: 'string', title: 'Policy Name' }),
-                                        defineField({ name: 'policyUrl', type: 'url', title: 'Policy URL (PDF link)' }),
+                                        defineField({ name: 'policyUrl', type: 'string', title: 'Policy URL or Path' }),
                                     ],
                                     preview: {
                                         select: { policyName: 'policyName' },
@@ -983,7 +983,7 @@ export const tabbedContentBlock = defineType({
                                                     type: 'object',
                                                     fields: [
                                                         defineField({ name: 'policyName', type: 'string', title: 'Policy Name' }),
-                                                        defineField({ name: 'policyUrl', type: 'url', title: 'Policy URL' }),
+                                                        defineField({ name: 'policyUrl', type: 'string', title: 'Policy URL or Path' }),
                                                     ],
                                                 }),
                                             ],

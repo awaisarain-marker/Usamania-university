@@ -2,11 +2,11 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 
 const writeClient = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    projectId: 'a2yn5s3t',
+    dataset: 'production',
     apiVersion: '2024-01-01',
-    token: process.env.SANITY_API_WRITE_TOKEN,
     useCdn: false,
+    token: 'skKNkjf0Q3pm3EFBIdItvRkcDakA4D9ywo3W8GwKc1pJNmVmcOz8lO6t02PSMy4UjqNh1Z0oDSf3JLoM0ZbKHnOXIPYpv7o4DBDlkSv3YkLJqzFKlW2ynD3cBQ6KWDamA12jE9GDqOqSOFtyVI5QFgFWM516DKpA8wfPDGgOtbnShwNvZqIU',
 });
 
 // Generate unique key
