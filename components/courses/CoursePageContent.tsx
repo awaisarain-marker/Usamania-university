@@ -49,7 +49,7 @@ interface CoursePageContentProps {
 
 function SemesterTable({ semesterName, courses, totalCredits }: {
     semesterName: string
-    courses: Course['semesterData'][0]['courses']
+    courses: NonNullable<Course['semesterData']>[0]['courses']
     totalCredits: number
 }) {
     return (
