@@ -36,10 +36,12 @@ const admissionPageData = {
                 { _key: createKey(), text: 'Explore Programs', href: '#academics', style: 'red' }
             ]
         },
-        // Academics Grid placeholder
+        // Academics Grid Section
         {
             _type: 'academicsGridBlock',
             _key: createKey(),
+            title: 'UIT <br /> Academics',
+            description: 'Discover the program that sparks your passion and sets you up for success. Your academic journey awaits!',
         },
         // Tabbed Content for Admission Info
         {
