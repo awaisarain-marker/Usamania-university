@@ -545,6 +545,58 @@ export const journeyTimelineBlock = defineType({
     },
 })
 
+// Accordion Section Block - Image + Expandable Text (like QEC Introduction)
+export const accordionSectionBlock = defineType({
+    name: 'accordionSectionBlock',
+    title: 'Accordion Section (Image + Text)',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID (for navigation)', type: 'string', description: 'e.g., "introduction" for #introduction links' }),
+        defineField({ name: 'imageUrl', title: 'Image URL', type: 'url', validation: Rule => Rule.required() }),
+        defineField({ name: 'imageAlt', title: 'Image Alt Text', type: 'string' }),
+        defineField({ name: 'title', title: 'Section Title', type: 'string', validation: Rule => Rule.required() }),
+        defineField({
+            name: 'paragraphs',
+            title: 'Paragraphs',
+            description: 'Each paragraph will be displayed with proper spacing',
+            type: 'array',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'text', type: 'text', title: 'Paragraph Text' }),
+                    ],
+                    preview: {
+                        select: { text: 'text' },
+                        prepare({ text }) {
+                            return { title: text?.substring(0, 80) + '...' || 'Paragraph' }
+                        },
+                    },
+                }),
+            ],
+        }),
+        defineField({ name: 'showReadMore', title: 'Show Read More Button', type: 'boolean', initialValue: true }),
+        defineField({
+            name: 'backgroundColor',
+            title: 'Background Style',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Light Background', value: 'light' },
+                    { title: 'White Background', value: 'white' },
+                ],
+            },
+            initialValue: 'light',
+        }),
+    ],
+    preview: {
+        select: { title: 'title', sectionId: 'sectionId' },
+        prepare({ title, sectionId }) {
+            return { title: title || 'Accordion Section', subtitle: sectionId ? `#${sectionId}` : 'Image + Text' }
+        },
+    },
+})
+
 // Export all blocks
 export const pageBuilderBlocks = [
     heroBlock,
@@ -566,5 +618,6 @@ export const pageBuilderBlocks = [
     leadershipBlock,
     facilitiesBlock,
     journeyTimelineBlock,
+    // Content blocks
+    accordionSectionBlock,
 ]
-

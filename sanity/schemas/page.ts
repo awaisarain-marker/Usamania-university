@@ -58,6 +58,8 @@ export default defineType({
                 { type: 'leadershipBlock' },
                 { type: 'facilitiesBlock' },
                 { type: 'journeyTimelineBlock' },
+                // Content blocks
+                { type: 'accordionSectionBlock' },
                 // Utility blocks
                 { type: 'spacerBlock' },
                 { type: 'richTextBlock' },

@@ -22,6 +22,8 @@ import FacultyGrid from '@/components/faculty/FacultyGrid';
 import TabAccordion from '@/components/layout/TabAccordion';
 import LeadershipSection from '@/components/layout/LeadershipSection';
 import FacilitiesSection from '@/components/layout/FacilitiesSection';
+// Content components
+import AccordionSection from '@/components/layout/AccordionSection';
 
 // Define the section type
 interface Section {
@@ -47,6 +49,8 @@ const ComponentMap: Record<string, React.ComponentType<any>> = {
     tabAccordionBlock: TabAccordion,
     leadershipBlock: LeadershipSection,
     facilitiesBlock: FacilitiesSection,
+    // Content components
+    accordionSectionBlock: AccordionSection,
 };
 
 // Spacer Component
