@@ -14,9 +14,10 @@ import event from './schemas/event'
 import homePage from './schemas/homePage'
 import aboutPage from './schemas/aboutPage'
 import facultyMember from './schemas/facultyMember'
+import faculty from './schemas/faculty'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-    types: [homePage, aboutPage, facultyMember, post, hero, course, navigation, menuItem, headerSettings, footer, doubleImage, quote, twoColumnImageGrid, event],
+    types: [homePage, aboutPage, faculty, facultyMember, post, hero, course, navigation, menuItem, headerSettings, footer, doubleImage, quote, twoColumnImageGrid, event],
 }
 
 

@@ -412,3 +412,39 @@ export async function getAllFaculty() {
     `)
 }
 
+// Faculty Department Queries
+export async function getFacultyBySlug(slug: string) {
+    return client.fetch(`
+        *[_type == "faculty" && slug.current == $slug][0] {
+            _id,
+            title,
+            "slug": slug.current,
+            subtitle,
+            heroImageUrl,
+            categorySlug,
+            facultyGridTitle
+        }
+    `, { slug })
+}
+
+export async function getAllFacultyDepartments() {
+    return client.fetch(`
+        *[_type == "faculty"] | order(order asc) {
+            _id,
+            title,
+            "slug": slug.current,
+            subtitle,
+            heroImageUrl,
+            categorySlug,
+            facultyGridTitle
+        }
+    `)
+}
+
+export async function getAllFacultySlugs() {
+    return client.fetch(`
+        *[_type == "faculty"] {
+            "slug": slug.current
+        }
+    `)
+}

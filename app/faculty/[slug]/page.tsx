@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import PageHero from '@/components/layout/PageHero';
 import FacultyPopup from '@/components/faculty/FacultyPopup';
-import { getFacultyByCategory } from '@/sanity/lib/queries';
+import { getFacultyBySlug, getFacultyByCategory } from '@/sanity/lib/queries';
 
 interface FacultyMember {
     _id: string;
@@ -26,25 +27,69 @@ interface FacultyMember {
     courses?: string[];
 }
 
-export default function ComputingSciencesPage() {
+interface FacultyDepartment {
+    _id: string;
+    title: string;
+    slug: string;
+    subtitle?: string;
+    heroImageUrl?: string;
+    categorySlug: string;
+    facultyGridTitle?: string;
+}
+
+export default function FacultyDepartmentPage() {
+    const params = useParams();
+    const slug = params.slug as string;
+
     const [isExpanded, setIsExpanded] = useState(false);
     const [selectedMember, setSelectedMember] = useState<FacultyMember | null>(null);
     const [facultyMembers, setFacultyMembers] = useState<FacultyMember[]>([]);
+    const [department, setDepartment] = useState<FacultyDepartment | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchFaculty() {
+        async function fetchData() {
             try {
-                const data = await getFacultyByCategory('computing-sciences');
-                setFacultyMembers(data);
+                // Fetch department info from Sanity
+                const deptData = await getFacultyBySlug(slug);
+
+                if (deptData) {
+                    setDepartment(deptData);
+                    // Fetch faculty members for this category
+                    const membersData = await getFacultyByCategory(deptData.categorySlug);
+                    setFacultyMembers(membersData);
+                } else {
+                    // Fallback for when Sanity doesn't have the data yet
+                    // Use slug as category slug directly
+                    const membersData = await getFacultyByCategory(slug);
+                    setFacultyMembers(membersData);
+
+                    // Create a fallback department object
+                    const titleMap: Record<string, string> = {
+                        'computing-sciences': 'Faculty of Computing Sciences',
+                        'engineering-technology': 'Faculty of Engineering & Technology',
+                        'management-social-sciences': 'Faculty of Management & Social Sciences',
+                    };
+                    setDepartment({
+                        _id: 'fallback',
+                        title: titleMap[slug] || `Faculty of ${slug.replace(/-/g, ' ')}`,
+                        slug: slug,
+                        subtitle: 'Innovating the Future with Technology and Research',
+                        categorySlug: slug,
+                        facultyGridTitle: `${slug.replace(/-/g, ' ')} Faculty Members`,
+                    });
+                }
             } catch (error) {
-                console.error('Error fetching faculty:', error);
+                console.error('Error fetching faculty data:', error);
             } finally {
                 setLoading(false);
             }
         }
-        fetchFaculty();
-    }, []);
+
+        if (slug) {
+            fetchData();
+        }
+    }, [slug]);
 
     // Find the Dean for the sidebar
     const dean = facultyMembers.find(m => m.isDean);
@@ -67,16 +112,26 @@ export default function ComputingSciencesPage() {
         );
     }
 
+    if (!department) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <p className="text-xl text-gray-600">Faculty department not found.</p>
+            </div>
+        );
+    }
+
+    const defaultHeroImage = 'https://www.aubg.edu/wp-content/uploads/2022/03/aubg-campus-1.jpg';
+
     return (
-        <div className="page-computing-sciences bg-[#e6eef4]">
+        <div className={`page-faculty-${slug} bg-[#e6eef4]`}>
             <PageHero
-                title="Faculty of Computing Sciences"
-                subtitle="Innovating the Future with Technology and Research"
-                bgImage="https://www.aubg.edu/wp-content/uploads/2022/03/aubg-campus-1.jpg"
+                title={department.title}
+                subtitle={department.subtitle || ''}
+                bgImage={department.heroImageUrl || defaultHeroImage}
                 breadcrumbs={[
                     { label: 'Home', href: '/' },
                     { label: 'Faculty', href: '/faculty' },
-                    { label: 'Computing Sciences' }
+                    { label: department.title.replace('Faculty of ', '') }
                 ]}
             />
 
@@ -85,7 +140,9 @@ export default function ComputingSciencesPage() {
 
                     {/* Left Column: Faculty Grid */}
                     <div className="lg:w-2/3 pt-12 pb-20">
-                        <h2 className="text-3xl text-[#002856] font-bold mb-8 font-lato">Computing Sciences Faculty Members</h2>
+                        <h2 className="text-3xl text-[#002856] font-bold mb-8 font-lato">
+                            {department.facultyGridTitle || `${department.title} Faculty Members`}
+                        </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                             {facultyMembers.filter(m => !m.isDean).map((member) => {
