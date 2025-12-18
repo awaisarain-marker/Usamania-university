@@ -20,8 +20,8 @@ const defaultData = {
   heroTitle: "Expand your world,",
   heroSubtitle: "shape its future",
   heroButtons: [
-    { text: "Admission", link: "/admission", style: "red" },
-    { text: "How to apply", link: "/admission#how-to-apply", style: "transparent" }
+    { text: "Admission", link: "/admission", style: "red" as const },
+    { text: "How to apply", link: "/admission#how-to-apply", style: "transparent" as const }
   ],
   heroStats: [
     { value: "Global Standards", label: "delivered in Pakistan" },
