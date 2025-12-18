@@ -497,3 +497,39 @@ export async function getFacultyMembersByCategorySlug(categorySlug: string) {
         }
     `, { categorySlug })
 }
+
+// Dynamic Page Queries
+export async function getPageBySlug(slug: string) {
+    return client.fetch(`
+        *[_type == "page" && slug.current == $slug][0] {
+            _id,
+            title,
+            "slug": slug.current,
+            seoTitle,
+            seoDescription,
+            sections[] {
+                _type,
+                _key,
+                ...
+            }
+        }
+    `, { slug })
+}
+
+export async function getAllPageSlugs() {
+    return client.fetch(`
+        *[_type == "page"] {
+            "slug": slug.current
+        }
+    `)
+}
+
+export async function getAllPages() {
+    return client.fetch(`
+        *[_type == "page"] | order(title asc) {
+            _id,
+            title,
+            "slug": slug.current
+        }
+    `)
+}

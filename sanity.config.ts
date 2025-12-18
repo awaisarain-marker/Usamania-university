@@ -17,12 +17,20 @@ const deskStructure = (S: any) =>
     S.list()
         .title('Content')
         .items([
-            // Pages Group
+            // Page Builder - Dynamic Pages
             S.listItem()
-                .title('Pages')
+                .title('Page Builder')
+                .schemaType('page')
+                .child(S.documentTypeList('page').title('All Pages')),
+
+            S.divider(),
+
+            // Legacy Pages (Home & About)
+            S.listItem()
+                .title('Static Pages')
                 .child(
                     S.list()
-                        .title('Pages')
+                        .title('Static Pages')
                         .items([
                             S.listItem()
                                 .title('Home Page')
@@ -34,6 +42,7 @@ const deskStructure = (S: any) =>
                 ),
 
             S.divider(),
+
 
             // Faculty Group
             S.listItem()

@@ -29,7 +29,7 @@ interface HeroProps {
 }
 
 export default function Hero({
-    videoUrl = "https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4",
+    videoUrl = "https://ik.imagekit.io/byat8clceo/herosection%20video.mp4",
     title = "Expand your world,",
     subtitle = "shape its future",
     buttons = [
