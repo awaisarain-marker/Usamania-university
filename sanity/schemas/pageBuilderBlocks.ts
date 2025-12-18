@@ -597,6 +597,172 @@ export const accordionSectionBlock = defineType({
     },
 })
 
+// Vision Box Block - For Vision/Mission/Objectives style sections (qec-vision-box)
+export const visionBoxBlock = defineType({
+    name: 'visionBoxBlock',
+    title: 'Vision Box Section',
+    type: 'object',
+    fields: [
+        defineField({ name: 'sectionId', title: 'Section ID (for navigation)', type: 'string', description: 'e.g., "vision" for #vision links' }),
+        defineField({ name: 'title', title: 'Section Title', type: 'string', validation: Rule => Rule.required() }),
+        defineField({
+            name: 'contentType',
+            title: 'Content Type',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Simple Paragraph', value: 'paragraph' },
+                    { title: 'Bullet Points (with red arrows)', value: 'bullets' },
+                    { title: 'Icon List (with custom icons)', value: 'iconList' },
+                    { title: 'Downloadable Files', value: 'files' },
+                ],
+            },
+            initialValue: 'paragraph',
+        }),
+        // For paragraph type
+        defineField({ name: 'paragraphText', title: 'Paragraph Text', type: 'text', hidden: ({ parent }) => parent?.contentType !== 'paragraph' }),
+        // For bullets type
+        defineField({
+            name: 'bulletItems',
+            title: 'Bullet Items',
+            type: 'array',
+            hidden: ({ parent }) => parent?.contentType !== 'bullets',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'text', type: 'text', title: 'Item Text' }),
+                    ],
+                    preview: {
+                        select: { text: 'text' },
+                        prepare({ text }) {
+                            return { title: text?.substring(0, 80) + '...' || 'Bullet Item' }
+                        },
+                    },
+                }),
+            ],
+        }),
+        // For icon list type
+        defineField({
+            name: 'iconItems',
+            title: 'Icon List Items',
+            type: 'array',
+            hidden: ({ parent }) => parent?.contentType !== 'iconList',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({
+                            name: 'icon',
+                            type: 'string',
+                            title: 'Icon',
+                            options: {
+                                list: [
+                                    { title: 'Arrow Right', value: 'arrow-right' },
+                                    { title: 'Check Mark', value: 'check' },
+                                    { title: 'Star', value: 'star' },
+                                    { title: 'Circle', value: 'circle' },
+                                ],
+                            },
+                            initialValue: 'arrow-right',
+                        }),
+                        defineField({ name: 'title', type: 'string', title: 'Item Title' }),
+                        defineField({ name: 'description', type: 'text', title: 'Item Description' }),
+                    ],
+                    preview: {
+                        select: { title: 'title', icon: 'icon' },
+                        prepare({ title, icon }) {
+                            return { title: title || 'Icon Item', subtitle: icon }
+                        },
+                    },
+                }),
+            ],
+        }),
+        // For files type
+        defineField({
+            name: 'fileItems',
+            title: 'Downloadable Files',
+            type: 'array',
+            hidden: ({ parent }) => parent?.contentType !== 'files',
+            of: [
+                defineArrayMember({
+                    type: 'object',
+                    fields: [
+                        defineField({ name: 'fileName', type: 'string', title: 'File Name (e.g., "QAA Calendar 2025-2026")' }),
+                        defineField({ name: 'fileUrl', type: 'url', title: 'File URL (PDF link)' }),
+                    ],
+                    preview: {
+                        select: { fileName: 'fileName' },
+                        prepare({ fileName }) {
+                            return { title: fileName || 'File' }
+                        },
+                    },
+                }),
+            ],
+        }),
+        // Button (optional, can be added to any content type)
+        defineField({ name: 'showButton', title: 'Show Button', type: 'boolean', initialValue: false }),
+        defineField({
+            name: 'buttonText',
+            title: 'Button Text',
+            type: 'string',
+            hidden: ({ parent }) => !parent?.showButton
+        }),
+        defineField({
+            name: 'buttonLink',
+            title: 'Button Link',
+            type: 'string',
+            hidden: ({ parent }) => !parent?.showButton
+        }),
+        defineField({
+            name: 'buttonStyle',
+            title: 'Button Style',
+            type: 'string',
+            hidden: ({ parent }) => !parent?.showButton,
+            options: {
+                list: [
+                    { title: 'Red Solid', value: 'red' },
+                    { title: 'Red Outline', value: 'red-outline' },
+                    { title: 'White Solid', value: 'white' },
+                    { title: 'Navy Solid', value: 'navy' },
+                    { title: 'Navy Outline', value: 'navy-outline' },
+                    { title: 'Link Style (with arrow)', value: 'link' },
+                ],
+            },
+            initialValue: 'red',
+        }),
+        // Background color
+        defineField({
+            name: 'backgroundColor',
+            title: 'Background Color',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'White', value: 'white' },
+                    { title: 'Light Blue (#e6eef4)', value: 'light-blue' },
+                    { title: 'Navy Blue (#002856)', value: 'navy' },
+                ],
+            },
+            initialValue: 'white',
+        }),
+    ],
+    preview: {
+        select: { title: 'title', contentType: 'contentType', sectionId: 'sectionId' },
+        prepare({ title, contentType, sectionId }) {
+            const typeLabels: Record<string, string> = {
+                paragraph: 'Paragraph',
+                bullets: 'Bullet Points',
+                iconList: 'Icon List',
+                files: 'Files',
+            }
+            return {
+                title: title || 'Vision Box',
+                subtitle: `${typeLabels[contentType] || 'Paragraph'}${sectionId ? ` • #${sectionId}` : ''}`
+            }
+        },
+    },
+})
+
 // Export all blocks
 export const pageBuilderBlocks = [
     heroBlock,
@@ -620,4 +786,5 @@ export const pageBuilderBlocks = [
     journeyTimelineBlock,
     // Content blocks
     accordionSectionBlock,
+    visionBoxBlock,
 ]

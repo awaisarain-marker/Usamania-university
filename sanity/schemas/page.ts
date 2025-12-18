@@ -60,6 +60,7 @@ export default defineType({
                 { type: 'journeyTimelineBlock' },
                 // Content blocks
                 { type: 'accordionSectionBlock' },
+                { type: 'visionBoxBlock' },
                 // Utility blocks
                 { type: 'spacerBlock' },
                 { type: 'richTextBlock' },

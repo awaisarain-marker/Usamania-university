@@ -222,29 +222,24 @@ const menuData: MenuItem[] = [
             { label: "WebMail", href: "https://mail.google.com/" },
             { label: "Admission Portal", href: "https://eduboard.uit.edu/AdmissionPortal/Login" }
         ]
+    },
+    {
+        label: "Virtual Tour",
+        href: "/virtual-tour"
     }
 ]
 
 export async function GET() {
     try {
-        // Check if navigation already exists
-        const existing = await writeClient.fetch(`*[_type == "navigation"][0]`)
-
-        if (existing) {
-            // Update existing
-            await writeClient.patch(existing._id).set({
-                menuItems: addKeys(menuData)
-            }).commit()
-
-            return NextResponse.json({
-                success: true,
-                message: 'Navigation menu updated with current website menu!',
-                itemCount: menuData.length
-            })
+        // Delete ALL existing navigation documents first
+        const allNavs = await writeClient.fetch(`*[_type == "navigation"]._id`)
+        for (const id of allNavs) {
+            await writeClient.delete(id)
         }
 
-        // Create new navigation document
-        await writeClient.create({
+        // Create navigation document with specific ID that matches config
+        await writeClient.createOrReplace({
+            _id: 'navigation',
             _type: 'navigation',
             title: 'Main Navigation',
             menuItems: addKeys(menuData)
@@ -252,8 +247,9 @@ export async function GET() {
 
         return NextResponse.json({
             success: true,
-            message: 'Navigation menu created with all 14 categories!',
-            itemCount: menuData.length
+            message: 'Navigation menu created with all 14 mega menu categories!',
+            itemCount: menuData.length,
+            categories: menuData.map(m => m.label)
         })
     } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error'
