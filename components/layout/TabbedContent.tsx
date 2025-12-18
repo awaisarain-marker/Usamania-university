@@ -27,11 +27,12 @@ interface PolicyCategory {
 
 interface Tab {
     tabTitle: string;
-    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox';
+    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText';
     organogramNodes?: OrgNode[];
     teamImageUrl?: string;
     teamMembers?: TeamMember[];
     policyCategories?: PolicyCategory[];
+    richContent?: string;
 }
 
 interface TabbedContentProps {
@@ -191,6 +192,21 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                     </div>
                                                                 ))}
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Rich Text Content */}
+                                                {tab.contentType === 'richText' && tab.richContent && (
+                                                    <div className="qec-vision-box" style={{ width: '100%', maxWidth: '100%', marginTop: 0 }}>
+                                                        <div className="qec-vision-content-wrap">
+                                                            <div className="section-title">
+                                                                <h2>{tab.tabTitle}</h2>
+                                                            </div>
+                                                            <div
+                                                                className="prose max-w-none text-gray-600"
+                                                                dangerouslySetInnerHTML={{ __html: tab.richContent }}
+                                                            />
                                                         </div>
                                                     </div>
                                                 )}

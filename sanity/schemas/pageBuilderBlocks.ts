@@ -924,8 +924,18 @@ export const tabbedContentBlock = defineType({
                                     { title: 'Team Grid', value: 'teamGrid' },
                                     { title: 'Policy Links', value: 'policyLinks' },
                                     { title: 'Vision Box', value: 'visionBox' },
+                                    { title: 'Rich Text (HTML)', value: 'richText' },
                                 ],
                             },
+                        }),
+                        // Rich Text content (HTML)
+                        defineField({
+                            name: 'richContent',
+                            title: 'Rich Content (supports HTML)',
+                            type: 'text',
+                            rows: 15,
+                            hidden: ({ parent }) => parent?.contentType !== 'richText',
+                            description: 'You can use HTML for complex layouts with tables, styled boxes, etc.',
                         }),
                         // Organogram content
                         defineField({
