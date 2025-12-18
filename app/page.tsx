@@ -129,7 +129,7 @@ export default function Home() {
         videoUrl={pageData.heroVideoUrl}
         title={pageData.heroTitle}
         subtitle={pageData.heroSubtitle}
-        buttons={pageData.heroButtons}
+        buttons={pageData.heroButtons as { text: string; link: string; style: 'red' | 'transparent' }[]}
         stats={pageData.heroStats}
         quickLinks={pageData.heroQuickLinks}
       />
