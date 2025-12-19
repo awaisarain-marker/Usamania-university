@@ -253,38 +253,43 @@ const admissionPageData = {
                         ],
                     },
                 },
-                // Tab 4: Fee Structure
+                // Tab 4: Fee Structure - Fee Table with full data
                 {
                     _key: createKey(),
                     tabTitle: 'Fee Structure',
-                    contentType: 'policyLinks',
-                    policyCategories: [
+                    contentType: 'feeTable',
+                    feeTables: [
                         {
                             _key: createKey(),
-                            categoryName: 'Computing Programs',
-                            policies: [
-                                { _key: createKey(), policyName: 'BS Computer Science - PKR 3,100 per credit hour', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Software Engineering - PKR 3,100 per credit hour', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BE Computer Systems - PKR 3,500 per credit hour', policyUrl: '' },
+                            tableTitle: 'Undergraduate Programs – Fee Information',
+                            semester: 'Fall 2025 Semester',
+                            programs: [
+                                { _key: createKey(), srNo: 1, programName: 'BS (Computer Science)', admissionFee: '25,000', securityDeposit: '-', semesterCharges: '9,000', tuitionFeePerCH: '10,870', firstSemCreditHours: '15', firstSemTuitionFee: '163,050', totalFee: '197,050' },
+                                { _key: createKey(), srNo: 2, programName: 'BS (Software Engineering)', admissionFee: '25,000', securityDeposit: '-', semesterCharges: '9,000', tuitionFeePerCH: '10,870', firstSemCreditHours: '15', firstSemTuitionFee: '163,050', totalFee: '197,050' },
+                                { _key: createKey(), srNo: 3, programName: 'BS (Artificial Intelligence)', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '9,000', tuitionFeePerCH: '8,000', firstSemCreditHours: '15', firstSemTuitionFee: '120,000', totalFee: '169,000' },
+                                { _key: createKey(), srNo: 4, programName: 'BS (Data Science)', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '9,000', tuitionFeePerCH: '8,000', firstSemCreditHours: '15', firstSemTuitionFee: '120,000', totalFee: '169,000' },
+                                { _key: createKey(), srNo: 5, programName: 'BE Computer Systems', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '6,700', firstSemCreditHours: '16', firstSemTuitionFee: '107,200', totalFee: '157,200' },
+                                { _key: createKey(), srNo: 6, programName: 'BE Electrical', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '6,700', firstSemCreditHours: '16', firstSemTuitionFee: '107,200', totalFee: '157,200' },
+                                { _key: createKey(), srNo: 7, programName: 'BS (Accounting & Finance)', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '5,000', firstSemCreditHours: '17', firstSemTuitionFee: '85,000', totalFee: '135,000' },
+                                { _key: createKey(), srNo: 8, programName: 'BBA', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '5,400', firstSemCreditHours: '17', firstSemTuitionFee: '91,800', totalFee: '141,800' },
+                                { _key: createKey(), srNo: 9, programName: 'B.E. Tech (Computer)', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '3,000', firstSemCreditHours: '16', firstSemTuitionFee: '48,000', totalFee: '98,000' },
+                                { _key: createKey(), srNo: 10, programName: 'B.E. Tech (Software)', admissionFee: '25,000', securityDeposit: '15,000', semesterCharges: '10,000', tuitionFeePerCH: '3,000', firstSemCreditHours: '16', firstSemTuitionFee: '48,000', totalFee: '98,000' },
                             ],
                         },
                         {
                             _key: createKey(),
-                            categoryName: 'Engineering Programs',
-                            policies: [
-                                { _key: createKey(), policyName: 'BE Electrical Engineering - PKR 3,500 per credit hour', policyUrl: '' },
-                                { _key: createKey(), policyName: 'B.E. Technology - PKR 2,800 per credit hour', policyUrl: '' },
+                            tableTitle: 'Graduate Programs – Fee Information',
+                            programs: [
+                                { _key: createKey(), srNo: 11, programName: 'MS (Computer Science)', admissionFee: '15,000', securityDeposit: '15,000', semesterCharges: '8,000', tuitionFeePerCH: '9,000', firstSemCreditHours: '12', firstSemTuitionFee: '108,000', totalFee: '146,000' },
+                                { _key: createKey(), srNo: 12, programName: 'MS (Electrical Engg.)', admissionFee: '15,000', securityDeposit: '15,000', semesterCharges: '8,000', tuitionFeePerCH: '8,000', firstSemCreditHours: '12', firstSemTuitionFee: '96,000', totalFee: '134,000' },
+                                { _key: createKey(), srNo: 13, programName: 'MS (Comm & Net Engg.)', admissionFee: '15,000', securityDeposit: '15,000', semesterCharges: '8,000', tuitionFeePerCH: '8,000', firstSemCreditHours: '12', firstSemTuitionFee: '96,000', totalFee: '134,000' },
                             ],
                         },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Management Programs',
-                            policies: [
-                                { _key: createKey(), policyName: 'BBA - PKR 2,500 per credit hour', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Business Informatics - PKR 2,500 per credit hour', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Accounting & Finance - PKR 2,500 per credit hour', policyUrl: '' },
-                            ],
-                        },
+                    ],
+                    feeNotes: [
+                        { _key: createKey(), noteLabel: 'a', noteText: 'An anticipated increase of about 10% in tuition fees is expected every Fall, in alignment with the annual inflation rate.' },
+                        { _key: createKey(), noteLabel: 'b', noteText: 'University fees are subject to change without prior notice. The institution reserves the right to revise the fee structure at its discretion.' },
+                        { _key: createKey(), noteLabel: 'c', noteText: 'The security deposit for BS (Computer Science) and BS (Software Engineering) programs will be charged in the second semester.' },
                     ],
                 },
                 // Tab 5: Fee Refund Policy

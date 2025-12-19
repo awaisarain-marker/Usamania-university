@@ -927,6 +927,7 @@ export const tabbedContentBlock = defineType({
                                     { title: 'Rich Text (HTML)', value: 'richText' },
                                     { title: 'FAQ Accordion', value: 'faqAccordion' },
                                     { title: 'Procedure Steps', value: 'procedureSteps' },
+                                    { title: 'Fee Table', value: 'feeTable' },
                                 ],
                             },
                         }),
@@ -1163,6 +1164,76 @@ export const tabbedContentBlock = defineType({
                                     type: 'text',
                                     title: 'Description (optional)',
                                     rows: 3,
+                                }),
+                            ],
+                        }),
+                        // Fee Table content (for Fee Structure)
+                        defineField({
+                            name: 'feeTables',
+                            title: 'Fee Tables',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'feeTable',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'tableTitle', type: 'string', title: 'Table Title' }),
+                                        defineField({ name: 'semester', type: 'string', title: 'Semester (e.g., Fall 2025)' }),
+                                        defineField({
+                                            name: 'programs',
+                                            title: 'Programs',
+                                            type: 'array',
+                                            of: [
+                                                defineArrayMember({
+                                                    type: 'object',
+                                                    fields: [
+                                                        defineField({ name: 'srNo', type: 'number', title: 'Sr. No.' }),
+                                                        defineField({ name: 'programName', type: 'string', title: 'Program Name' }),
+                                                        defineField({ name: 'admissionFee', type: 'string', title: 'Admission Fee' }),
+                                                        defineField({ name: 'securityDeposit', type: 'string', title: 'Security Deposit' }),
+                                                        defineField({ name: 'semesterCharges', type: 'string', title: 'Semester Charges' }),
+                                                        defineField({ name: 'tuitionFeePerCH', type: 'string', title: 'Tuition Fee (per Credit Hour)' }),
+                                                        defineField({ name: 'firstSemCreditHours', type: 'string', title: '1st Semester Credit Hours' }),
+                                                        defineField({ name: 'firstSemTuitionFee', type: 'string', title: '1st Semester Tuition Fee' }),
+                                                        defineField({ name: 'totalFee', type: 'string', title: 'Total Fee' }),
+                                                    ],
+                                                    preview: {
+                                                        select: { srNo: 'srNo', programName: 'programName' },
+                                                        prepare({ srNo, programName }) {
+                                                            return { title: `${srNo}. ${programName}` };
+                                                        },
+                                                    },
+                                                }),
+                                            ],
+                                        }),
+                                    ],
+                                    preview: {
+                                        select: { title: 'tableTitle' },
+                                        prepare({ title }) {
+                                            return { title: title || 'Fee Table' };
+                                        },
+                                    },
+                                }),
+                            ],
+                        }),
+                        defineField({
+                            name: 'feeNotes',
+                            title: 'Fee Notes',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'feeTable',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'noteLabel', type: 'string', title: 'Label (e.g., a, b, c)' }),
+                                        defineField({ name: 'noteText', type: 'text', title: 'Note Text', rows: 2 }),
+                                    ],
+                                    preview: {
+                                        select: { label: 'noteLabel', text: 'noteText' },
+                                        prepare({ label, text }) {
+                                            return { title: `(${label}) ${text?.substring(0, 50) || ''}...` };
+                                        },
+                                    },
                                 }),
                             ],
                         }),

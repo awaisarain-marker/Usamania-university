@@ -63,9 +63,32 @@ interface ProcedureInfoBox {
     infoDescription?: string;
 }
 
+interface FeeProgram {
+    srNo: number;
+    programName: string;
+    admissionFee: string;
+    securityDeposit: string;
+    semesterCharges: string;
+    tuitionFeePerCH: string;
+    firstSemCreditHours: string;
+    firstSemTuitionFee: string;
+    totalFee: string;
+}
+
+interface FeeTableData {
+    tableTitle: string;
+    semester?: string;
+    programs: FeeProgram[];
+}
+
+interface FeeNote {
+    noteLabel: string;
+    noteText: string;
+}
+
 interface Tab {
     tabTitle: string;
-    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion' | 'procedureSteps';
+    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion' | 'procedureSteps' | 'feeTable';
     organogramNodes?: OrgNode[];
     teamImageUrl?: string;
     teamMembers?: TeamMember[];
@@ -77,6 +100,9 @@ interface Tab {
     procedureSections?: ProcedureSection[];
     procedureTable?: ProcedureTable;
     procedureInfoBox?: ProcedureInfoBox;
+    // Fee Table fields
+    feeTables?: FeeTableData[];
+    feeNotes?: FeeNote[];
 }
 
 interface TabbedContentProps {
@@ -404,6 +430,71 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                         ))}
                                                                     </div>
                                                                 )}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+
+                                                {/* Fee Table Content */}
+                                                {tab.contentType === 'feeTable' && (
+                                                    <div className="fee-table-content" style={{ width: '100%', maxWidth: '100%' }}>
+                                                        {tab.feeTables?.map((feeTable, tableIndex) => (
+                                                            <div key={tableIndex} className="mb-10">
+                                                                <h3 className="text-xl font-bold text-[#002856] mb-2">{feeTable.tableTitle}</h3>
+                                                                {feeTable.semester && (
+                                                                    <p className="text-sm text-gray-500 mb-4 font-medium">{feeTable.semester}</p>
+                                                                )}
+                                                                <div className="overflow-x-auto">
+                                                                    <table className="w-full text-sm border-collapse border border-gray-300">
+                                                                        <thead>
+                                                                            <tr className="bg-[#002856] text-white">
+                                                                                <th className="py-2 px-3 border border-gray-300 text-center" rowSpan={2}>Sr.</th>
+                                                                                <th className="py-2 px-3 border border-gray-300 text-left" rowSpan={2}>Programs</th>
+                                                                                <th className="py-2 px-3 border border-gray-300 text-center" colSpan={2}>One Time Charges</th>
+                                                                                <th className="py-2 px-3 border border-gray-300 text-center" colSpan={2}>Semester Fee</th>
+                                                                                <th className="py-2 px-3 border border-gray-300 text-center" colSpan={3}>Semester Fee at the time of Admission</th>
+                                                                            </tr>
+                                                                            <tr className="bg-[#002856]/90 text-white text-xs">
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">Admission<br />Fee</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">Security<br />Deposit</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">Semester<br />Charges</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">Tuition Fee<br />(per CH)</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">1st Sem<br />Credit Hr</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center">1st Sem<br />Tuition Fee</th>
+                                                                                <th className="py-2 px-2 border border-gray-300 text-center font-bold">Total</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {feeTable.programs?.map((program, rowIndex) => (
+                                                                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.srNo}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 font-medium">{program.programName}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.admissionFee}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.securityDeposit}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.semesterCharges}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.tuitionFeePerCH}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.firstSemCreditHours}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center">{program.firstSemTuitionFee}</td>
+                                                                                    <td className="py-2 px-3 border border-gray-300 text-center font-bold text-[#ed1c24]">{program.totalFee}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+
+                                                        {/* Fee Notes */}
+                                                        {tab.feeNotes && tab.feeNotes.length > 0 && (
+                                                            <div className="mt-6 p-4 bg-amber-50 border-l-4 border-amber-400 rounded">
+                                                                <h4 className="font-bold text-[#002856] mb-3">Note:</h4>
+                                                                <ul className="space-y-2 text-sm text-gray-700">
+                                                                    {tab.feeNotes.map((note, noteIndex) => (
+                                                                        <li key={noteIndex}>
+                                                                            <span className="font-medium">({note.noteLabel})</span> {note.noteText}
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
                                                             </div>
                                                         )}
                                                     </div>
