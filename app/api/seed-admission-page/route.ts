@@ -49,53 +49,97 @@ const admissionPageData = {
             _key: createKey(),
             sectionId: 'admission-info',
             tabs: [
-                // Tab 1: Admission Information
+                // Tab 1: Admission Information - Rich Text with exact frontend content
                 {
                     _key: createKey(),
                     tabTitle: 'Admission Information',
-                    contentType: 'policyLinks',
-                    policyCategories: [
-                        {
-                            _key: createKey(),
-                            categoryName: 'Department of Computer Science',
-                            policies: [
-                                { _key: createKey(), policyName: 'BS Computer Science', policyUrl: '/courses/bs-computer-science' },
-                                { _key: createKey(), policyName: 'BS Software Engineering', policyUrl: '/courses/bs-software-engineering' },
-                                { _key: createKey(), policyName: 'BS Artificial Intelligence', policyUrl: '/courses/bs-artificial-intelligence' },
-                                { _key: createKey(), policyName: 'BS Data Science', policyUrl: '/courses/bs-data-science' },
-                                { _key: createKey(), policyName: 'MS Computer Science', policyUrl: '' },
-                            ],
-                        },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Department of Electrical Engineering',
-                            policies: [
-                                { _key: createKey(), policyName: 'BE Computer Systems', policyUrl: '/courses/be-computer-systems' },
-                                { _key: createKey(), policyName: 'BE Electrical (Power)', policyUrl: '/courses/be-electrical-power' },
-                                { _key: createKey(), policyName: 'BE Electrical (Electronic)', policyUrl: '/courses/be-electrical-electronic' },
-                                { _key: createKey(), policyName: 'MS Electrical Engineering', policyUrl: '' },
-                                { _key: createKey(), policyName: 'MS Communication and Network Engineering', policyUrl: '' },
-                            ],
-                        },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Department of Management Sciences',
-                            policies: [
-                                { _key: createKey(), policyName: 'BBA (Bachelor in Business Administration)', policyUrl: '/courses/bba' },
-                                { _key: createKey(), policyName: 'BS Accounting and Finance', policyUrl: '/courses/bs-accounting-finance' },
-                            ],
-                        },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Important Dates',
-                            policies: [
-                                { _key: createKey(), policyName: 'Online Application: https://eduboard.uit.edu/AdmissionPortal/Login', policyUrl: 'https://eduboard.uit.edu/AdmissionPortal/Login' },
-                                { _key: createKey(), policyName: 'Last date for submission: Thursday, January 08 2026', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Entrance Test: Saturday, January 10, 2026 at 11:00 AM', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Start of Academic Session: February, 2026', policyUrl: '' },
-                            ],
-                        },
-                    ],
+                    contentType: 'richText',
+                    richContent: `
+<h3 class="text-2xl font-bold text-[#002856] mb-6">Graduate / Undergraduate Programs</h3>
+
+<div class="mb-8">
+    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Computer Science</h4>
+    <ul class="list-disc pl-5 mb-4 space-y-1 font-medium">
+        <li>BS Computer Science</li>
+        <li>BS Software Engineering</li>
+    </ul>
+    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856] mb-4">
+        <strong class="text-[#002856] block mb-2">Eligibility for BS Programs:</strong>
+        <ul class="list-disc pl-5 space-y-2 text-sm">
+            <li>Passed either Higher Secondary Examination (HSC-II) in Pre-Engineering/Pre-Medical/Science General/Computer Science) from any authorized board of intermediate education in Pakistan OR any equivalent foreign examination board with at least 50% or 550 marks OR is awaiting his/her final result of HSC-II.</li>
+            <li>HSC-II (Pre-medical) students must pass deficiency courses of Mathematics of 6 credit hours within one year of their regular studies.</li>
+        </ul>
+    </div>
+
+    <h5 class="font-bold text-[#002856] mt-4 mb-2">MS Computer Science</h5>
+    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
+        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
+        <p class="text-sm">Sixteen years of schooling or 4-year education after HSSC or equivalent (minimum 124 credit hours) from HEC recognized degree awarding institute, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Computing, Communication / Telecommunication, Electronics or any other field as deemed relevant by the Admission Committee.</p>
+    </div>
+</div>
+
+<div class="mb-8">
+    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Electrical Engineering</h4>
+
+    <h5 class="font-bold text-[#002856] mb-2">MS Electrical Engineering</h5>
+    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856] mb-4">
+        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
+        <p class="text-sm">Candidate must have a PEC-recognized BE / BS Engg. / BSc Engg. or equivalent degree, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Electrical, Electronics, Controls or relevant.</p>
+    </div>
+
+    <h5 class="font-bold text-[#002856] mb-2">MS Communication and Network Engineering</h5>
+    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
+        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
+        <p class="text-sm">Sixteen years of schooling or 4-year education after HSSC or equivalent (minimum 124 credit hours) from HEC recognized degree awarding institute, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Computing, Communication / Telecommunication, Electronics or relevant.</p>
+    </div>
+</div>
+
+<div class="mb-10">
+    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Management Sciences</h4>
+    <ul class="list-disc pl-5 mb-4 space-y-1 font-medium">
+        <li>BBA (Bachelor in Business Administration)</li>
+        <li>BS Accounting and Finance</li>
+    </ul>
+    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
+        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
+        <p class="text-sm">Passed either Higher Secondary Examination (HSC-II) or equivalent from any authorized board of intermediate education in Pakistan OR any equivalent foreign examination board with at least 50% or 550 marks are eligible to apply for admission.</p>
+    </div>
+</div>
+
+<div>
+    <h3 class="text-2xl font-bold text-[#002856] mb-6">IMPORTANT DATES</h3>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <tbody>
+                <tr class="border-b border-gray-200">
+                    <td class="py-3 pr-4 font-bold text-[#002856]">Online Application</td>
+                    <td class="py-3 font-medium">
+                        <a href="https://eduboard.uit.edu/AdmissionPortal/Login" target="_blank" rel="noopener noreferrer" class="animated-link break-all">
+                            https://eduboard.uit.edu/AdmissionPortal/Login
+                        </a>
+                    </td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td class="py-3 pr-4 font-bold text-[#002856]">Last date for submission of the online Application form</td>
+                    <td class="py-3">Thursday, January 08 2026</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td class="py-3 pr-4 font-bold text-[#002856]">Entrance Test date</td>
+                    <td class="py-3">Saturday, January 10, 2026</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td class="py-3 pr-4 font-bold text-[#002856]">Entrance Test Time / Venue</td>
+                    <td class="py-3">11.00 am / UIT University</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td class="py-3 pr-4 font-bold text-[#002856]">Start of Academic Session</td>
+                    <td class="py-3">February, 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+                    `,
                 },
                 // Tab 2: FAQs
                 {
