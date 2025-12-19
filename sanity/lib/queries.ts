@@ -533,3 +533,101 @@ export async function getAllPages() {
         }
     `)
 }
+
+// Admission Page Query
+export async function getAdmissionPage() {
+    return client.fetch(`
+        *[_type == "page" && slug.current == "admission"][0] {
+            title,
+            "slug": slug.current,
+            sections[] {
+                _type,
+                _key,
+                sectionId,
+                tabs[] {
+                    tabTitle,
+                    contentType,
+                    organogramNodes[] {
+                        name,
+                        level,
+                        parentIndex
+                    },
+                    teamImageUrl,
+                    teamMembers[] {
+                        name,
+                        position,
+                        phone,
+                        email
+                    },
+                    policyCategories[] {
+                        categoryName,
+                        policies[] {
+                            policyName,
+                            policyUrl
+                        }
+                    },
+                    richContent,
+                    faqItems[] {
+                        question,
+                        answer
+                    },
+                    procedureTitle,
+                    procedureSections[] {
+                        sectionHeading,
+                        sectionDescription,
+                        bulletPoints[] {
+                            text
+                        },
+                        accentColor
+                    },
+                    procedureTable {
+                        tableTitle,
+                        columnHeader1,
+                        columnHeader2,
+                        tableRows[] {
+                            criteria,
+                            value
+                        }
+                    },
+                    procedureInfoBox {
+                        infoTitle,
+                        infoItems[] {
+                            label,
+                            value
+                        },
+                        infoDescription
+                    },
+                    feeTables[] {
+                        tableTitle,
+                        semester,
+                        programs[] {
+                            srNo,
+                            programName,
+                            admissionFee,
+                            securityDeposit,
+                            semesterCharges,
+                            tuitionFeePerCH,
+                            firstSemCreditHours,
+                            firstSemTuitionFee,
+                            totalFee
+                        }
+                    },
+                    feeNotes[] {
+                        noteLabel,
+                        noteText
+                    },
+                    carouselTitle,
+                    carouselSlides[] {
+                        slideTitle,
+                        slideDescription,
+                        slideImages[] {
+                            "imageUrl": imageUrl,
+                            imageCaption
+                        },
+                        slideLink
+                    }
+                }
+            }
+        }
+    `)
+}

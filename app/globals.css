@@ -208,7 +208,7 @@ h6 {
 .image-cta .section-title h2 {
   font-family: 'DM Serif Display';
   color: #002f6c;
-  font-size: 50px;
+  font-size: 52px;
   font-weight: 400;
   line-height: 1.2;
 
@@ -311,7 +311,7 @@ h6 {
 
 .academics-section .section-title h2 {
   font-family: "DM Serif Display", serif;
-  font-size: 50px;
+  font-size: 52px;
   font-weight: 500;
   line-height: 1;
   color: #002856;
@@ -447,7 +447,7 @@ h6 {
 
 .blog-section__heading .section-title h2 {
   font-family: "DM Serif Display", serif;
-  font-size: 50px;
+  font-size: 52px;
   font-weight: 500;
   line-height: 1;
   color: #002856;
@@ -642,7 +642,7 @@ h6 {
   justify-content: center;
   background-color: #fff;
   border: none;
-  border-radius: 100px;
+  border-radius: 0;
   box-shadow: 0 20px 40px rgba(0, 40, 86, 0.2);
   margin: 0 5px;
   width: 70px;

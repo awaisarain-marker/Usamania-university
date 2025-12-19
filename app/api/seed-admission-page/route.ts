@@ -366,25 +366,261 @@ const admissionPageData = {
                     contentType: 'carousel',
                     carouselTitle: 'Our Outreach Programs',
                     carouselSlides: [
-                        { _key: createKey(), slideTitle: 'Dhoraji Youth Services Foundation invited UIT for Career Counselling Seminar', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dhoraji+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Dhoraji+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dhoraji+3' }] },
-                        { _key: createKey(), slideTitle: 'UIT University visited Govt. National College 2024', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=NatCollege2024+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=NatCollege2024+2' }] },
-                        { _key: createKey(), slideTitle: 'Visit by Study Collegiate to UIT University', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Study+Collegiate+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Study+Collegiate+2' }] },
-                        { _key: createKey(), slideTitle: 'UIT University participated in OMJ Freelancer Conference', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=OMJ+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=OMJ+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=OMJ+3' }] },
-                        { _key: createKey(), slideTitle: 'Visit by Vision Academy to UIT University', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Vision+Academy+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Vision+Academy+2' }] },
-                        { _key: createKey(), slideTitle: 'Visit by Quaid e Azam Rangers School & College to UIT University', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Rangers+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Rangers+2' }] },
-                        { _key: createKey(), slideTitle: 'UIT University visited Govt. Degree College Sukkur', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Sukkur+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Sukkur+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Sukkur+3' }] },
-                        { _key: createKey(), slideTitle: 'UIT University visited Govt. Degree College Sukkur', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Sukkur2+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Sukkur2+2' }] },
-                        { _key: createKey(), slideTitle: 'EDU Clan 3.0 Hyderabad', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=EDUClan3+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=EDUClan3+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=EDUClan3+3' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=EDUClan3+4' }] },
-                        { _key: createKey(), slideTitle: 'Conducted a Counseling Session at Govt. Dehli College', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Dehli+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dehli+2' }] },
-                        { _key: createKey(), slideTitle: 'Participated in The Intellect School Career Fair 2023 Expo', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Intellect+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Intellect+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Intellect+3' }] },
-                        { _key: createKey(), slideTitle: 'UIT University visited Govt. National College 2023', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=NatCollege2023+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=NatCollege2023+2' }] },
-                        { _key: createKey(), slideTitle: 'Outreach Visit to Govt. College Gulzar e Hijri', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Gulzar+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Gulzar+2' }] },
-                        { _key: createKey(), slideTitle: '5th Pakistan Navy Industry Seminar & Exhibition 2023 Expo', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Navy+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Navy+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Navy+3' }] },
-                        { _key: createKey(), slideTitle: 'UIT University participated in Dawn Education Expo 2023', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dawn+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Dawn+2' }] },
-                        { _key: createKey(), slideTitle: 'UIT University participated in EDU CLAN 2.0 Tando Muhammad Khan 2022 Expo', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=EDUClan2+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=EDUClan2+2' }] },
-                        { _key: createKey(), slideTitle: 'Visit by D\'Rajus Coaching Center to UIT University', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=DRajus+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=DRajus+2' }] },
-                        { _key: createKey(), slideTitle: 'UIT University particpated in The Caspian College Education Expo', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Caspian+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Caspian+2' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Caspian+3' }] },
-                        { _key: createKey(), slideTitle: 'UIT University participated in The News Education Expo 2023', slideImages: [{ _key: createKey(), imageUrl: 'https://placehold.co/600x400/002856/ffffff?text=News+1' }, { _key: createKey(), imageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=News+2' }] },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Dhoraji Youth Services Foundation invited UIT for Career Counselling Seminar",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/swefwef.png" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-09-at-3.33.37-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/WhatsApp-Image-2025-06-29-at-12.19.05-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-09-at-3.33.35-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/wfer.png" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2025/07/wefwf.png" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University visited Govt. National College 2024",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.16-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.18-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.19-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.17-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.16-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.17-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/12/WhatsApp-Image-2024-11-28-at-12.32.15-PM-1.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Visit by Study Collegiate to UIT University",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0430-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0439-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0451-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0452-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0454-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0465-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0467-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0473-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0474-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0476-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0484-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0486-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0491-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0495-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0499-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0502-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/03/IMG_0504-scaled.jpg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University participated in OMJ Freelancer Conference",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.58-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.58-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.59-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.59-PM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.59-PM-3.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.36.59-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-12-at-1.37.00-PM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Visit by Vision Academy to UIT University",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_9019.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_9007.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_9011.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/IMG_8968-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/IMG_8947-scaled.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_9027-1.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_9002.jpg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Visit by Quaid e Azam Rangers School & College to UIT University",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8889.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8881.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8873.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8773.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8698-e1715756405497.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8669.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8588.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8657.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8650.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8582-e1715919654758.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8575.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/Optimized-IMG_8564.jpg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University visited Govt. Degree College Sukkur",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-01-31-at-10.57.47-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-01-31-at-10.57.48-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-01-31-at-10.57.48-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-01-31-at-10.57.48-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/02/WhatsApp-Image-2024-01-31-at-10.57.49-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "EDU Clan 3.0 Tando Muhammad Khan",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-03-at-11.35.36-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-03-at-11.35.35-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-03-at-11.35.33-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-03-at-11.35.31-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/Untitled-Project-3.jpg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "EDU Clan 3.0 Hyderabad",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/Untitled-Project-2-1.jpg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-02-at-11.20.02-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-02-at-11.20.12-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-02-at-11.49.24-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-02-at-11.49.30-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-12-02-at-11.57.55-PM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Conducted a Counseling Session at Govt. Dehli College",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.49.45-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.49.46-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Participated in The Intellect School Career Fair 2023 Expo",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-14-at-2.40.02-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-14-at-2.40.04-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-15-at-12.42.52-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-15-at-12.42.53-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-15-at-12.44.17-PM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University visited Govt. National College 2023",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.56-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.57-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.57-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.57-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.58-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.56.58-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Outreach Visit to Govt. College Gulzar e Hijri",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-12.23.14-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-12.23.17-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-12.23.19-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-12.23.21-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-12.23.29-PM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "5th Pakistan Navy Industry Seminar & Exhibition 2023 Expo",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.17.53-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.17.54-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.17.55-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.17.56-PM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.17.56-PM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2023-11-22-at-5.20.15-PM-1.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University participated in Dawn Education Expo 2023",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.51.16-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.59.19-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.59.19-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.59.20-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.59.20-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.00.49-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.00.49-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.00.49-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University participated in EDU CLAN 2.0 Tando Muhammad Khan 2022 Expo",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.46-AM-1-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.46-AM-2-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.46-AM-3.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.47-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.49-AM-1-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.49-AM-2-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.49-AM-3.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.50-AM-1-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.03.50-AM-2.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "Visit by D'Rajus Coaching Center to UIT University",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.17-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.18-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.18-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.18-AM-3.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.18-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.19-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.19-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.19-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.20-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.44.55-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.46.50-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University particpated in The Caspian College Education Expo",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.12-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.12-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.12-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.13-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.13-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.14-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.35-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.35-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.36-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-11.02.36-AM.jpeg" }
+                            ]
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: "UIT University participated in The News Education Expo 2023",
+                            slideImages: [
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.50.39-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.22-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.22-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.23-AM-1.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.23-AM-2.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.23-AM.jpeg" },
+                                { _key: createKey(), imageUrl: "https://uitu.edu.pk/wp-content/uploads/2024/01/WhatsApp-Image-2024-01-31-at-10.54.24-AM.jpeg" }
+                            ]
+                        },
                     ],
                 },
             ],

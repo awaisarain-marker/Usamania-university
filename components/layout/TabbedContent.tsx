@@ -2,6 +2,11 @@
 
 import React, { useState } from 'react';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 interface OrgNode {
     name: string;
@@ -143,6 +148,27 @@ function buildOrgTree(nodes: OrgNode[]) {
 
 export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
     const [activeTab, setActiveTab] = useState(0);
+
+    React.useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const index = tabs.findIndex(tab => {
+                    const tabId = tab.tabTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                    // Handle special case for FAQs if needed, but "faqs" matches "faqs"
+                    return tabId === hash;
+                });
+                if (index !== -1) {
+                    setActiveTab(index);
+                }
+            }
+        };
+
+        handleHashChange();
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, [tabs]);
+
 
     if (!tabs || tabs.length === 0) return null;
 
@@ -519,41 +545,41 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
 
                                                 {/* Image Carousel Content */}
                                                 {tab.contentType === 'carousel' && (
-                                                    <div className="carousel-content" style={{ width: '100%', maxWidth: '100%' }}>
-                                                        {tab.carouselTitle && (
-                                                            <h2 className="text-2xl font-bold text-[#002856] mb-6">{tab.carouselTitle}</h2>
-                                                        )}
+                                                    <div className="carousel-content relative group" style={{ width: '100%', maxWidth: '100%' }}>
+                                                        <div className="flex items-center justify-between mb-6">
+                                                            {tab.carouselTitle && (
+                                                                <h2 className="text-2xl font-bold text-[#002856] mb-0">{tab.carouselTitle}</h2>
+                                                            )}
+                                                            {/* Navigation Arrows */}
+                                                            <div className="flex gap-2">
+                                                                <button className={`slider__prev prev-tab-${index} flex items-center justify-center w-[70px] h-[70px] bg-white shadow-md hover:bg-[#002856] hover:text-white transition-colors text-[#002856]`}>
+                                                                    <ArrowLeft size={24} />
+                                                                </button>
+                                                                <button className={`slider__next next-tab-${index} flex items-center justify-center w-[70px] h-[70px] bg-white shadow-md hover:bg-[#002856] hover:text-white transition-colors text-[#002856]`}>
+                                                                    <ArrowRight size={24} />
+                                                                </button>
+                                                            </div>
+                                                        </div>
 
                                                         {tab.carouselSlides && tab.carouselSlides.length > 0 && (
-                                                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                                                {tab.carouselSlides.map((slide, slideIndex) => (
-                                                                    <div key={slideIndex} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                                                                        {/* Show first image from slideImages array */}
-                                                                        {slide.slideImages && slide.slideImages.length > 0 && (
-                                                                            <div className="aspect-video overflow-hidden">
-                                                                                <img
-                                                                                    src={slide.slideImages[0].imageUrl}
-                                                                                    alt={slide.slideTitle}
-                                                                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                                                                />
-                                                                            </div>
-                                                                        )}
-                                                                        <div className="p-4">
-                                                                            <h3 className="font-bold text-[#002856] mb-2 text-sm">{slide.slideTitle}</h3>
-                                                                            {slide.slideDescription && (
-                                                                                <p className="text-xs text-gray-600 mb-2">{slide.slideDescription}</p>
-                                                                            )}
-                                                                            {slide.slideImages && slide.slideImages.length > 1 && (
-                                                                                <span className="text-xs text-gray-400">+{slide.slideImages.length - 1} more photos</span>
-                                                                            )}
-                                                                        </div>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        )}
-                                                    </div>
+                                                            <Swiper
+                                                                modules={[Navigation, Autoplay]}
+                                                                spaceBetween={24}
+                                                                slidesPerView={1}
+                                                                navigation={{
+                                                                    prevEl: `.prev-tab-${index}`,
+                                                                    nextEl: `.next-tab-${index}`,
+                                                                }}
+                                                                autoplay={{
+                                                                    delay: 5000,
+                                                                    disableOnInteraction: false,
+                                                                }}
+                                                                breakpoints={{
+                                                                    640: { slidesPerView: 2 },
+                                                                    1024: { slidesPerView: 3 },
+                                                                }}
                                                 )}
-                                            </div>
+                                                    </div>
                                         </section>
                                     ))}
                                 </div>
