@@ -314,7 +314,7 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                 <h3 className="text-lg font-bold text-[#002856] mb-4">{section.sectionHeading}</h3>
 
                                                                 {/* Section Description */}
-                                                                {section.sectionDescription && (
+                                                                {section.sectionDescription && section.sectionDescription.length > 0 && (
                                                                     <div className="text-gray-600 mb-4 prose prose-sm max-w-none">
                                                                         <PortableText
                                                                             value={section.sectionDescription}
