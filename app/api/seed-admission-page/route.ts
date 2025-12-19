@@ -366,34 +366,25 @@ const admissionPageData = {
                     contentType: 'carousel',
                     carouselTitle: 'Our Outreach Programs',
                     carouselSlides: [
-                        {
-                            _key: createKey(),
-                            slideTitle: 'School Visits Program',
-                            slideDescription: 'UIT University visits schools to inspire students about higher education and career opportunities.',
-                            slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=School+Visits',
-                            slideLink: ''
-                        },
-                        {
-                            _key: createKey(),
-                            slideTitle: 'Career Counseling Workshops',
-                            slideDescription: 'Free career counseling sessions for students to help them choose the right academic path.',
-                            slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Career+Counseling',
-                            slideLink: ''
-                        },
-                        {
-                            _key: createKey(),
-                            slideTitle: 'Open House Events',
-                            slideDescription: 'Campus tours and information sessions for prospective students and parents.',
-                            slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Open+House',
-                            slideLink: ''
-                        },
-                        {
-                            _key: createKey(),
-                            slideTitle: 'Tech Talks',
-                            slideDescription: 'Industry experts share insights on latest technology trends and career opportunities.',
-                            slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Tech+Talks',
-                            slideLink: ''
-                        },
+                        { _key: createKey(), slideTitle: 'Dhoraji Youth Services Foundation invited UIT for Career Counselling Seminar', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dhoraji+Career+Seminar' },
+                        { _key: createKey(), slideTitle: 'UIT University visited Govt. National College 2024', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=National+College+2024' },
+                        { _key: createKey(), slideTitle: 'Visit by Study Collegiate to UIT University', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Study+Collegiate+Visit' },
+                        { _key: createKey(), slideTitle: 'UIT University participated in OMJ Freelancer Conference', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=OMJ+Freelancer+Conference' },
+                        { _key: createKey(), slideTitle: 'Visit by Vision Academy to UIT University', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Vision+Academy+Visit' },
+                        { _key: createKey(), slideTitle: 'Visit by Quaid e Azam Rangers School & College to UIT University', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Rangers+School+Visit' },
+                        { _key: createKey(), slideTitle: 'UIT University visited Govt. Degree College Sukkur', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Degree+College+Sukkur' },
+                        { _key: createKey(), slideTitle: 'UIT University visited Govt. Degree College Sukkur', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Degree+College+Sukkur+2' },
+                        { _key: createKey(), slideTitle: 'EDU Clan 3.0 Hyderabad', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=EDU+Clan+3.0' },
+                        { _key: createKey(), slideTitle: 'Conducted a Counseling Session at Govt. Dehli College', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Dehli+College+Session' },
+                        { _key: createKey(), slideTitle: 'Participated in The Intellect School Career Fair 2023 Expo', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Intellect+School+Expo' },
+                        { _key: createKey(), slideTitle: 'UIT University visited Govt. National College 2023', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=National+College+2023' },
+                        { _key: createKey(), slideTitle: 'Outreach Visit to Govt. College Gulzar e Hijri', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Gulzar+e+Hijri' },
+                        { _key: createKey(), slideTitle: '5th Pakistan Navy Industry Seminar & Exhibition 2023 Expo', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Navy+Industry+Seminar' },
+                        { _key: createKey(), slideTitle: 'UIT University participated in Dawn Education Expo 2023', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Dawn+Education+Expo' },
+                        { _key: createKey(), slideTitle: 'UIT University participated in EDU CLAN 2.0 Tando Muhammad Khan 2022 Expo', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=EDU+CLAN+2.0' },
+                        { _key: createKey(), slideTitle: 'Visit by D\'Rajus Coaching Center to UIT University', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=DRajus+Coaching+Visit' },
+                        { _key: createKey(), slideTitle: 'UIT University particpated in The Caspian College Education Expo', slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Caspian+College+Expo' },
+                        { _key: createKey(), slideTitle: 'UIT University participated in The News Education Expo 2023', slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=News+Education+Expo' },
                     ],
                 },
             ],
