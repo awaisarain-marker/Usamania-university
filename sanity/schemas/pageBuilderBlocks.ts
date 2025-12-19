@@ -949,7 +949,33 @@ export const tabbedContentBlock = defineType({
                                     type: 'object',
                                     fields: [
                                         defineField({ name: 'question', type: 'string', title: 'Question' }),
-                                        defineField({ name: 'answer', type: 'text', title: 'Answer', rows: 4 }),
+                                        defineField({
+                                            name: 'answer',
+                                            type: 'array',
+                                            title: 'Answer',
+                                            of: [
+                                                {
+                                                    type: 'block',
+                                                    styles: [{ title: 'Normal', value: 'normal' }],
+                                                    marks: {
+                                                        decorators: [
+                                                            { title: 'Bold', value: 'strong' },
+                                                            { title: 'Italic', value: 'em' },
+                                                        ],
+                                                        annotations: [
+                                                            {
+                                                                name: 'link',
+                                                                type: 'object',
+                                                                title: 'Link',
+                                                                fields: [
+                                                                    { name: 'href', type: 'url', title: 'URL' },
+                                                                ],
+                                                            },
+                                                        ],
+                                                    },
+                                                },
+                                            ],
+                                        }),
                                     ],
                                     preview: {
                                         select: { question: 'question' },

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { PortableText, PortableTextComponents } from '@portabletext/react';
 
 interface OrgNode {
     name: string;
@@ -27,7 +28,7 @@ interface PolicyCategory {
 
 interface FaqItem {
     question: string;
-    answer: string;
+    answer: any[]; // PortableText block content
 }
 
 interface Tab {
@@ -235,8 +236,21 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                                                     </svg>
                                                                                 </summary>
-                                                                                <div className="mt-3 text-sm text-gray-600 whitespace-pre-wrap">
-                                                                                    {faq.answer}
+                                                                                <div className="mt-3 text-sm text-gray-600 prose prose-sm max-w-none">
+                                                                                    {faq.answer && (
+                                                                                        <PortableText
+                                                                                            value={faq.answer}
+                                                                                            components={{
+                                                                                                marks: {
+                                                                                                    link: ({ children, value }) => (
+                                                                                                        <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-[#ed1c24] hover:underline">
+                                                                                                            {children}
+                                                                                                        </a>
+                                                                                                    ),
+                                                                                                },
+                                                                                            }}
+                                                                                        />
+                                                                                    )}
                                                                                 </div>
                                                                             </details>
                                                                         </li>

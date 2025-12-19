@@ -14,6 +14,26 @@ function createKey() {
     return Math.random().toString(36).substring(2, 12);
 }
 
+// Create a simple text block for PortableText
+function createTextBlock(text: string) {
+    return [
+        {
+            _type: 'block',
+            _key: createKey(),
+            style: 'normal',
+            markDefs: [],
+            children: [
+                {
+                    _type: 'span',
+                    _key: createKey(),
+                    text: text,
+                    marks: [],
+                },
+            ],
+        },
+    ];
+}
+
 const admissionPageData = {
     _type: 'page',
     title: 'Admissions',
@@ -112,23 +132,23 @@ const admissionPageData = {
                     tabTitle: 'FAQs',
                     contentType: 'faqAccordion',
                     faqItems: [
-                        { _key: createKey(), question: '1. When can one apply for admissions at UIT University?', answer: 'Admission has started from January, 2025. If an applicant fulfills the admission criteria, he/she can apply for admission via online application at www.uitu.edu.pk' },
-                        { _key: createKey(), question: '2. Which Undergraduate programs are offered at UIT University?', answer: 'Department of Electrical Engineering: BE Electrical, BE Computer Systems. Department of Computer Science: BS Computer Science, BS Software Engineering. Department of Engineering Technology: B.E. Tech (Computer, Software, Electronics). Department of Management Sciences: BBA, BS Business Informatics, BS Accounting & Finance.' },
-                        { _key: createKey(), question: '3. What is the general admission criteria?', answer: 'For BE Electrical/CS: 60% in Pre-Engineering. For BS CS/SE: 50% in Pre-Engineering/Science General/Pre-Medical. For BE Tech: HSC-II/DAE with 50%. For Management Sciences: HSC-II with 45%.' },
-                        { _key: createKey(), question: '4. How do I proceed with my online application?', answer: 'Once you have registered via Online Admission Application, an Admission link will be sent to your e-mail address. You can proceed with the rest of the online application using the link.' },
-                        { _key: createKey(), question: '5. What if I am unable to register on Admission Portal?', answer: 'Re-check if you have already registered. Use another email if already registered. Check your Junk folder. If problem persists, email admission@uitu.edu.pk or call 021-34994305.' },
-                        { _key: createKey(), question: '6. Does UIT allow students to apply whose result has not been announced?', answer: 'Yes, UIT UNIVERSITY allows all students who are awaiting for results to be announced.' },
-                        { _key: createKey(), question: '7. How can I receive my admit card for entry test?', answer: 'After confirmation of receiving application fee from Bank, admit card will be available for printing from the admission portal. Or share the paid slip on WhatsApp 03330399113.' },
-                        { _key: createKey(), question: '8. What is the fee Structure at UIT UNIVERSITY?', answer: 'The tuition fee is charged as per credit hour. Please refer Fee structure at https://uitu.edu.pk/fee-structure/' },
-                        { _key: createKey(), question: '9. How can I Pay Application fee?', answer: 'Print out the fee voucher, visit any Meezan Bank branch and pay PKR 3,000. Submit scanned copy through the admission portal or WhatsApp 0333-0399113.' },
-                        { _key: createKey(), question: '10. What supporting documents do I need to submit?', answer: 'SSC certificate/O-Level, SSC Marks sheet, HSC consolidated Marks sheet (or Admit card for result awaited), Equivalence certificate for A-Level from IBBC.' },
-                        { _key: createKey(), question: '11. What type of Scholarships are offered?', answer: 'Please refer Scholarships Policy & awards on website.' },
-                        { _key: createKey(), question: '12. Does UIT follow an open merit policy?', answer: 'Yes, UIT UNIVERSITY only offers open merit admissions. There are no reserved or quota-based seats.' },
-                        { _key: createKey(), question: '13. How frequently are fee rates revised?', answer: 'Universities may increase fees on annual basis to cover inflation and increased costs.' },
-                        { _key: createKey(), question: '14. What if I fail to attain required marks as result awaiting candidate?', answer: 'Result-awaiting applicants will be offered provisional admission. If result is less than required, fee will be refunded as per policy.' },
-                        { _key: createKey(), question: '15. Can I change application after pressing Submit?', answer: 'No, you cannot make changes once submitted. For critical corrections, contact the admission office.' },
-                        { _key: createKey(), question: '16. Will I receive confirmation after submitting application?', answer: 'Yes, you will receive a text message and an e-mail notification stating the successful submission.' },
-                        { _key: createKey(), question: '17. If I passed SAT exam, would I be exempted from Entry Test?', answer: 'Yes, if you scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology.' },
+                        { _key: createKey(), question: '1. When can one apply for admissions at UIT University?', answer: createTextBlock('Admission has started from January, 2025. If an applicant fulfills the admission criteria, he/she can apply for admission via online application at www.uitu.edu.pk') },
+                        { _key: createKey(), question: '2. Which Undergraduate programs are offered at UIT University?', answer: createTextBlock('Department of Electrical Engineering: BE Electrical, BE Computer Systems. Department of Computer Science: BS Computer Science, BS Software Engineering. Department of Engineering Technology: B.E. Tech (Computer, Software, Electronics). Department of Management Sciences: BBA, BS Business Informatics, BS Accounting & Finance.') },
+                        { _key: createKey(), question: '3. What is the general admission criteria?', answer: createTextBlock('For BE Electrical/CS: 60% in Pre-Engineering. For BS CS/SE: 50% in Pre-Engineering/Science General/Pre-Medical. For BE Tech: HSC-II/DAE with 50%. For Management Sciences: HSC-II with 45%.') },
+                        { _key: createKey(), question: '4. How do I proceed with my online application?', answer: createTextBlock('Once you have registered via Online Admission Application, an Admission link will be sent to your e-mail address. You can proceed with the rest of the online application using the link.') },
+                        { _key: createKey(), question: '5. What if I am unable to register on Admission Portal?', answer: createTextBlock('Re-check if you have already registered. Use another email if already registered. Check your Junk folder. If problem persists, email admission@uitu.edu.pk or call 021-34994305.') },
+                        { _key: createKey(), question: '6. Does UIT allow students to apply whose result has not been announced?', answer: createTextBlock('Yes, UIT UNIVERSITY allows all students who are awaiting for results to be announced.') },
+                        { _key: createKey(), question: '7. How can I receive my admit card for entry test?', answer: createTextBlock('After confirmation of receiving application fee from Bank, admit card will be available for printing from the admission portal. Or share the paid slip on WhatsApp 03330399113.') },
+                        { _key: createKey(), question: '8. What is the fee Structure at UIT UNIVERSITY?', answer: createTextBlock('The tuition fee is charged as per credit hour. Please refer Fee structure at https://uitu.edu.pk/fee-structure/') },
+                        { _key: createKey(), question: '9. How can I Pay Application fee?', answer: createTextBlock('Print out the fee voucher, visit any Meezan Bank branch and pay PKR 3,000. Submit scanned copy through the admission portal or WhatsApp 0333-0399113.') },
+                        { _key: createKey(), question: '10. What supporting documents do I need to submit?', answer: createTextBlock('SSC certificate/O-Level, SSC Marks sheet, HSC consolidated Marks sheet (or Admit card for result awaited), Equivalence certificate for A-Level from IBBC.') },
+                        { _key: createKey(), question: '11. What type of Scholarships are offered?', answer: createTextBlock('Please refer Scholarships Policy & awards on website.') },
+                        { _key: createKey(), question: '12. Does UIT follow an open merit policy?', answer: createTextBlock('Yes, UIT UNIVERSITY only offers open merit admissions. There are no reserved or quota-based seats.') },
+                        { _key: createKey(), question: '13. How frequently are fee rates revised?', answer: createTextBlock('Universities may increase fees on annual basis to cover inflation and increased costs.') },
+                        { _key: createKey(), question: '14. What if I fail to attain required marks as result awaiting candidate?', answer: createTextBlock('Result-awaiting applicants will be offered provisional admission. If result is less than required, fee will be refunded as per policy.') },
+                        { _key: createKey(), question: '15. Can I change application after pressing Submit?', answer: createTextBlock('No, you cannot make changes once submitted. For critical corrections, contact the admission office.') },
+                        { _key: createKey(), question: '16. Will I receive confirmation after submitting application?', answer: createTextBlock('Yes, you will receive a text message and an e-mail notification stating the successful submission.') },
+                        { _key: createKey(), question: '17. If I passed SAT exam, would I be exempted from Entry Test?', answer: createTextBlock('Yes, if you scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology.') },
                     ],
                 },
                 // Tab 3: How to Apply
