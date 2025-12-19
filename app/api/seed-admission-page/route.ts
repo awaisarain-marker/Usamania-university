@@ -141,23 +141,160 @@ const admissionPageData = {
 </div>
                     `,
                 },
-                // Tab 2: FAQs
+                // Tab 2: FAQs - Rich Text with all 17 questions
                 {
                     _key: createKey(),
                     tabTitle: 'FAQs',
-                    contentType: 'policyLinks',
-                    policyCategories: [
-                        {
-                            _key: createKey(),
-                            categoryName: 'Frequently Asked Questions',
-                            policies: [
-                                { _key: createKey(), policyName: 'What are the admission requirements?', policyUrl: '' },
-                                { _key: createKey(), policyName: 'When is the application deadline?', policyUrl: '' },
-                                { _key: createKey(), policyName: 'What is the fee structure?', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Are scholarships available?', policyUrl: '' },
-                            ],
-                        },
-                    ],
+                    contentType: 'richText',
+                    richContent: `
+<div class="faq-list space-y-4">
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">1. When can one apply for admissions at UIT University?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Admission has started from January, 2025. If an applicant fulfill the admission criteria (eligibility criteria can be seen on website at <a href="https://www.uitu.edu.pk" target="_blank" class="text-[#ed1c24] hover:underline">www.uitu.edu.pk</a>), he/she can apply for admission via online application.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">2. Which Undergraduate programs are offered at UIT University?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p class="mb-2">UIT University offers the following Undergraduate programs:</p>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Electrical Engineering</h4>
+        <ul class="list-disc pl-5 space-y-1"><li>BE Electrical (Electronic / Power/ Telecommunication)</li><li>BE Computer Systems</li></ul>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Computer Science</h4>
+        <ul class="list-disc pl-5 space-y-1"><li>BS Computer Science</li><li>BS Software Engineering</li></ul>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Engineering Technology</h4>
+        <ul class="list-disc pl-5 space-y-1"><li>B.E. Tech (Computer)</li><li>B.E. Tech (Software)</li><li>B.E. Tech (Electronics)</li></ul>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Management Sciences</h4>
+        <ul class="list-disc pl-5 space-y-1"><li>BBA</li><li>BS Business Informatics</li><li>BS Accounting & Finance</li></ul>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">3. What is the general admission criteria?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p class="mb-2">All applicants must meet the following criteria:</p>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.E. Electrical & B.E. Computer Systems</h4>
+        <p>HSC, A-level, Aga Khan Board, Federal Board and other board students with at least 60% or equivalent marks in Pre-Engineering.</p>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.S. Computer Science & Software Engineering</h4>
+        <p>HSC, A-level, Aga khan board, Federal Board and other board students with at least 50% or equivalent marks in Pre-Engineering, Science General OR Pre-Medical.</p>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.E. Tech (Engineering Technology)</h4>
+        <p>Passed HSC-II/DAE in relevant discipline with at least 50% or 550 marks.</p>
+        <h4 class="font-bold text-[#002856] mt-4 mb-2">For Management Sciences</h4>
+        <p>Passed HSC-II or equivalent with at least 45% or 495 marks.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">4. How do I proceed with my online application?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Once you have registered via Online Admission Application, an Admission link will be sent to your e-mail address. You can proceed with the rest of the online application using the link.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">5. What if I am unable to register on Admission Portal?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Re-check if you have already registered with the same e-mail. Use another email if already registered. Check your Junk or Spam folder. If problem persists, email <a href="mailto:admission@uitu.edu.pk" class="text-[#ed1c24] hover:underline">admission@uitu.edu.pk</a> or call 021-34994305 Ext: 3025, 3087.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">6. Does UIT allow students to apply whose result has not been announced?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Yes, UIT UNIVERSITY allows all the students who are awaiting for results to be announced.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">7. How can I receive my admit card for entry test?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>After confirmation of receiving application fee from Bank, system generated admit card will be available for printing from the admission portal. Or share the paid slip on WhatsApp 03330399113.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">8. What is the fee Structure at UIT UNIVERSITY?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>The tuition fee is charged as per credit hour. Please refer Fee structure on website at <a href="https://uitu.edu.pk/fee-structure/" target="_blank" class="text-[#ed1c24] hover:underline">https://uitu.edu.pk/fee-structure/</a></p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">9. How can I Pay Application fee?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <ul class="list-disc pl-5 space-y-2">
+            <li>Print out the fee voucher (automatically generated after submission)</li>
+            <li>Visit any branch of Meezan Bank and pay admission processing fee of PKR 3,000</li>
+            <li>Submit scanned copy of the paid fee voucher through the admission portal or WhatsApp 0333-0399113</li>
+        </ul>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">10. What supporting documents do I need to submit?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <ul class="list-disc pl-5 space-y-1">
+            <li>SSC certificate or O-Level certificate</li>
+            <li>SSC Marks sheet</li>
+            <li>HSC consolidated Marks sheet (or HSC-II Admit card for result awaited students)</li>
+            <li>Equivalence certificate for A-Level, issued by IBBC</li>
+        </ul>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">11. What type of Scholarships are offered by UIT UNIVERSITY?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Please refer Scholarships Policy & awards on website.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">12. Does UIT follow an open merit policy in awarding admission?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Yes, UIT UNIVERSITY only offers open merit admissions. There are no reserved or quota-based seats.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">13. How frequently is UIT UNIVERSITY fee rates revised?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Universities may increase fees on annual basis to cover inflation and increased costs.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">14. If I failed to attain the required marks as a result awaiting candidate, what will happen?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Applicants awaiting results will be offered provisional admission. If the result is less than required marks, the fee will be refunded as per policy.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">15. Can I change the online application once I have pressed Submit?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>No, you cannot make any changes once submitted. However, for critical information corrections (address, contact number), contact the admission office.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">16. Will I receive a confirmation after submitting my online application?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Yes, you will receive a text message and an e-mail notification stating the successful submission of your online application.</p>
+    </div>
+</details>
+
+<details class="bg-white p-4 rounded-lg border border-gray-200">
+    <summary class="font-bold text-[#002856] cursor-pointer">17. If I have passed SAT exam, would I be exempted from Entry Test?</summary>
+    <div class="mt-3 text-sm text-gray-600">
+        <p>Yes, if you have scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology. Submit an application for exemption along with evidence to the Admission office.</p>
+    </div>
+</details>
+
+</div>
+                    `,
                 },
                 // Tab 3: How to Apply
                 {
