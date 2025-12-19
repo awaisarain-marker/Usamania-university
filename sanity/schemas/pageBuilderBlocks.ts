@@ -926,6 +926,7 @@ export const tabbedContentBlock = defineType({
                                     { title: 'Vision Box', value: 'visionBox' },
                                     { title: 'Rich Text (HTML)', value: 'richText' },
                                     { title: 'FAQ Accordion', value: 'faqAccordion' },
+                                    { title: 'Procedure Steps', value: 'procedureSteps' },
                                 ],
                             },
                         }),
@@ -983,6 +984,185 @@ export const tabbedContentBlock = defineType({
                                             return { title: question || 'FAQ Item' }
                                         },
                                     },
+                                }),
+                            ],
+                        }),
+                        // Procedure Steps content (for How to Apply, etc.)
+                        defineField({
+                            name: 'procedureTitle',
+                            title: 'Procedure Title',
+                            type: 'string',
+                            hidden: ({ parent }) => parent?.contentType !== 'procedureSteps',
+                        }),
+                        defineField({
+                            name: 'procedureSections',
+                            title: 'Procedure Sections',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'procedureSteps',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'sectionHeading', type: 'string', title: 'Section Heading' }),
+                                        defineField({
+                                            name: 'sectionDescription',
+                                            type: 'array',
+                                            title: 'Section Description (optional)',
+                                            of: [
+                                                {
+                                                    type: 'block',
+                                                    styles: [{ title: 'Normal', value: 'normal' }],
+                                                    marks: {
+                                                        decorators: [
+                                                            { title: 'Bold', value: 'strong' },
+                                                            { title: 'Italic', value: 'em' },
+                                                        ],
+                                                        annotations: [
+                                                            {
+                                                                name: 'link',
+                                                                type: 'object',
+                                                                title: 'Link',
+                                                                fields: [
+                                                                    { name: 'href', type: 'url', title: 'URL' },
+                                                                ],
+                                                            },
+                                                        ],
+                                                    },
+                                                },
+                                            ],
+                                        }),
+                                        defineField({
+                                            name: 'bulletPoints',
+                                            title: 'Bullet Points',
+                                            type: 'array',
+                                            of: [
+                                                defineArrayMember({
+                                                    type: 'object',
+                                                    fields: [
+                                                        defineField({
+                                                            name: 'text',
+                                                            type: 'array',
+                                                            title: 'Bullet Text',
+                                                            of: [
+                                                                {
+                                                                    type: 'block',
+                                                                    styles: [{ title: 'Normal', value: 'normal' }],
+                                                                    marks: {
+                                                                        decorators: [
+                                                                            { title: 'Bold', value: 'strong' },
+                                                                            { title: 'Italic', value: 'em' },
+                                                                        ],
+                                                                        annotations: [
+                                                                            {
+                                                                                name: 'link',
+                                                                                type: 'object',
+                                                                                title: 'Link',
+                                                                                fields: [
+                                                                                    { name: 'href', type: 'url', title: 'URL' },
+                                                                                ],
+                                                                            },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                            ],
+                                                        }),
+                                                    ],
+                                                    preview: {
+                                                        select: { text: 'text' },
+                                                        prepare({ text }) {
+                                                            const block = text?.[0];
+                                                            const textContent = block?.children?.map((c: any) => c.text).join('') || 'Bullet point';
+                                                            return { title: textContent.substring(0, 50) + (textContent.length > 50 ? '...' : '') };
+                                                        },
+                                                    },
+                                                }),
+                                            ],
+                                        }),
+                                        defineField({
+                                            name: 'accentColor',
+                                            title: 'Accent Color',
+                                            type: 'string',
+                                            options: {
+                                                list: [
+                                                    { title: 'Red', value: 'red' },
+                                                    { title: 'Blue', value: 'blue' },
+                                                ],
+                                            },
+                                            initialValue: 'red',
+                                        }),
+                                    ],
+                                    preview: {
+                                        select: { heading: 'sectionHeading' },
+                                        prepare({ heading }) {
+                                            return { title: heading || 'Section' };
+                                        },
+                                    },
+                                }),
+                            ],
+                        }),
+                        // Table data for procedures (like Merit Criteria)
+                        defineField({
+                            name: 'procedureTable',
+                            title: 'Procedure Table (optional)',
+                            type: 'object',
+                            hidden: ({ parent }) => parent?.contentType !== 'procedureSteps',
+                            fields: [
+                                defineField({ name: 'tableTitle', type: 'string', title: 'Table Title' }),
+                                defineField({
+                                    name: 'tableRows',
+                                    title: 'Table Rows',
+                                    type: 'array',
+                                    of: [
+                                        defineArrayMember({
+                                            type: 'object',
+                                            fields: [
+                                                defineField({ name: 'criteria', type: 'string', title: 'Criteria' }),
+                                                defineField({ name: 'value', type: 'string', title: 'Value/Weightage' }),
+                                            ],
+                                            preview: {
+                                                select: { criteria: 'criteria', value: 'value' },
+                                                prepare({ criteria, value }) {
+                                                    return { title: `${criteria}: ${value}` };
+                                                },
+                                            },
+                                        }),
+                                    ],
+                                }),
+                            ],
+                        }),
+                        // Info Box for procedures (like Payment details)
+                        defineField({
+                            name: 'procedureInfoBox',
+                            title: 'Info Box (optional)',
+                            type: 'object',
+                            hidden: ({ parent }) => parent?.contentType !== 'procedureSteps',
+                            fields: [
+                                defineField({ name: 'infoTitle', type: 'string', title: 'Info Box Title' }),
+                                defineField({
+                                    name: 'infoItems',
+                                    title: 'Info Items',
+                                    type: 'array',
+                                    of: [
+                                        defineArrayMember({
+                                            type: 'object',
+                                            fields: [
+                                                defineField({ name: 'label', type: 'string', title: 'Label' }),
+                                                defineField({ name: 'value', type: 'string', title: 'Value' }),
+                                            ],
+                                            preview: {
+                                                select: { label: 'label', value: 'value' },
+                                                prepare({ label, value }) {
+                                                    return { title: `${label}: ${value}` };
+                                                },
+                                            },
+                                        }),
+                                    ],
+                                }),
+                                defineField({
+                                    name: 'infoDescription',
+                                    type: 'text',
+                                    title: 'Description (optional)',
+                                    rows: 3,
                                 }),
                             ],
                         }),

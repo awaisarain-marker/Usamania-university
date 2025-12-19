@@ -31,15 +31,52 @@ interface FaqItem {
     answer: any[]; // PortableText block content
 }
 
+interface BulletPoint {
+    text: any[]; // PortableText block content
+}
+
+interface ProcedureSection {
+    sectionHeading: string;
+    sectionDescription?: any[]; // PortableText block content
+    bulletPoints?: BulletPoint[];
+    accentColor?: 'red' | 'blue';
+}
+
+interface ProcedureTableRow {
+    criteria: string;
+    value: string;
+}
+
+interface ProcedureTable {
+    tableTitle?: string;
+    tableRows?: ProcedureTableRow[];
+}
+
+interface ProcedureInfoItem {
+    label: string;
+    value: string;
+}
+
+interface ProcedureInfoBox {
+    infoTitle?: string;
+    infoItems?: ProcedureInfoItem[];
+    infoDescription?: string;
+}
+
 interface Tab {
     tabTitle: string;
-    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion';
+    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion' | 'procedureSteps';
     organogramNodes?: OrgNode[];
     teamImageUrl?: string;
     teamMembers?: TeamMember[];
     policyCategories?: PolicyCategory[];
     richContent?: string;
     faqItems?: FaqItem[];
+    // Procedure Steps fields
+    procedureTitle?: string;
+    procedureSections?: ProcedureSection[];
+    procedureTable?: ProcedureTable;
+    procedureInfoBox?: ProcedureInfoBox;
 }
 
 interface TabbedContentProps {
@@ -258,6 +295,117 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Procedure Steps Content */}
+                                                {tab.contentType === 'procedureSteps' && (
+                                                    <div className="procedure-steps-content" style={{ width: '100%', maxWidth: '100%' }}>
+                                                        {tab.procedureTitle && (
+                                                            <h2 className="text-2xl font-bold text-[#002856] mb-6">{tab.procedureTitle}</h2>
+                                                        )}
+
+                                                        {/* Procedure Sections */}
+                                                        {tab.procedureSections?.map((section, sectionIndex) => (
+                                                            <div
+                                                                key={sectionIndex}
+                                                                className={`mb-8 p-6 bg-gray-50 rounded-lg border-l-4 ${section.accentColor === 'blue' ? 'border-[#002856]' : 'border-[#ed1c24]'}`}
+                                                            >
+                                                                <h3 className="text-lg font-bold text-[#002856] mb-4">{section.sectionHeading}</h3>
+
+                                                                {/* Section Description */}
+                                                                {section.sectionDescription && (
+                                                                    <div className="text-gray-600 mb-4 prose prose-sm max-w-none">
+                                                                        <PortableText
+                                                                            value={section.sectionDescription}
+                                                                            components={{
+                                                                                marks: {
+                                                                                    link: ({ children, value }) => (
+                                                                                        <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-[#ed1c24] hover:underline">
+                                                                                            {children}
+                                                                                        </a>
+                                                                                    ),
+                                                                                },
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                )}
+
+                                                                {/* Bullet Points */}
+                                                                {section.bulletPoints && section.bulletPoints.length > 0 && (
+                                                                    <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                                                                        {section.bulletPoints.map((bullet, bulletIndex) => (
+                                                                            <li key={bulletIndex} className="prose prose-sm max-w-none">
+                                                                                {bullet.text && (
+                                                                                    <PortableText
+                                                                                        value={bullet.text}
+                                                                                        components={{
+                                                                                            marks: {
+                                                                                                link: ({ children, value }) => (
+                                                                                                    <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-[#ed1c24] hover:underline font-medium">
+                                                                                                        {children}
+                                                                                                    </a>
+                                                                                                ),
+                                                                                                strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                                                                                            },
+                                                                                            block: {
+                                                                                                normal: ({ children }) => <span>{children}</span>,
+                                                                                            },
+                                                                                        }}
+                                                                                    />
+                                                                                )}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                )}
+                                                            </div>
+                                                        ))}
+
+                                                        {/* Procedure Table */}
+                                                        {tab.procedureTable?.tableRows && tab.procedureTable.tableRows.length > 0 && (
+                                                            <div className="mb-8">
+                                                                {tab.procedureTable.tableTitle && (
+                                                                    <h3 className="text-lg font-bold text-[#002856] mb-4">{tab.procedureTable.tableTitle}</h3>
+                                                                )}
+                                                                <div className="overflow-x-auto">
+                                                                    <table className="w-full text-left border-collapse border border-gray-300">
+                                                                        <thead>
+                                                                            <tr className="bg-[#002856] text-white">
+                                                                                <th className="py-3 px-4 border border-gray-300">Criteria</th>
+                                                                                <th className="py-3 px-4 border border-gray-300 text-center">Weightage</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {tab.procedureTable.tableRows.map((row, rowIndex) => (
+                                                                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                                                                    <td className="py-3 px-4 border border-gray-300">{row.criteria}</td>
+                                                                                    <td className="py-3 px-4 border border-gray-300 text-center font-bold text-[#ed1c24]">{row.value}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Info Box */}
+                                                        {tab.procedureInfoBox?.infoTitle && (
+                                                            <div className="mb-8 p-6 bg-[#002856] rounded-lg text-white">
+                                                                <h3 className="text-lg font-bold mb-4">{tab.procedureInfoBox.infoTitle}</h3>
+                                                                {tab.procedureInfoBox.infoDescription && (
+                                                                    <p className="mb-4">{tab.procedureInfoBox.infoDescription}</p>
+                                                                )}
+                                                                {tab.procedureInfoBox.infoItems && tab.procedureInfoBox.infoItems.length > 0 && (
+                                                                    <div className="bg-white/10 p-4 rounded">
+                                                                        {tab.procedureInfoBox.infoItems.map((item, itemIndex) => (
+                                                                            <p key={itemIndex} className={itemIndex < tab.procedureInfoBox!.infoItems!.length - 1 ? 'mb-2' : ''}>
+                                                                                <strong>{item.label}:</strong> {item.value}
+                                                                            </p>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>
