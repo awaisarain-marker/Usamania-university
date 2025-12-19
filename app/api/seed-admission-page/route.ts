@@ -292,32 +292,52 @@ const admissionPageData = {
                         { _key: createKey(), noteLabel: 'c', noteText: 'The security deposit for BS (Computer Science) and BS (Software Engineering) programs will be charged in the second semester.' },
                     ],
                 },
-                // Tab 5: Fee Refund Policy
+                // Tab 5: Fee Refund Policy - Procedure Steps with sections and table
                 {
                     _key: createKey(),
                     tabTitle: 'Fee Refund Policy',
-                    contentType: 'policyLinks',
-                    policyCategories: [
+                    contentType: 'procedureSteps',
+                    procedureTitle: 'Fee Refund Policy',
+                    procedureSections: [
                         {
                             _key: createKey(),
-                            categoryName: 'Refund Timeline',
-                            policies: [
-                                { _key: createKey(), policyName: 'Up to 10th day - 100% Fee Refund', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Up to 15th day - 80% Fee Refund', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Up to 20th day - 60% Fee Refund', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Up to 30th day - 50% Fee Refund', policyUrl: '' },
-                                { _key: createKey(), policyName: '31st day onwards - No Refund', policyUrl: '' },
+                            sectionHeading: 'HEC Revised Policy',
+                            accentColor: 'blue',
+                            sectionDescription: createTextBlock('The Higher Education Commission (HEC) has circulated the revised National Fee-Refund Policy for Higher Education Institutions in Pakistan, updated in 2024.'),
+                        },
+                        {
+                            _key: createKey(),
+                            sectionHeading: 'Refund Guidelines',
+                            accentColor: 'red',
+                            bulletPoints: [
+                                { _key: createKey(), text: createTextBlock('Admission Fee is non-refundable in any case.') },
+                                { _key: createKey(), text: createTextBlock('Security deposit is refundable at the time of completion of degree or closing of admission subject to clearance.') },
+                                { _key: createKey(), text: createTextBlock('Tuition Fee/Exam Fee/Enrolment Fee/Extra Curricular Charges is refundable in accordance with the guidelines of Higher Education Commission (HEC).') },
                             ],
                         },
                         {
                             _key: createKey(),
-                            categoryName: 'Important Notes',
-                            policies: [
-                                { _key: createKey(), policyName: 'Admission Fee is non-refundable', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Security deposit is refundable at degree completion', policyUrl: '' },
-                            ],
+                            sectionHeading: 'Important Notice',
+                            accentColor: 'blue',
+                            sectionDescription: createTextBlock('Please note that the below said policy will be applicable from the commencement of classes. Days shall be counted including working days and holidays.'),
+                        },
+                        {
+                            _key: createKey(),
+                            sectionHeading: 'Pending Results',
+                            accentColor: 'red',
+                            sectionDescription: createTextBlock('The same policy will apply to candidates offered admissions with pending results as well as in the event of any issues arising in the HSC/A-Level/Equivalent results after the commencement of classes.'),
                         },
                     ],
+                    procedureTable: {
+                        tableTitle: 'Refund Schedule',
+                        tableRows: [
+                            { _key: createKey(), criteria: 'Up to 10th day of the commencement of classes', value: '100% Fee Refund' },
+                            { _key: createKey(), criteria: 'Up to 15th day of commencement of classes', value: '80% Fee Refund' },
+                            { _key: createKey(), criteria: 'Up to 20th day of commencement of classes', value: '60% Fee Refund' },
+                            { _key: createKey(), criteria: 'Up to 30th day of commencement of classes', value: '50% Fee Refund' },
+                            { _key: createKey(), criteria: '31st day onwards of commencement of classes', value: 'No Refund' },
+                        ],
+                    },
                 },
                 // Tab 6: Admission Test Results
                 {
