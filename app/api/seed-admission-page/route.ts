@@ -151,41 +151,124 @@ const admissionPageData = {
                         { _key: createKey(), question: '17. If I passed SAT exam, would I be exempted from Entry Test?', answer: createTextBlock('Yes, if you scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology.') },
                     ],
                 },
-                // Tab 3: How to Apply
+                // Tab 3: How to Apply - Rich Text with headings, lists and table
                 {
                     _key: createKey(),
                     tabTitle: 'How to Apply',
-                    contentType: 'policyLinks',
-                    policyCategories: [
-                        {
-                            _key: createKey(),
-                            categoryName: 'Registration',
-                            policies: [
-                                { _key: createKey(), policyName: '1. Register at the admission portal', policyUrl: 'https://eduboard.uit.edu/AdmissionPortal/Login' },
-                                { _key: createKey(), policyName: '2. Validate your email address', policyUrl: '' },
-                                { _key: createKey(), policyName: '3. Proceed with online application', policyUrl: '' },
-                            ],
-                        },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Fee Payment',
-                            policies: [
-                                { _key: createKey(), policyName: '4. Print fee voucher from portal', policyUrl: '' },
-                                { _key: createKey(), policyName: '5. Pay PKR 3,000 at Meezan Bank', policyUrl: '' },
-                                { _key: createKey(), policyName: '6. Upload paid voucher to portal', policyUrl: '' },
-                            ],
-                        },
-                        {
-                            _key: createKey(),
-                            categoryName: 'Required Documents',
-                            policies: [
-                                { _key: createKey(), policyName: 'SSC Certificate & Marks Sheet', policyUrl: '' },
-                                { _key: createKey(), policyName: 'HSC Marks Sheet or Admit Card', policyUrl: '' },
-                                { _key: createKey(), policyName: 'CNIC / B-Form Copy', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Passport Size Photo', policyUrl: '' },
-                            ],
-                        },
-                    ],
+                    contentType: 'richText',
+                    richContent: `
+<div class="how-to-apply-content">
+    <h2 class="text-2xl font-bold text-[#002856] mb-6">How to Apply / Online Admission Procedure</h2>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Registration</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>Register at the admission portal by <a href="https://eduboard.uit.edu/AdmissionPortal/Login" target="_blank" class="text-[#ed1c24] hover:underline font-medium">clicking here</a>.</li>
+            <li>Open your email and click on the link received to validate your email address.</li>
+            <li>Proceed with the rest of the online application process using the link received.</li>
+        </ul>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#002856]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Submission of Application Form</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>Log-in to the admission portal using your user ID & password.</li>
+            <li>Fill in the details and upload a recent photograph. Please note that the photograph must be clear and on white background (see photograph specification).</li>
+            <li>Upload all required academic documents.</li>
+            <li>Submit the application and download the system-generated fee voucher.</li>
+        </ul>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Documents Required to Upload with the Application Form</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>SSC marks sheet / O-Level equivalency.</li>
+            <li>HSC-Part II consolidated marks sheet / A-Level equivalency.</li>
+            <li>SSC Certificate.</li>
+            <li>HSC Part-II admit card (for result awaited students).</li>
+            <li>CNIC/Form-B.</li>
+        </ul>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#002856]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Application Processing Fee</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>Print out the system-generated fee voucher after application submission.</li>
+            <li>Visit any branch of Meezan Bank and pay the admission processing fee <strong>PKR 3,000</strong>.</li>
+            <li>Submit a scanned copy of the paid fee voucher through the admission portal and email at <a href="mailto:admission@uitu.edu.pk" class="text-[#ed1c24] hover:underline">admission@uitu.edu.pk</a></li>
+        </ul>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Issuance of Admit Card</h3>
+        <p class="text-gray-600">After receiving all the information and confirmation of the fee receipt by UIT University, an email and SMS alert will be sent to the candidates to print out the admit card.</p>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#002856]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Entrance Test</h3>
+        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>The entrance test will be conducted on <strong>Saturday January 10, 2026 at 11:00 A.M.</strong> at UIT University.</li>
+            <li>The candidate must bring the UIT University admit card on the entry test day.</li>
+        </ul>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Interview</h3>
+        <p class="text-gray-600">The candidate will receive a schedule of the interview via email & SMS.</p>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#002856]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Merit List</h3>
+        <p class="text-gray-600">The candidate will receive an email regarding the admission offer.</p>
+    </div>
+
+    <div class="mb-8">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Merit Determination Criteria</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-[#002856] text-white">
+                        <th class="py-3 px-4 border border-gray-300">Criteria</th>
+                        <th class="py-3 px-4 border border-gray-300 text-center">Weightage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white">
+                        <td class="py-3 px-4 border border-gray-300">Weightage of Pre-Entry Admission test</td>
+                        <td class="py-3 px-4 border border-gray-300 text-center font-bold text-[#ed1c24]">50%</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="py-3 px-4 border border-gray-300">Weightage of HSC marks OR equivalent</td>
+                        <td class="py-3 px-4 border border-gray-300 text-center font-bold text-[#ed1c24]">40%</td>
+                    </tr>
+                    <tr class="bg-white">
+                        <td class="py-3 px-4 border border-gray-300">Weightage of SSC marks OR equivalent</td>
+                        <td class="py-3 px-4 border border-gray-300 text-center font-bold text-[#ed1c24]">10%</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="py-3 px-4 border border-gray-300">Pre-Admission Interviews</td>
+                        <td class="py-3 px-4 border border-gray-300 text-center font-bold">ACCEPT/DECLINE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+        <h3 class="text-lg font-bold text-[#002856] mb-4">Submission of Documents</h3>
+        <p class="text-gray-600">The candidate will be asked to visit UIT University to submit the admission fee along with their educational documents in order to receive their UIT University roll number.</p>
+    </div>
+
+    <div class="mb-8 p-6 bg-[#002856] rounded-lg text-white">
+        <h3 class="text-lg font-bold mb-4">Payment of Registration Fee</h3>
+        <p class="mb-4">The candidate is required to pay the fee via pay order, using the following details:</p>
+        <div class="bg-white/10 p-4 rounded">
+            <p class="mb-2"><strong>Account Title:</strong> UIT University</p>
+            <p><strong>NTN #:</strong> 4473774</p>
+        </div>
+    </div>
+</div>
+                    `,
                 },
                 // Tab 4: Fee Structure
                 {
