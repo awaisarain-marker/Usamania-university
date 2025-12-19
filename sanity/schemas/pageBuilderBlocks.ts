@@ -1258,7 +1258,26 @@ export const tabbedContentBlock = defineType({
                                     fields: [
                                         defineField({ name: 'slideTitle', type: 'string', title: 'Slide Title' }),
                                         defineField({ name: 'slideDescription', type: 'text', title: 'Slide Description (optional)', rows: 2 }),
-                                        defineField({ name: 'slideImageUrl', type: 'url', title: 'Slide Image URL' }),
+                                        defineField({
+                                            name: 'slideImages',
+                                            title: 'Slide Images',
+                                            type: 'array',
+                                            of: [
+                                                defineArrayMember({
+                                                    type: 'object',
+                                                    fields: [
+                                                        defineField({ name: 'imageUrl', type: 'url', title: 'Image URL' }),
+                                                        defineField({ name: 'imageCaption', type: 'string', title: 'Caption (optional)' }),
+                                                    ],
+                                                    preview: {
+                                                        select: { caption: 'imageCaption', url: 'imageUrl' },
+                                                        prepare({ caption, url }) {
+                                                            return { title: caption || 'Image' };
+                                                        },
+                                                    },
+                                                }),
+                                            ],
+                                        }),
                                         defineField({ name: 'slideLink', type: 'url', title: 'Link URL (optional)' }),
                                     ],
                                     preview: {
