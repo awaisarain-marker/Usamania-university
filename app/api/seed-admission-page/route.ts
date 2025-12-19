@@ -49,7 +49,7 @@ const admissionPageData = {
             _key: createKey(),
             sectionId: 'admission-info',
             tabs: [
-                // Tab 1: Admission Information - Rich Text with exact frontend content
+                // Tab 1: Admission Information - Rich Text Content
                 {
                     _key: createKey(),
                     tabTitle: 'Admission Information',
@@ -57,244 +57,79 @@ const admissionPageData = {
                     richContent: `
 <h3 class="text-2xl font-bold text-[#002856] mb-6">Graduate / Undergraduate Programs</h3>
 
-<div class="mb-8">
-    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Computer Science</h4>
-    <ul class="list-disc pl-5 mb-4 space-y-1 font-medium">
-        <li>BS Computer Science</li>
-        <li>BS Software Engineering</li>
+<div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#ed1c24]">
+    <h4 class="text-lg font-bold text-[#002856] mb-4">Eligibility Criteria for Undergraduate Programs</h4>
+    <ul class="space-y-2 text-gray-600">
+        <li><strong>BE Electrical / Computer Systems:</strong> At least 60% marks in Pre-Engineering</li>
+        <li><strong>BS Computer Science / Software Engineering:</strong> At least 50% marks in Pre-Engineering, Science General or Pre-Medical</li>
+        <li><strong>B.E. Technology:</strong> HSC-II/DAE in relevant discipline with at least 50% marks</li>
+        <li><strong>BBA / BS Accounting & Finance / BS Business Informatics:</strong> HSC-II or equivalent with at least 45% marks</li>
     </ul>
-    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856] mb-4">
-        <strong class="text-[#002856] block mb-2">Eligibility for BS Programs:</strong>
-        <ul class="list-disc pl-5 space-y-2 text-sm">
-            <li>Passed either Higher Secondary Examination (HSC-II) in Pre-Engineering/Pre-Medical/Science General/Computer Science) from any authorized board of intermediate education in Pakistan OR any equivalent foreign examination board with at least 50% or 550 marks OR is awaiting his/her final result of HSC-II.</li>
-            <li>HSC-II (Pre-medical) students must pass deficiency courses of Mathematics of 6 credit hours within one year of their regular studies.</li>
-        </ul>
-    </div>
-
-    <h5 class="font-bold text-[#002856] mt-4 mb-2">MS Computer Science</h5>
-    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
-        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
-        <p class="text-sm">Sixteen years of schooling or 4-year education after HSSC or equivalent (minimum 124 credit hours) from HEC recognized degree awarding institute, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Computing, Communication / Telecommunication, Electronics or any other field as deemed relevant by the Admission Committee.</p>
-    </div>
 </div>
 
-<div class="mb-8">
-    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Electrical Engineering</h4>
-
-    <h5 class="font-bold text-[#002856] mb-2">MS Electrical Engineering</h5>
-    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856] mb-4">
-        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
-        <p class="text-sm">Candidate must have a PEC-recognized BE / BS Engg. / BSc Engg. or equivalent degree, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Electrical, Electronics, Controls or relevant.</p>
-    </div>
-
-    <h5 class="font-bold text-[#002856] mb-2">MS Communication and Network Engineering</h5>
-    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
-        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
-        <p class="text-sm">Sixteen years of schooling or 4-year education after HSSC or equivalent (minimum 124 credit hours) from HEC recognized degree awarding institute, with a minimum CGPA of 2.0 (on a scale of 4.0) or 60% marks, in any of the following fields: Computing, Communication / Telecommunication, Electronics or relevant.</p>
-    </div>
+<div class="mb-8 p-6 bg-gray-50 rounded-lg border-l-4 border-[#002856]">
+    <h4 class="text-lg font-bold text-[#002856] mb-4">Important Dates</h4>
+    <p class="text-gray-600">Admissions are open for Fall 2025. Apply now through our online portal.</p>
 </div>
 
-<div class="mb-10">
-    <h4 class="text-xl font-bold text-[#ed1c24] mb-3">Department of Management Sciences</h4>
-    <ul class="list-disc pl-5 mb-4 space-y-1 font-medium">
-        <li>BBA (Bachelor in Business Administration)</li>
-        <li>BS Accounting and Finance</li>
-    </ul>
-    <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#002856]">
-        <strong class="text-[#002856] block mb-2">Eligibility:</strong>
-        <p class="text-sm">Passed either Higher Secondary Examination (HSC-II) or equivalent from any authorized board of intermediate education in Pakistan OR any equivalent foreign examination board with at least 50% or 550 marks are eligible to apply for admission.</p>
-    </div>
-</div>
-
-<div>
-    <h3 class="text-2xl font-bold text-[#002856] mb-6">IMPORTANT DATES</h3>
-    <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-            <tbody>
-                <tr class="border-b border-gray-200">
-                    <td class="py-3 pr-4 font-bold text-[#002856]">Online Application</td>
-                    <td class="py-3 font-medium">
-                        <a href="https://eduboard.uit.edu/AdmissionPortal/Login" target="_blank" rel="noopener noreferrer" class="animated-link break-all">
-                            https://eduboard.uit.edu/AdmissionPortal/Login
-                        </a>
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-200">
-                    <td class="py-3 pr-4 font-bold text-[#002856]">Last date for submission of the online Application form</td>
-                    <td class="py-3">Thursday, January 08 2026</td>
-                </tr>
-                <tr class="border-b border-gray-200">
-                    <td class="py-3 pr-4 font-bold text-[#002856]">Entrance Test date</td>
-                    <td class="py-3">Saturday, January 10, 2026</td>
-                </tr>
-                <tr class="border-b border-gray-200">
-                    <td class="py-3 pr-4 font-bold text-[#002856]">Entrance Test Time / Venue</td>
-                    <td class="py-3">11.00 am / UIT University</td>
-                </tr>
-                <tr class="border-b border-gray-200">
-                    <td class="py-3 pr-4 font-bold text-[#002856]">Start of Academic Session</td>
-                    <td class="py-3">February, 2026</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+        <tbody>
+            <tr class="border-b border-gray-200">
+                <td class="py-3 pr-4 font-bold text-[#002856]">Online Application</td>
+                <td class="py-3 font-medium">
+                    <a href="https://eduboard.uit.edu/AdmissionPortal/Login" target="_blank" rel="noopener noreferrer" class="text-[#ed1c24] hover:underline">
+                        https://eduboard.uit.edu/AdmissionPortal/Login
+                    </a>
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-3 pr-4 font-bold text-[#002856]">Application Fee</td>
+                <td class="py-3 font-medium">PKR 3,000</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-3 pr-4 font-bold text-[#002856]">Contact</td>
+                <td class="py-3 font-medium">021-34994305 Ext: 3025, 3087</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-3 pr-4 font-bold text-[#002856]">WhatsApp</td>
+                <td class="py-3 font-medium">0333-0399113</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-3 pr-4 font-bold text-[#002856]">Email</td>
+                <td class="py-3 font-medium">
+                    <a href="mailto:admission@uitu.edu.pk" class="text-[#ed1c24] hover:underline">admission@uitu.edu.pk</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
                     `,
                 },
-                // Tab 2: FAQs - Rich Text with all 17 questions
+                // Tab 2: FAQs - FAQ Accordion with structured items
                 {
                     _key: createKey(),
                     tabTitle: 'FAQs',
-                    contentType: 'richText',
-                    richContent: `
-<div class="faq-list space-y-4">
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">1. When can one apply for admissions at UIT University?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Admission has started from January, 2025. If an applicant fulfill the admission criteria (eligibility criteria can be seen on website at <a href="https://www.uitu.edu.pk" target="_blank" class="text-[#ed1c24] hover:underline">www.uitu.edu.pk</a>), he/she can apply for admission via online application.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">2. Which Undergraduate programs are offered at UIT University?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p class="mb-2">UIT University offers the following Undergraduate programs:</p>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Electrical Engineering</h4>
-        <ul class="list-disc pl-5 space-y-1"><li>BE Electrical (Electronic / Power/ Telecommunication)</li><li>BE Computer Systems</li></ul>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Computer Science</h4>
-        <ul class="list-disc pl-5 space-y-1"><li>BS Computer Science</li><li>BS Software Engineering</li></ul>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Engineering Technology</h4>
-        <ul class="list-disc pl-5 space-y-1"><li>B.E. Tech (Computer)</li><li>B.E. Tech (Software)</li><li>B.E. Tech (Electronics)</li></ul>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">Department of Management Sciences</h4>
-        <ul class="list-disc pl-5 space-y-1"><li>BBA</li><li>BS Business Informatics</li><li>BS Accounting & Finance</li></ul>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">3. What is the general admission criteria?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p class="mb-2">All applicants must meet the following criteria:</p>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.E. Electrical & B.E. Computer Systems</h4>
-        <p>HSC, A-level, Aga Khan Board, Federal Board and other board students with at least 60% or equivalent marks in Pre-Engineering.</p>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.S. Computer Science & Software Engineering</h4>
-        <p>HSC, A-level, Aga khan board, Federal Board and other board students with at least 50% or equivalent marks in Pre-Engineering, Science General OR Pre-Medical.</p>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">For B.E. Tech (Engineering Technology)</h4>
-        <p>Passed HSC-II/DAE in relevant discipline with at least 50% or 550 marks.</p>
-        <h4 class="font-bold text-[#002856] mt-4 mb-2">For Management Sciences</h4>
-        <p>Passed HSC-II or equivalent with at least 45% or 495 marks.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">4. How do I proceed with my online application?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Once you have registered via Online Admission Application, an Admission link will be sent to your e-mail address. You can proceed with the rest of the online application using the link.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">5. What if I am unable to register on Admission Portal?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Re-check if you have already registered with the same e-mail. Use another email if already registered. Check your Junk or Spam folder. If problem persists, email <a href="mailto:admission@uitu.edu.pk" class="text-[#ed1c24] hover:underline">admission@uitu.edu.pk</a> or call 021-34994305 Ext: 3025, 3087.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">6. Does UIT allow students to apply whose result has not been announced?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Yes, UIT UNIVERSITY allows all the students who are awaiting for results to be announced.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">7. How can I receive my admit card for entry test?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>After confirmation of receiving application fee from Bank, system generated admit card will be available for printing from the admission portal. Or share the paid slip on WhatsApp 03330399113.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">8. What is the fee Structure at UIT UNIVERSITY?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>The tuition fee is charged as per credit hour. Please refer Fee structure on website at <a href="https://uitu.edu.pk/fee-structure/" target="_blank" class="text-[#ed1c24] hover:underline">https://uitu.edu.pk/fee-structure/</a></p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">9. How can I Pay Application fee?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <ul class="list-disc pl-5 space-y-2">
-            <li>Print out the fee voucher (automatically generated after submission)</li>
-            <li>Visit any branch of Meezan Bank and pay admission processing fee of PKR 3,000</li>
-            <li>Submit scanned copy of the paid fee voucher through the admission portal or WhatsApp 0333-0399113</li>
-        </ul>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">10. What supporting documents do I need to submit?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <ul class="list-disc pl-5 space-y-1">
-            <li>SSC certificate or O-Level certificate</li>
-            <li>SSC Marks sheet</li>
-            <li>HSC consolidated Marks sheet (or HSC-II Admit card for result awaited students)</li>
-            <li>Equivalence certificate for A-Level, issued by IBBC</li>
-        </ul>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">11. What type of Scholarships are offered by UIT UNIVERSITY?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Please refer Scholarships Policy & awards on website.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">12. Does UIT follow an open merit policy in awarding admission?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Yes, UIT UNIVERSITY only offers open merit admissions. There are no reserved or quota-based seats.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">13. How frequently is UIT UNIVERSITY fee rates revised?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Universities may increase fees on annual basis to cover inflation and increased costs.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">14. If I failed to attain the required marks as a result awaiting candidate, what will happen?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Applicants awaiting results will be offered provisional admission. If the result is less than required marks, the fee will be refunded as per policy.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">15. Can I change the online application once I have pressed Submit?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>No, you cannot make any changes once submitted. However, for critical information corrections (address, contact number), contact the admission office.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">16. Will I receive a confirmation after submitting my online application?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Yes, you will receive a text message and an e-mail notification stating the successful submission of your online application.</p>
-    </div>
-</details>
-
-<details class="bg-white p-4 rounded-lg border border-gray-200">
-    <summary class="font-bold text-[#002856] cursor-pointer">17. If I have passed SAT exam, would I be exempted from Entry Test?</summary>
-    <div class="mt-3 text-sm text-gray-600">
-        <p>Yes, if you have scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology. Submit an application for exemption along with evidence to the Admission office.</p>
-    </div>
-</details>
-
-</div>
-                    `,
+                    contentType: 'faqAccordion',
+                    faqItems: [
+                        { _key: createKey(), question: '1. When can one apply for admissions at UIT University?', answer: 'Admission has started from January, 2025. If an applicant fulfills the admission criteria, he/she can apply for admission via online application at www.uitu.edu.pk' },
+                        { _key: createKey(), question: '2. Which Undergraduate programs are offered at UIT University?', answer: 'Department of Electrical Engineering: BE Electrical, BE Computer Systems. Department of Computer Science: BS Computer Science, BS Software Engineering. Department of Engineering Technology: B.E. Tech (Computer, Software, Electronics). Department of Management Sciences: BBA, BS Business Informatics, BS Accounting & Finance.' },
+                        { _key: createKey(), question: '3. What is the general admission criteria?', answer: 'For BE Electrical/CS: 60% in Pre-Engineering. For BS CS/SE: 50% in Pre-Engineering/Science General/Pre-Medical. For BE Tech: HSC-II/DAE with 50%. For Management Sciences: HSC-II with 45%.' },
+                        { _key: createKey(), question: '4. How do I proceed with my online application?', answer: 'Once you have registered via Online Admission Application, an Admission link will be sent to your e-mail address. You can proceed with the rest of the online application using the link.' },
+                        { _key: createKey(), question: '5. What if I am unable to register on Admission Portal?', answer: 'Re-check if you have already registered. Use another email if already registered. Check your Junk folder. If problem persists, email admission@uitu.edu.pk or call 021-34994305.' },
+                        { _key: createKey(), question: '6. Does UIT allow students to apply whose result has not been announced?', answer: 'Yes, UIT UNIVERSITY allows all students who are awaiting for results to be announced.' },
+                        { _key: createKey(), question: '7. How can I receive my admit card for entry test?', answer: 'After confirmation of receiving application fee from Bank, admit card will be available for printing from the admission portal. Or share the paid slip on WhatsApp 03330399113.' },
+                        { _key: createKey(), question: '8. What is the fee Structure at UIT UNIVERSITY?', answer: 'The tuition fee is charged as per credit hour. Please refer Fee structure at https://uitu.edu.pk/fee-structure/' },
+                        { _key: createKey(), question: '9. How can I Pay Application fee?', answer: 'Print out the fee voucher, visit any Meezan Bank branch and pay PKR 3,000. Submit scanned copy through the admission portal or WhatsApp 0333-0399113.' },
+                        { _key: createKey(), question: '10. What supporting documents do I need to submit?', answer: 'SSC certificate/O-Level, SSC Marks sheet, HSC consolidated Marks sheet (or Admit card for result awaited), Equivalence certificate for A-Level from IBBC.' },
+                        { _key: createKey(), question: '11. What type of Scholarships are offered?', answer: 'Please refer Scholarships Policy & awards on website.' },
+                        { _key: createKey(), question: '12. Does UIT follow an open merit policy?', answer: 'Yes, UIT UNIVERSITY only offers open merit admissions. There are no reserved or quota-based seats.' },
+                        { _key: createKey(), question: '13. How frequently are fee rates revised?', answer: 'Universities may increase fees on annual basis to cover inflation and increased costs.' },
+                        { _key: createKey(), question: '14. What if I fail to attain required marks as result awaiting candidate?', answer: 'Result-awaiting applicants will be offered provisional admission. If result is less than required, fee will be refunded as per policy.' },
+                        { _key: createKey(), question: '15. Can I change application after pressing Submit?', answer: 'No, you cannot make changes once submitted. For critical corrections, contact the admission office.' },
+                        { _key: createKey(), question: '16. Will I receive confirmation after submitting application?', answer: 'Yes, you will receive a text message and an e-mail notification stating the successful submission.' },
+                        { _key: createKey(), question: '17. If I passed SAT exam, would I be exempted from Entry Test?', answer: 'Yes, if you scored at least 800 in SAT-I and 1500 in SAT-II with Physics, Chemistry/Computer Science and Mathematics/Biology.' },
+                    ],
                 },
                 // Tab 3: How to Apply
                 {
@@ -313,21 +148,21 @@ const admissionPageData = {
                         },
                         {
                             _key: createKey(),
-                            categoryName: 'Documents Required',
+                            categoryName: 'Fee Payment',
                             policies: [
-                                { _key: createKey(), policyName: 'SSC marks sheet / O-Level equivalency', policyUrl: '' },
-                                { _key: createKey(), policyName: 'HSC-Part II consolidated marks sheet / A-Level equivalency', policyUrl: '' },
-                                { _key: createKey(), policyName: 'SSC Certificate', policyUrl: '' },
-                                { _key: createKey(), policyName: 'HSC Part-II admit card (for result awaited students)', policyUrl: '' },
-                                { _key: createKey(), policyName: 'CNIC/Form-B', policyUrl: '' },
+                                { _key: createKey(), policyName: '4. Print fee voucher from portal', policyUrl: '' },
+                                { _key: createKey(), policyName: '5. Pay PKR 3,000 at Meezan Bank', policyUrl: '' },
+                                { _key: createKey(), policyName: '6. Upload paid voucher to portal', policyUrl: '' },
                             ],
                         },
                         {
                             _key: createKey(),
-                            categoryName: 'Application Processing Fee',
+                            categoryName: 'Required Documents',
                             policies: [
-                                { _key: createKey(), policyName: 'Fee: PKR 3,000 at Meezan Bank', policyUrl: '' },
-                                { _key: createKey(), policyName: 'Email paid voucher to admission@uitu.edu.pk', policyUrl: 'mailto:admission@uitu.edu.pk' },
+                                { _key: createKey(), policyName: 'SSC Certificate & Marks Sheet', policyUrl: '' },
+                                { _key: createKey(), policyName: 'HSC Marks Sheet or Admit Card', policyUrl: '' },
+                                { _key: createKey(), policyName: 'CNIC / B-Form Copy', policyUrl: '' },
+                                { _key: createKey(), policyName: 'Passport Size Photo', policyUrl: '' },
                             ],
                         },
                     ],
@@ -340,25 +175,28 @@ const admissionPageData = {
                     policyCategories: [
                         {
                             _key: createKey(),
-                            categoryName: 'Undergraduate Programs - Fall 2025',
+                            categoryName: 'Computing Programs',
                             policies: [
-                                { _key: createKey(), policyName: 'BS Computer Science - Total: PKR 197,050', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Software Engineering - Total: PKR 197,050', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Artificial Intelligence - Total: PKR 169,000', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Data Science - Total: PKR 169,000', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BE Computer Systems - Total: PKR 157,200', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BE Electrical - Total: PKR 157,200', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BS Accounting & Finance - Total: PKR 135,000', policyUrl: '' },
-                                { _key: createKey(), policyName: 'BBA - Total: PKR 141,800', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BS Computer Science - PKR 3,100 per credit hour', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BS Software Engineering - PKR 3,100 per credit hour', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BE Computer Systems - PKR 3,500 per credit hour', policyUrl: '' },
                             ],
                         },
                         {
                             _key: createKey(),
-                            categoryName: 'Graduate Programs',
+                            categoryName: 'Engineering Programs',
                             policies: [
-                                { _key: createKey(), policyName: 'MS Computer Science - Total: PKR 146,000', policyUrl: '' },
-                                { _key: createKey(), policyName: 'MS Electrical Engineering - Total: PKR 134,000', policyUrl: '' },
-                                { _key: createKey(), policyName: 'MS Communication & Network Engineering - Total: PKR 134,000', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BE Electrical Engineering - PKR 3,500 per credit hour', policyUrl: '' },
+                                { _key: createKey(), policyName: 'B.E. Technology - PKR 2,800 per credit hour', policyUrl: '' },
+                            ],
+                        },
+                        {
+                            _key: createKey(),
+                            categoryName: 'Management Programs',
+                            policies: [
+                                { _key: createKey(), policyName: 'BBA - PKR 2,500 per credit hour', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BS Business Informatics - PKR 2,500 per credit hour', policyUrl: '' },
+                                { _key: createKey(), policyName: 'BS Accounting & Finance - PKR 2,500 per credit hour', policyUrl: '' },
                             ],
                         },
                     ],
@@ -371,7 +209,7 @@ const admissionPageData = {
                     policyCategories: [
                         {
                             _key: createKey(),
-                            categoryName: 'Refund Schedule',
+                            categoryName: 'Refund Timeline',
                             policies: [
                                 { _key: createKey(), policyName: 'Up to 10th day - 100% Fee Refund', policyUrl: '' },
                                 { _key: createKey(), policyName: 'Up to 15th day - 80% Fee Refund', policyUrl: '' },
@@ -415,7 +253,7 @@ export async function GET() {
     try {
         // Find existing admission page
         const existingPage = await writeClient.fetch(
-            `*[_type == "page" && slug.current == "admission"][0]._id`
+            `* [_type == "page" && slug.current == "admission"][0]._id`
         );
 
         let result;

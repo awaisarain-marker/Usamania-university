@@ -925,6 +925,7 @@ export const tabbedContentBlock = defineType({
                                     { title: 'Policy Links', value: 'policyLinks' },
                                     { title: 'Vision Box', value: 'visionBox' },
                                     { title: 'Rich Text (HTML)', value: 'richText' },
+                                    { title: 'FAQ Accordion', value: 'faqAccordion' },
                                 ],
                             },
                         }),
@@ -936,6 +937,28 @@ export const tabbedContentBlock = defineType({
                             rows: 15,
                             hidden: ({ parent }) => parent?.contentType !== 'richText',
                             description: 'You can use HTML for complex layouts with tables, styled boxes, etc.',
+                        }),
+                        // FAQ Accordion content
+                        defineField({
+                            name: 'faqItems',
+                            title: 'FAQ Items',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'faqAccordion',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'question', type: 'string', title: 'Question' }),
+                                        defineField({ name: 'answer', type: 'text', title: 'Answer', rows: 4 }),
+                                    ],
+                                    preview: {
+                                        select: { question: 'question' },
+                                        prepare({ question }) {
+                                            return { title: question || 'FAQ Item' }
+                                        },
+                                    },
+                                }),
+                            ],
                         }),
                         // Organogram content
                         defineField({

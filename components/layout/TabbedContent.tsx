@@ -25,14 +25,20 @@ interface PolicyCategory {
     policies: Policy[];
 }
 
+interface FaqItem {
+    question: string;
+    answer: string;
+}
+
 interface Tab {
     tabTitle: string;
-    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText';
+    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion';
     organogramNodes?: OrgNode[];
     teamImageUrl?: string;
     teamMembers?: TeamMember[];
     policyCategories?: PolicyCategory[];
     richContent?: string;
+    faqItems?: FaqItem[];
 }
 
 interface TabbedContentProps {
@@ -207,6 +213,36 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                 className="prose max-w-none text-gray-600"
                                                                 dangerouslySetInnerHTML={{ __html: tab.richContent }}
                                                             />
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* FAQ Accordion Content */}
+                                                {tab.contentType === 'faqAccordion' && tab.faqItems && (
+                                                    <div className="qec-vision-box" style={{ width: '100%', maxWidth: '100%', marginTop: 0 }}>
+                                                        <div className="qec-vision-content-wrap">
+                                                            <div className="section-title">
+                                                                <h2>{tab.tabTitle}</h2>
+                                                            </div>
+                                                            <div className="js-accordion-content">
+                                                                <ul className="accordion space-y-3" aria-label="FAQ accordion">
+                                                                    {tab.faqItems.map((faq, faqIndex) => (
+                                                                        <li key={faqIndex} className="item-list__box --v2 col-12">
+                                                                            <details className="bg-white p-4 rounded-lg border border-gray-200 group">
+                                                                                <summary className="font-bold text-[#002856] cursor-pointer list-none flex justify-between items-center">
+                                                                                    <span>{faq.question}</span>
+                                                                                    <svg className="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                                                    </svg>
+                                                                                </summary>
+                                                                                <div className="mt-3 text-sm text-gray-600 whitespace-pre-wrap">
+                                                                                    {faq.answer}
+                                                                                </div>
+                                                                            </details>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 )}
