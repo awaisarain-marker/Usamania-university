@@ -88,9 +88,16 @@ interface FeeNote {
     noteText: string;
 }
 
+interface CarouselSlide {
+    slideTitle: string;
+    slideDescription?: string;
+    slideImageUrl: string;
+    slideLink?: string;
+}
+
 interface Tab {
     tabTitle: string;
-    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion' | 'procedureSteps' | 'feeTable';
+    contentType: 'organogram' | 'teamGrid' | 'policyLinks' | 'visionBox' | 'richText' | 'faqAccordion' | 'procedureSteps' | 'feeTable' | 'carousel';
     organogramNodes?: OrgNode[];
     teamImageUrl?: string;
     teamMembers?: TeamMember[];
@@ -105,6 +112,9 @@ interface Tab {
     // Fee Table fields
     feeTables?: FeeTableData[];
     feeNotes?: FeeNote[];
+    // Carousel fields
+    carouselTitle?: string;
+    carouselSlides?: CarouselSlide[];
 }
 
 interface TabbedContentProps {
@@ -497,6 +507,49 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                         </li>
                                                                     ))}
                                                                 </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+
+                                                {/* Image Carousel Content */}
+                                                {tab.contentType === 'carousel' && (
+                                                    <div className="carousel-content" style={{ width: '100%', maxWidth: '100%' }}>
+                                                        {tab.carouselTitle && (
+                                                            <h2 className="text-2xl font-bold text-[#002856] mb-6">{tab.carouselTitle}</h2>
+                                                        )}
+
+                                                        {tab.carouselSlides && tab.carouselSlides.length > 0 && (
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                                {tab.carouselSlides.map((slide, slideIndex) => (
+                                                                    <div key={slideIndex} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                                                                        {slide.slideImageUrl && (
+                                                                            <div className="aspect-video overflow-hidden">
+                                                                                <img
+                                                                                    src={slide.slideImageUrl}
+                                                                                    alt={slide.slideTitle}
+                                                                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                                                                />
+                                                                            </div>
+                                                                        )}
+                                                                        <div className="p-4">
+                                                                            <h3 className="font-bold text-[#002856] mb-2">{slide.slideTitle}</h3>
+                                                                            {slide.slideDescription && (
+                                                                                <p className="text-sm text-gray-600 mb-3">{slide.slideDescription}</p>
+                                                                            )}
+                                                                            {slide.slideLink && (
+                                                                                <a
+                                                                                    href={slide.slideLink}
+                                                                                    target="_blank"
+                                                                                    rel="noopener noreferrer"
+                                                                                    className="text-sm text-[#ed1c24] hover:underline font-medium"
+                                                                                >
+                                                                                    Learn More →
+                                                                                </a>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
                                                             </div>
                                                         )}
                                                     </div>

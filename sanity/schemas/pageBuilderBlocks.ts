@@ -928,6 +928,7 @@ export const tabbedContentBlock = defineType({
                                     { title: 'FAQ Accordion', value: 'faqAccordion' },
                                     { title: 'Procedure Steps', value: 'procedureSteps' },
                                     { title: 'Fee Table', value: 'feeTable' },
+                                    { title: 'Image Carousel', value: 'carousel' },
                                 ],
                             },
                         }),
@@ -1234,6 +1235,36 @@ export const tabbedContentBlock = defineType({
                                         select: { label: 'noteLabel', text: 'noteText' },
                                         prepare({ label, text }) {
                                             return { title: `(${label}) ${text?.substring(0, 50) || ''}...` };
+                                        },
+                                    },
+                                }),
+                            ],
+                        }),
+                        // Image Carousel content (for Outreach Programs, etc.)
+                        defineField({
+                            name: 'carouselTitle',
+                            title: 'Carousel Section Title',
+                            type: 'string',
+                            hidden: ({ parent }) => parent?.contentType !== 'carousel',
+                        }),
+                        defineField({
+                            name: 'carouselSlides',
+                            title: 'Carousel Slides',
+                            type: 'array',
+                            hidden: ({ parent }) => parent?.contentType !== 'carousel',
+                            of: [
+                                defineArrayMember({
+                                    type: 'object',
+                                    fields: [
+                                        defineField({ name: 'slideTitle', type: 'string', title: 'Slide Title' }),
+                                        defineField({ name: 'slideDescription', type: 'text', title: 'Slide Description (optional)', rows: 2 }),
+                                        defineField({ name: 'slideImageUrl', type: 'url', title: 'Slide Image URL' }),
+                                        defineField({ name: 'slideLink', type: 'url', title: 'Link URL (optional)' }),
+                                    ],
+                                    preview: {
+                                        select: { title: 'slideTitle' },
+                                        prepare({ title }) {
+                                            return { title: title || 'Slide' };
                                         },
                                     },
                                 }),

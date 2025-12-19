@@ -359,6 +359,43 @@ const admissionPageData = {
                         },
                     ],
                 },
+                // Tab 7: Outreach Programs - Image Carousel
+                {
+                    _key: createKey(),
+                    tabTitle: 'Outreach Programs',
+                    contentType: 'carousel',
+                    carouselTitle: 'Our Outreach Programs',
+                    carouselSlides: [
+                        {
+                            _key: createKey(),
+                            slideTitle: 'School Visits Program',
+                            slideDescription: 'UIT University visits schools to inspire students about higher education and career opportunities.',
+                            slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=School+Visits',
+                            slideLink: ''
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: 'Career Counseling Workshops',
+                            slideDescription: 'Free career counseling sessions for students to help them choose the right academic path.',
+                            slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Career+Counseling',
+                            slideLink: ''
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: 'Open House Events',
+                            slideDescription: 'Campus tours and information sessions for prospective students and parents.',
+                            slideImageUrl: 'https://placehold.co/600x400/002856/ffffff?text=Open+House',
+                            slideLink: ''
+                        },
+                        {
+                            _key: createKey(),
+                            slideTitle: 'Tech Talks',
+                            slideDescription: 'Industry experts share insights on latest technology trends and career opportunities.',
+                            slideImageUrl: 'https://placehold.co/600x400/ed1c24/ffffff?text=Tech+Talks',
+                            slideLink: ''
+                        },
+                    ],
+                },
             ],
         },
     ]
