@@ -16,7 +16,7 @@ import { getHomePageContent } from "@/sanity/lib/queries";
 // Default fallback data
 const defaultData = {
   // Hero defaults
-  heroVideoUrl: "https://www.aubg.edu/wp-content/uploads/2022/10/campus-tour.mp4",
+  heroVideoUrl: "https://ik.imagekit.io/byat8clceo/herosection%20video.mp4",
   heroTitle: "Expand your world,",
   heroSubtitle: "shape its future",
   heroButtons: [

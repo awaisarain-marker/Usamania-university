@@ -578,8 +578,44 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                     640: { slidesPerView: 2 },
                                                                     1024: { slidesPerView: 3 },
                                                                 }}
-                                                )}
+                                                            >
+                                                                {tab.carouselSlides.map((slide, slideIndex) => (
+                                                                    <SwiperSlide key={slideIndex}>
+                                                                        <div className="bg-white shadow-md overflow-hidden h-full">
+                                                                            {slide.slideImages && slide.slideImages.length > 0 && (
+                                                                                <div className="aspect-video overflow-hidden">
+                                                                                    <img
+                                                                                        src={slide.slideImages[0].imageUrl}
+                                                                                        alt={slide.slideImages[0].imageCaption || slide.slideTitle}
+                                                                                        className="w-full h-full object-cover"
+                                                                                    />
+                                                                                </div>
+                                                                            )}
+                                                                            <div className="p-4">
+                                                                                <h3 className="text-lg font-bold text-[#002856] mb-2">{slide.slideTitle}</h3>
+                                                                                {slide.slideDescription && (
+                                                                                    <p className="text-sm text-gray-600 mb-3">{slide.slideDescription}</p>
+                                                                                )}
+                                                                                {slide.slideLink && (
+                                                                                    <a
+                                                                                        href={slide.slideLink}
+                                                                                        className="text-[#ed1c24] font-medium text-sm hover:underline inline-flex items-center gap-1"
+                                                                                    >
+                                                                                        Learn More
+                                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                                                            <path d="M5 12h14M12 5l7 7-7 7" />
+                                                                                        </svg>
+                                                                                    </a>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+                                                                    </SwiperSlide>
+                                                                ))}
+                                                            </Swiper>
+                                                        )}
                                                     </div>
+                                                )}
+                                            </div>
                                         </section>
                                     ))}
                                 </div>

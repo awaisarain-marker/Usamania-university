@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Open_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SiteLayout from "@/components/layout/SiteLayout";
@@ -18,6 +18,12 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "UIT University",
   description: "UIT University Website",
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
