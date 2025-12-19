@@ -525,39 +525,28 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                         )}
 
                                                         {tab.carouselSlides && tab.carouselSlides.length > 0 && (
-                                                            <div className="space-y-8">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                                                 {tab.carouselSlides.map((slide, slideIndex) => (
-                                                                    <div key={slideIndex} className="bg-white rounded-lg shadow-md overflow-hidden p-6">
-                                                                        <h3 className="text-lg font-bold text-[#002856] mb-4">{slide.slideTitle}</h3>
-                                                                        {slide.slideDescription && (
-                                                                            <p className="text-sm text-gray-600 mb-4">{slide.slideDescription}</p>
-                                                                        )}
-
-                                                                        {/* Image Gallery for this slide */}
+                                                                    <div key={slideIndex} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                                                                        {/* Show first image from slideImages array */}
                                                                         {slide.slideImages && slide.slideImages.length > 0 && (
-                                                                            <div className={`grid gap-4 ${slide.slideImages.length === 1 ? 'grid-cols-1' : slide.slideImages.length === 2 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'}`}>
-                                                                                {slide.slideImages.map((image, imgIndex) => (
-                                                                                    <div key={imgIndex} className="aspect-video overflow-hidden rounded-lg">
-                                                                                        <img
-                                                                                            src={image.imageUrl}
-                                                                                            alt={image.imageCaption || slide.slideTitle}
-                                                                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                                                                        />
-                                                                                    </div>
-                                                                                ))}
+                                                                            <div className="aspect-video overflow-hidden">
+                                                                                <img
+                                                                                    src={slide.slideImages[0].imageUrl}
+                                                                                    alt={slide.slideTitle}
+                                                                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                                                                />
                                                                             </div>
                                                                         )}
-
-                                                                        {slide.slideLink && (
-                                                                            <a
-                                                                                href={slide.slideLink}
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                className="inline-block mt-4 text-sm text-[#ed1c24] hover:underline font-medium"
-                                                                            >
-                                                                                Learn More →
-                                                                            </a>
-                                                                        )}
+                                                                        <div className="p-4">
+                                                                            <h3 className="font-bold text-[#002856] mb-2 text-sm">{slide.slideTitle}</h3>
+                                                                            {slide.slideDescription && (
+                                                                                <p className="text-xs text-gray-600 mb-2">{slide.slideDescription}</p>
+                                                                            )}
+                                                                            {slide.slideImages && slide.slideImages.length > 1 && (
+                                                                                <span className="text-xs text-gray-400">+{slide.slideImages.length - 1} more photos</span>
+                                                                            )}
+                                                                        </div>
                                                                     </div>
                                                                 ))}
                                                             </div>
