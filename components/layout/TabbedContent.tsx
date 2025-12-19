@@ -49,6 +49,8 @@ interface ProcedureTableRow {
 
 interface ProcedureTable {
     tableTitle?: string;
+    columnHeader1?: string;
+    columnHeader2?: string;
     tableRows?: ProcedureTableRow[];
 }
 
@@ -397,8 +399,8 @@ export default function TabbedContent({ sectionId, tabs }: TabbedContentProps) {
                                                                     <table className="w-full text-left border-collapse border border-gray-300">
                                                                         <thead>
                                                                             <tr className="bg-[#002856] text-white">
-                                                                                <th className="py-3 px-4 border border-gray-300">Criteria</th>
-                                                                                <th className="py-3 px-4 border border-gray-300 text-center">Weightage</th>
+                                                                                <th className="py-3 px-4 border border-gray-300">{tab.procedureTable.columnHeader1 || 'Criteria'}</th>
+                                                                                <th className="py-3 px-4 border border-gray-300 text-center">{tab.procedureTable.columnHeader2 || 'Weightage'}</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>

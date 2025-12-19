@@ -237,6 +237,8 @@ const admissionPageData = {
                     ],
                     procedureTable: {
                         tableTitle: 'Merit Determination Criteria',
+                        columnHeader1: 'Criteria',
+                        columnHeader2: 'Weightage',
                         tableRows: [
                             { _key: createKey(), criteria: 'Weightage of Pre-Entry Admission test', value: '50%' },
                             { _key: createKey(), criteria: 'Weightage of HSC marks OR equivalent', value: '40%' },
@@ -330,6 +332,8 @@ const admissionPageData = {
                     ],
                     procedureTable: {
                         tableTitle: 'Refund Schedule',
+                        columnHeader1: 'Commencement of Classes',
+                        columnHeader2: 'Refund % of Tuition Fee',
                         tableRows: [
                             { _key: createKey(), criteria: 'Up to 10th day of the commencement of classes', value: '100% Fee Refund' },
                             { _key: createKey(), criteria: 'Up to 15th day of commencement of classes', value: '80% Fee Refund' },

@@ -1109,6 +1109,8 @@ export const tabbedContentBlock = defineType({
                             hidden: ({ parent }) => parent?.contentType !== 'procedureSteps',
                             fields: [
                                 defineField({ name: 'tableTitle', type: 'string', title: 'Table Title' }),
+                                defineField({ name: 'columnHeader1', type: 'string', title: 'Column 1 Header', initialValue: 'Criteria' }),
+                                defineField({ name: 'columnHeader2', type: 'string', title: 'Column 2 Header', initialValue: 'Weightage' }),
                                 defineField({
                                     name: 'tableRows',
                                     title: 'Table Rows',
