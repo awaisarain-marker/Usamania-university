@@ -1,43 +1,64 @@
-const blogPosts = [
-    {
-        title: "Economics for a New Generation: Professor Nikos Fatouros Teaches for the Future",
-        image: "https://www.aubg.edu/wp-content/uploads/2025/12/Professor-Nikos-Fatouros-Teaching-Economics-at-AUBG-2-1-489x318.png",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-        description: "Professor Nikos Fatouros joined UIT University in the 2024/2025 academic year and is already serving as the Interim Chair of the Economics Department. His research interests go ...",
-        category: "Economics",
-        featured: true,
-    },
-    {
-        title: "Ashod Derandonyan ('01) Championing Accessibility Support for the Deaf and Hard of Hearing Community",
-        image: "https://www.aubg.edu/wp-content/uploads/2025/12/Ashod-Derandonyan-'01-at-the-AUBG-Civic-Society-Forum-in-2025-254x165.png",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-        category: "Alumni",
-    },
-    {
-        title: "The 2025 Study Trip to Brussels Explores National Security in the EU",
-        image: "https://www.aubg.edu/wp-content/uploads/2025/12/AUBG-European-Studies-Study-Trip-to-Brussels-2025-1-254x165.png",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-        category: "European Studies",
-    },
-    {
-        title: "What to Do with a Major in Business Administration: Career Prospects",
-        image: "https://www.aubg.edu/wp-content/uploads/2025/11/What-to-Do-with-a-Major-in-Economics-254x165.png",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-        category: "Business",
-    },
-    {
-        title: "What to Do with a Major in Political Science & International Relations and European Studies",
-        image: "https://www.aubg.edu/wp-content/uploads/2025/11/What-to-Do-with-a-Major-in-Political-Science-254x165.png",
-        link: "/uit-today/what-to-do-with-a-major-in-business-administration-career-prospects",
-        category: "Politics",
-    },
-];
+import { useState, useEffect } from 'react';
+import { getAllPosts } from '@/sanity/lib/queries';
+import Link from 'next/link';
+
+interface BlogPost {
+    title: string;
+    image: string;
+    link: string;
+    description?: string;
+    category: string;
+    featured?: boolean;
+}
 
 interface BlogSectionProps {
     title?: string;
 }
 
 export default function BlogSection({ title = "UIT University Today" }: BlogSectionProps) {
+    const [posts, setPosts] = useState<BlogPost[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                const data = await getAllPosts();
+                if (data && data.length > 0) {
+                    const formattedPosts = data.map((post: any) => ({
+                        title: post.title,
+                        image: post.mainImageUrl || post.mainImage || "https://www.aubg.edu/wp-content/uploads/2025/12/Professor-Nikos-Fatouros-Teaching-Economics-at-AUBG-2-1-489x318.png", // Fallback image
+                        link: `/uit-today/${post.slug}`,
+                        description: post.description,
+                        category: post.category || "News",
+                        featured: false // Logic can be added to determine featured post
+                    }));
+
+                    // Set first post as featured if available
+                    if (formattedPosts.length > 0) {
+                        formattedPosts[0].featured = true;
+                    }
+
+                    setPosts(formattedPosts);
+                }
+            } catch (error) {
+                console.error("Error fetching blog posts:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchPosts();
+    }, []);
+
+    if (loading) {
+        return <div className="py-20 text-center">Loading news...</div>;
+    }
+
+    // Fallback if no posts found
+    if (posts.length === 0) {
+        return null;
+    }
+
     return (
         <section className="blog-section">
             <div className="container">
@@ -51,21 +72,21 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                             <p>Discover what it's like to study at one of Pakistan's top universities, and explore our latest developments, student achievements, and alumni success stories.</p>
                         </div>
                     </div>
-                    <a href="/uit-today" className="btn-secondary --red --arrow --border">
+                    <Link href="/uit-today" className="btn-secondary --red --arrow --border">
                         <span>UIT University Today</span>
                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Blog Slider */}
                 <div className="blog-section__slider">
                     <div className="slider__wrapper">
                         <div className="blog-section__list">
-                            {blogPosts.map((post, index) => (
+                            {posts.map((post, index) => (
                                 <div key={index} className="blog-section__item">
-                                    <a href={post.link} className="blog-section__item-wrap">
+                                    <Link href={post.link} className="blog-section__item-wrap">
                                         <figure className="blog-section__item-media">
                                             <img
                                                 className="image"
@@ -86,7 +107,7 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                                                 <span className="text-uppercase text-bold text-light-blue">{post.category}</span>
                                             </div>
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

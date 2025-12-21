@@ -76,8 +76,8 @@ const components = {
     },
 };
 
-export default function SinglePostPage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = React.use(params);
+export default function SinglePostPage({ params }: { params: { slug: string } }) {
+    const { slug } = params;
     const [post, setPost] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 

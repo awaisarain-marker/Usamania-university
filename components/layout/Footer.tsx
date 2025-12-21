@@ -21,6 +21,22 @@ export default function Footer() {
         fetchFooter();
     }, []);
 
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show button after scrolling down 500px (header/banner height)
+            if (window.scrollY > 500) {
+                setShowScrollTop(true);
+            } else {
+                setShowScrollTop(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -79,8 +95,16 @@ export default function Footer() {
 
     return (
         <footer className="site-footer" role="contentinfo">
-            {/* Scroll to Top Button */}
-            <div className="scroll-top container active">
+            {/* Scroll to Top Button - Moved to Left */}
+            <div
+                className={`scroll-top ${showScrollTop ? 'active' : ''}`}
+                style={{
+                    right: 'auto',  // Unset right
+                    left: '30px',   // Move to left
+                    bottom: '30px', // Ensure consistent bottom spacing
+                    zIndex: 9999    // Stay on top
+                }}
+            >
                 <div className="scroll-top__item" onClick={scrollToTop}>
                     <svg width="25" height="25" className="icon icon-scroll-top scroll-top__icon" aria-hidden="true" role="img">
                         <use xlinkHref="#icon-scroll-top"></use>

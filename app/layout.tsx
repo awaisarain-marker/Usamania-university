@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteLayout from "@/components/layout/SiteLayout";
 import SvgSprite from "@/components/icons/Sprite";
 import BodyClassUpdater from "@/components/layout/BodyClassUpdater";
+import Chatbot from "@/components/Chatbot";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
         <SiteLayout>
           {children}
         </SiteLayout>
+        <Chatbot />
       </body>
     </html>
   );

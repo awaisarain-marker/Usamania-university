@@ -38,6 +38,9 @@ const deskStructure = (S: any) =>
                             S.listItem()
                                 .title('About Page')
                                 .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+                            S.listItem()
+                                .title('Contact Page')
+                                .child(S.document().schemaType('contactPage').documentId('contactPage')),
                         ])
                 ),
 

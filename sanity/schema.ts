@@ -12,6 +12,7 @@ import twoColumnImageGrid from './schemas/twoColumnImageGrid'
 import event from './schemas/event'
 import homePage from './schemas/homePage'
 import aboutPage from './schemas/aboutPage'
+import contactPage from './schemas/contactPage'
 import facultyMember from './schemas/facultyMember'
 import faculty from './schemas/faculty'
 import facultyCategory from './schemas/facultyCategory'
@@ -24,6 +25,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         page,
         homePage,
         aboutPage,
+        contactPage,
         // Faculty
         faculty,
         facultyCategory,

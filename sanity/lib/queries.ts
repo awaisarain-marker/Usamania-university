@@ -631,3 +631,22 @@ export async function getAdmissionPage() {
         }
     `)
 }
+
+// Get Contact Page Content
+export async function getContactPageContent() {
+    return client.fetch(`
+        *[_type == "contactPage"][0] {
+            heroTitle,
+            heroSubtitle,
+            heroBgImage,
+            address,
+            uanNumber,
+            admissionsNumber,
+            email,
+            mapEmbedUrl,
+            formTitle,
+            formSubmitText,
+            formSuccessMessage
+        }
+    `)
+}
