@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getAllPosts } from '@/sanity/lib/queries';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -25,6 +26,10 @@ interface BlogSectionProps {
 export default function BlogSection({ title = "UIT University Today" }: BlogSectionProps) {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
+    const swiperRef = useRef<SwiperType | null>(null);
+    const prevRef = useRef<HTMLButtonElement>(null);
+    const nextRef = useRef<HTMLButtonElement>(null);
+    const paginationRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         async function fetchPosts() {
@@ -91,13 +96,25 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                 <div className="blog-section__slider relative">
                     <Swiper
                         modules={[Navigation, Pagination]}
-                        navigation={{
-                            nextEl: '.slider__next',
-                            prevEl: '.slider__prev',
-                        }}
-                        pagination={{
-                            el: '.slider__pagination',
-                            type: 'progressbar',
+                        onSwiper={(swiper) => {
+                            swiperRef.current = swiper;
+                            // Connect navigation after swiper is initialized
+                            if (prevRef.current && nextRef.current) {
+                                swiper.params.navigation = {
+                                    prevEl: prevRef.current,
+                                    nextEl: nextRef.current,
+                                };
+                                swiper.navigation.init();
+                                swiper.navigation.update();
+                            }
+                            if (paginationRef.current) {
+                                swiper.params.pagination = {
+                                    el: paginationRef.current,
+                                    type: 'progressbar',
+                                };
+                                swiper.pagination.init();
+                                swiper.pagination.update();
+                            }
                         }}
                         loop={true}
                         spaceBetween={30}
@@ -140,16 +157,26 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                     </Swiper>
 
                     {/* Pagination */}
-                    <div className="slider__pagination"></div>
+                    <div ref={paginationRef} className="slider__pagination"></div>
 
                     {/* Navigation */}
                     <div className="slider__navigation">
-                        <button className="slider__prev" aria-label="Previous slide">
+                        <button
+                            ref={prevRef}
+                            className="slider__prev"
+                            aria-label="Previous slide"
+                            onClick={() => swiperRef.current?.slidePrev()}
+                        >
                             <svg width="25" height="25" className="icon icon-arrow-left" aria-hidden="true" role="img">
                                 <use xlinkHref="#arrow-left"></use>
                             </svg>
                         </button>
-                        <button className="slider__next" aria-label="Next slide">
+                        <button
+                            ref={nextRef}
+                            className="slider__next"
+                            aria-label="Next slide"
+                            onClick={() => swiperRef.current?.slideNext()}
+                        >
                             <svg width="25" height="25" className="icon icon-arrow-right" aria-hidden="true" role="img">
                                 <use xlinkHref="#arrow-right"></use>
                             </svg>
@@ -160,3 +187,4 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
         </section>
     );
 }
+
