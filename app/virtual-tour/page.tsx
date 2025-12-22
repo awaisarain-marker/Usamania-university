@@ -2,6 +2,17 @@
 
 import React from 'react';
 import PageHero from '@/components/layout/PageHero';
+import dynamic from 'next/dynamic';
+
+const TourViewer = dynamic(() => import('@/components/virtual-tour/TourViewer'), {
+    ssr: false,
+    loading: () => (
+        <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-500">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#ed1c24] mb-2"></div>
+            <p className="text-sm font-medium">Initializing 3D Engine...</p>
+        </div>
+    )
+});
 
 export default function VirtualTourPage() {
     return (
@@ -22,15 +33,9 @@ export default function VirtualTourPage() {
                         <h2>Experience UIT University</h2>
                     </div>
 
-                    <div className="w-full aspect-video bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
-                        <div className="relative z-10 text-center p-8 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/50">
-                            <h3 className="text-xl font-bold text-[#002856] mb-2">360° Tour Loading...</h3>
-                            <p className="text-gray-600 mb-4">The virtual tour experience is being prepared.</p>
-                            <span className="inline-block px-4 py-2 bg-[#ed1c24] text-white font-semibold text-sm rounded transition-transform group-hover:scale-105">
-                                Tour Player Placeholder
-                            </span>
-                        </div>
+                    {/* 3D Model Viewer */}
+                    <div className="w-full aspect-video bg-gray-100 flex items-center justify-center border border-gray-200 shadow-sm relative overflow-hidden group h-[600px]">
+                        <TourViewer />
                     </div>
 
                     <div className="mt-12 grid md:grid-cols-3 gap-8 text-center">

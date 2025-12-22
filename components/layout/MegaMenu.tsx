@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useTransition } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, ChevronRight, ChevronDown, LayoutGrid } from 'lucide-react';
@@ -13,6 +13,7 @@ interface MegaMenuProps {
 const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     // State for menu items (defaults to hardcoded data)
     const [menuItems, setMenuItems] = useState<MenuItem[]>(menuData);
+    const [isPending, startTransition] = useTransition();
 
     // Determine the default active category (first item's ID)
     const [activeCategory, setActiveCategory] = useState<string>(menuItems[0]?.id || 'about-us');
@@ -124,7 +125,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                 </Link>
                                 <button
                                     onClick={onClose}
-                                    className="bg-white/5 hover:bg-white/10 p-2.5 text-white transition-colors"
+                                    className="bg-white/5 hover:bg-white/10 p-2.5 text-white transition-colors cursor-pointer"
                                 >
                                     <X className="w-6 h-6" />
                                 </button>
@@ -143,7 +144,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                         <div key={item.id} className="border-b border-white/5 last:border-0">
                                             <button
                                                 onClick={() => setActiveCategory(activeCategory === item.id ? '' : item.id)}
-                                                className={`w-full flex items-center justify-between py-4 px-2 text-left transition-colors ${activeCategory === item.id ? 'text-[#ed1c24]' : 'text-white'}`}
+                                                className={`w-full flex items-center justify-between py-4 px-2 text-left transition-colors cursor-pointer ${activeCategory === item.id ? 'text-[#ed1c24]' : 'text-white'}`}
                                             >
                                                 <span className="font-serif text-xl">{item.label}</span>
                                                 <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${activeCategory === item.id ? 'rotate-180 text-[#ed1c24]' : 'text-gray-500'}`} />
@@ -178,9 +179,15 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                             <div className="hidden lg:flex lg:col-span-3 flex-col border-r border-white/10 h-full overflow-y-auto no-scrollbar py-8 pr-4">
                                 <nav className="space-y-1">
                                     {menuItems.map((item) => (
-                                        <div
+                                        <Link
+                                            href={item.href || '#'}
                                             key={item.id}
-                                            onMouseEnter={() => setActiveCategory(item.id)}
+                                            onMouseEnter={() => {
+                                                startTransition(() => {
+                                                    setActiveCategory(item.id);
+                                                });
+                                            }}
+                                            onClick={onClose}
                                             className={`group block py-3 border-l-4 transition-all duration-300 ease-out cursor-pointer pl-6 ${activeCategory === item.id
                                                 ? 'border-[#ed1c24] text-white'
                                                 : 'border-transparent text-gray-500 hover:text-gray-300 hover:pl-8'
@@ -195,7 +202,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                                     <ChevronRight className="w-5 h-5 text-[#ed1c24]" />
                                                 )}
                                             </div>
-                                        </div>
+                                        </Link>
                                     ))}
                                 </nav>
 

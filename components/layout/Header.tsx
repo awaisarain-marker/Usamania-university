@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { Search, Globe, Menu, X } from "lucide-react";
 import MegaMenu from "./MegaMenu";
 import { client } from "@/sanity/lib/client";
+import { searchData, SearchResult } from "@/lib/searchData";
+import { getAllPosts, getAllEvents, getAllJobs } from "@/sanity/lib/queries";
 
 interface HeaderSettings {
     logoUrl?: string;
@@ -32,8 +34,12 @@ const defaultSettings: HeaderSettings = {
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+    const [showDropdown, setShowDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [settings, setSettings] = useState<HeaderSettings>(defaultSettings);
+    const [extraSearchData, setExtraSearchData] = useState<SearchResult[]>([]);
     const pathname = usePathname();
 
     // Force dark header (white background, dark text) on blog & event pages
@@ -63,7 +69,60 @@ export default function Header() {
                 console.error('Error fetching header settings:', error);
             }
         }
+
+        async function fetchDynamicSearchData() {
+            try {
+                const [posts, events, jobs] = await Promise.all([getAllPosts(), getAllEvents(), getAllJobs()]);
+                const dynamicResults: SearchResult[] = [];
+
+                if (posts) {
+                    posts.forEach((post: any) => {
+                        dynamicResults.push({
+                            id: `post-${post.slug}`,
+                            title: post.title,
+                            description: post.description || 'Read our latest blog post.',
+                            type: 'Blog',
+                            url: post.externalUrl || `/uit-today/${post.slug}`,
+                            date: post.publishedAt
+                        });
+                    });
+                }
+
+                if (events) {
+                    events.forEach((event: any) => {
+                        dynamicResults.push({
+                            id: `event-${event.slug}`,
+                            title: event.title,
+                            description: `Event at ${event.location || 'UIT University'}`,
+                            type: 'Event',
+                            url: event.externalUrl || `/events/${event.slug}`,
+                            date: event.date
+                        });
+                    });
+                }
+
+                // Add Jobs to Search
+                if (jobs) {
+                    jobs.forEach((job: any) => {
+                        dynamicResults.push({
+                            id: `job-${job._id}`,
+                            title: job.title,
+                            description: job.description || 'Career Opportunity',
+                            type: 'Job',
+                            url: '/careers', // Point to careers page for now, or specifically to the job if we add query param support
+                            date: job.postedDate
+                        });
+                    });
+                }
+
+                setExtraSearchData(dynamicResults);
+            } catch (error) {
+                console.error('Error fetching dynamic search data:', error);
+            }
+        }
+
         fetchSettings();
+        fetchDynamicSearchData();
     }, []);
 
     useEffect(() => {
@@ -130,29 +189,112 @@ export default function Header() {
                         {/* Search */}
                         <div className="hidden lg:flex items-center relative ml-2.5">
                             {/* Search Form - Expands to push content */}
-                            <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isSearchOpen ? 'w-[250px] opacity-100' : 'w-0 opacity-0'}`}>
-                                <form
-                                    method="GET"
-                                    action="/"
-                                    className="h-full w-full flex items-center"
-                                >
-                                    <label className="h-full w-full block m-0">
-                                        <span className="sr-only">Search for:</span>
-                                        <input
-                                            type="text"
-                                            name="s"
-                                            placeholder="Search..."
-                                            className="h-10 lg:h-11 xl:h-[50px] w-full px-4 border-none text-base text-black bg-white focus:outline-none placeholder:text-gray-500 rounded-none"
-                                            autoFocus={isSearchOpen}
-                                        />
-                                    </label>
-                                </form>
+                            <div className={`transition-all duration-300 ease-in-out ${isSearchOpen ? 'w-[300px] opacity-100' : 'w-0 opacity-0'}`}>
+                                <div className="relative h-full w-full">
+                                    <form
+                                        className="h-full w-full flex items-center"
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            if (searchQuery.trim()) {
+                                                window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+                                                setIsSearchOpen(false);
+                                            }
+                                        }}
+                                    >
+                                        <label className="h-full w-full block m-0 relative">
+                                            <span className="sr-only">Search for:</span>
+                                            <input
+                                                type="text"
+                                                value={searchQuery}
+                                                onChange={(e) => {
+                                                    const query = e.target.value;
+                                                    setSearchQuery(query);
+                                                    if (query.trim().length > 0) {
+                                                        const results = searchData(query, extraSearchData);
+                                                        setSearchResults(results);
+                                                        setShowDropdown(true);
+                                                    } else {
+                                                        setShowDropdown(false);
+                                                    }
+                                                }}
+                                                placeholder="Search..."
+                                                className="h-10 lg:h-11 xl:h-[50px] w-full px-4 border-none text-sm text-black bg-white focus:outline-none placeholder:text-gray-500 rounded-none"
+                                                autoFocus={isSearchOpen}
+                                            />
+                                        </label>
+                                    </form>
+
+                                    {/* Real-time Search Dropdown */}
+                                    {showDropdown && searchQuery.trim().length > 0 && (
+                                        <div className="absolute top-full right-0 w-[350px] bg-white shadow-2xl z-50 animate-fadeIn border-t border-gray-100">
+                                            <div className="max-h-[350px] overflow-y-auto custom-scrollbar">
+                                                {searchResults.length > 0 ? (
+                                                    <ul>
+                                                        {searchResults.map((result) => (
+                                                            <li key={result.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
+                                                                <Link
+                                                                    href={result.url}
+                                                                    className="block p-3 group"
+                                                                    onClick={() => {
+                                                                        setShowDropdown(false);
+                                                                        setIsSearchOpen(false);
+                                                                        setSearchQuery('');
+                                                                    }}
+                                                                >
+                                                                    <div className="flex items-center justify-between mb-1">
+                                                                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#ed1c24] border border-[#ed1c24] px-1.5 py-0.5 rounded-none">
+                                                                            {result.type}
+                                                                        </span>
+                                                                    </div>
+                                                                    <h4 className="text-sm font-semibold text-[#002856] group-hover:text-[#ed1c24] transition-colors line-clamp-1">
+                                                                        {result.title}
+                                                                    </h4>
+                                                                    {result.description && (
+                                                                        <p className="text-xs text-gray-500 mt-1 line-clamp-2 leading-relaxed">
+                                                                            {result.description}
+                                                                        </p>
+                                                                    )}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                        <li className="p-2 bg-gray-50 text-center sticky bottom-0 border-t border-gray-100">
+                                                            <Link
+                                                                href={`/search?q=${encodeURIComponent(searchQuery)}`}
+                                                                className="text-xs font-bold text-[#002856] hover:text-[#ed1c24] uppercase tracking-wide flex items-center justify-center gap-1"
+                                                                onClick={() => {
+                                                                    setIsSearchOpen(false);
+                                                                }}
+                                                                style={{ cursor: 'pointer' }}
+                                                            >
+                                                                View all results
+                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                                                </svg>
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
+                                                ) : (
+                                                    <div className="p-6 text-center text-gray-400">
+                                                        <p className="text-xs">No results found for "{searchQuery}"</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             {/* Search Button */}
                             <button
-                                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                className={`flex items-center justify-center h-10 w-10 lg:h-11 lg:w-11 xl:h-[50px] xl:w-[50px] bg-transparent border-0 transition-all duration-300 ease-in-out p-2 z-10 ${isDarkHeader ? 'text-[#002856]' : 'text-white'}`}
+                                onClick={() => {
+                                    setIsSearchOpen(!isSearchOpen);
+                                    if (!isSearchOpen) {
+                                        // Reset search when opening
+                                        setSearchQuery('');
+                                        setShowDropdown(false);
+                                    }
+                                }}
+                                className={`flex items-center justify-center h-10 w-10 lg:h-11 lg:w-11 xl:h-[50px] xl:w-[50px] bg-transparent border-0 transition-all duration-300 ease-in-out p-2 z-10 cursor-pointer ${isDarkHeader ? 'text-[#002856]' : 'text-white'}`}
                                 aria-label={isSearchOpen ? "Close Search" : "Open Search"}
                             >
                                 {isSearchOpen ? (

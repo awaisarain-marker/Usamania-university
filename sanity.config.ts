@@ -89,6 +89,12 @@ const deskStructure = (S: any) =>
                 .schemaType('event')
                 .child(S.documentTypeList('event').title('Events')),
 
+            // Job Positions
+            S.listItem()
+                .title('Job Positions')
+                .schemaType('job')
+                .child(S.documentTypeList('job').title('Job Positions')),
+
             S.divider(),
 
             // Settings Group

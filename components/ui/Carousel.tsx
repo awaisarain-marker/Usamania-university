@@ -182,7 +182,7 @@ export default function Carousel({ items, sectionTitle }: CarouselProps) {
                         >
                             <button
                                 onClick={() => setLightboxImage(null)}
-                                className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 transition-colors z-[100000]"
+                                className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 transition-colors z-[100000] cursor-pointer"
                             >
                                 <X className="w-8 h-8" />
                             </button>
@@ -197,7 +197,7 @@ export default function Carousel({ items, sectionTitle }: CarouselProps) {
                                         setLightboxImage(items[items.length - 1].image);
                                     }
                                 }}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 transition-colors z-[100000]"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 transition-colors z-[100000] cursor-pointer"
                             >
                                 <ChevronLeft className="w-10 h-10" />
                             </button>
@@ -223,7 +223,7 @@ export default function Carousel({ items, sectionTitle }: CarouselProps) {
                                         setLightboxImage(items[0].image);
                                     }
                                 }}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 transition-colors z-[100000]"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 transition-colors z-[100000] cursor-pointer"
                             >
                                 <ChevronRight className="w-10 h-10" />
                             </button>

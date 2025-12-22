@@ -650,3 +650,17 @@ export async function getContactPageContent() {
         }
     `)
 }
+
+// Job Queries
+export async function getAllJobs() {
+    return client.fetch(`
+        *[_type == "job"] | order(postedDate desc) {
+            _id,
+            title,
+            description,
+            postedDate,
+            deadline,
+            content
+        }
+    `)
+}

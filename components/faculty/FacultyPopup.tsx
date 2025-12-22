@@ -123,7 +123,7 @@ export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProp
                 <div className="w-full md:w-2/3 flex flex-col bg-white">
                     {/* Header with Close Button */}
                     <div className="flex justify-end p-4">
-                        <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                        <button onClick={onClose} className="text-gray-400 hover:text-gray-600 cursor-pointer">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                     </div>
@@ -135,7 +135,7 @@ export default function FacultyPopup({ isOpen, onClose, data }: FacultyPopupProp
                                 <li key={tab.name} className="custom-accordion-tabs__item">
                                     <button
                                         onClick={() => setActiveTab(tab.name)}
-                                        className={`custom-accordion-tabs__link ${activeTab === tab.name ? 'is-selected' : ''}`}
+                                        className={`custom-accordion-tabs__link cursor-pointer ${activeTab === tab.name ? 'is-selected' : ''}`}
                                     >
                                         {tab.name}
                                     </button>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageSquare, X, Send, Loader2 } from 'lucide-react';
 
 type Message = {
@@ -11,7 +12,11 @@ type Message = {
 };
 
 export default function Chatbot() {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+
+    // Don't render on Studio pages
+    if (pathname?.startsWith('/studio')) return null;
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 'welcome',
@@ -98,7 +103,7 @@ export default function Chatbot() {
             {/* Toggle Button - Sharp Corners */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-6 right-6 z-50 p-4 bg-primary-blue text-white shadow-lg hover:bg-primary-red transition-colors duration-300 ${isOpen ? 'rotate-90' : 'rotate-0'}`}
+                className={`fixed bottom-6 right-6 z-50 p-4 bg-primary-blue text-white shadow-lg hover:bg-primary-red transition-colors duration-300 cursor-pointer ${isOpen ? 'rotate-90' : 'rotate-0'}`}
                 aria-label="Toggle Chat"
             >
                 {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
@@ -128,8 +133,8 @@ export default function Chatbot() {
                             >
                                 <div
                                     className={`max-w-[80%] p-3 text-sm ${msg.sender === 'user'
-                                            ? 'bg-primary-blue text-white'
-                                            : 'bg-white text-gray-800 border border-gray-100 shadow-sm'
+                                        ? 'bg-primary-blue text-white'
+                                        : 'bg-white text-gray-800 border border-gray-100 shadow-sm'
                                         }`}
                                 >
                                     {msg.text}
@@ -164,7 +169,7 @@ export default function Chatbot() {
                             <button
                                 onClick={handleSend}
                                 disabled={isLoading || !inputText.trim()}
-                                className="p-3 bg-primary-blue text-white hover:bg-primary-red transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-3 bg-primary-blue text-white hover:bg-primary-red transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                             >
                                 {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
                             </button>

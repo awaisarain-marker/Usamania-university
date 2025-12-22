@@ -1,6 +1,13 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { getAllPosts } from '@/sanity/lib/queries';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface BlogPost {
     title: string;
@@ -27,17 +34,11 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                     const formattedPosts = data.map((post: any) => ({
                         title: post.title,
                         image: post.mainImageUrl || post.mainImage || "https://www.aubg.edu/wp-content/uploads/2025/12/Professor-Nikos-Fatouros-Teaching-Economics-at-AUBG-2-1-489x318.png", // Fallback image
-                        link: `/uit-today/${post.slug}`,
+                        link: post.externalUrl || (post.slug ? `/uit-today/${post.slug}` : '#'),
                         description: post.description,
                         category: post.category || "News",
-                        featured: false // Logic can be added to determine featured post
+                        featured: false
                     }));
-
-                    // Set first post as featured if available
-                    if (formattedPosts.length > 0) {
-                        formattedPosts[0].featured = true;
-                    }
-
                     setPosts(formattedPosts);
                 }
             } catch (error) {
@@ -54,9 +55,15 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
         return <div className="py-20 text-center">Loading news...</div>;
     }
 
-    // Fallback if no posts found
     if (posts.length === 0) {
         return null;
+    }
+
+    // Chunk posts into groups of 5
+    const chunkSize = 5;
+    const postChunks = [];
+    for (let i = 0; i < posts.length; i += chunkSize) {
+        postChunks.push(posts.slice(i, i + chunkSize));
     }
 
     return (
@@ -69,11 +76,11 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                             <h2>{title}</h2>
                         </div>
                         <div className="text-big">
-                            <p>Discover what it's like to study at one of Pakistan's top universities, and explore our latest developments, student achievements, and alumni success stories.</p>
+                            <p>Discover what it&apos;s like to study at one of Pakistan&apos;s top universities, and explore our latest developments, student achievements, and alumni success stories.</p>
                         </div>
                     </div>
                     <Link href="/uit-today" className="btn-secondary --red --arrow --border">
-                        <span>UIT University Today</span>
+                        <span>VIEW ALL STORIES</span>
                         <svg width="25" height="25" className="icon icon-arrow" aria-hidden="true" role="img">
                             <use xlinkHref="#arrow"></use>
                         </svg>
@@ -81,42 +88,59 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                 </div>
 
                 {/* Blog Slider */}
-                <div className="blog-section__slider">
-                    <div className="slider__wrapper">
-                        <div className="blog-section__list">
-                            {posts.map((post, index) => (
-                                <div key={index} className="blog-section__item">
-                                    <Link href={post.link} className="blog-section__item-wrap">
-                                        <figure className="blog-section__item-media">
-                                            <img
-                                                className="image"
-                                                alt={`${post.title} featured image`}
-                                                src={post.image}
-                                            />
-                                        </figure>
-                                        <div className="blog-section__item-content">
-                                            <div className="blog-section__item-title">
-                                                <h3 className="font-secondary text-bold">{post.title}</h3>
-                                            </div>
-                                            {post.description && (
-                                                <div className="blog-section__item-desc">
-                                                    <p>{post.description}</p>
+                <div className="blog-section__slider relative">
+                    <Swiper
+                        modules={[Navigation, Pagination]}
+                        navigation={{
+                            nextEl: '.slider__next',
+                            prevEl: '.slider__prev',
+                        }}
+                        pagination={{
+                            el: '.slider__pagination',
+                            type: 'progressbar',
+                        }}
+                        loop={true}
+                        spaceBetween={30}
+                        slidesPerView={1}
+                        className="slider__wrapper w-full"
+                    >
+                        {postChunks.map((chunk, chunkIndex) => (
+                            <SwiperSlide key={chunkIndex}>
+                                <div className="blog-section__list">
+                                    {chunk.map((post, postIndex) => (
+                                        <div key={postIndex} className="blog-section__item">
+                                            <Link href={post.link} className="blog-section__item-wrap">
+                                                <figure className="blog-section__item-media">
+                                                    <img
+                                                        className="image"
+                                                        alt={`${post.title} featured image`}
+                                                        src={post.image}
+                                                    />
+                                                </figure>
+                                                <div className="blog-section__item-content">
+                                                    <div className="blog-section__item-title">
+                                                        <h3 className="font-secondary text-bold">{post.title}</h3>
+                                                    </div>
+                                                    {/* Show description only for the first item in the chunk (the big one) */}
+                                                    {postIndex === 0 && post.description && (
+                                                        <div className="blog-section__item-desc">
+                                                            <p>{post.description}</p>
+                                                        </div>
+                                                    )}
+                                                    <div className="blog-section__item-footer">
+                                                        <span className="text-uppercase text-bold text-light-blue">{post.category}</span>
+                                                    </div>
                                                 </div>
-                                            )}
-                                            <div className="blog-section__item-footer">
-                                                <span className="text-uppercase text-bold text-light-blue">{post.category}</span>
-                                            </div>
+                                            </Link>
                                         </div>
-                                    </Link>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
 
                     {/* Pagination */}
-                    <div className="slider__pagination">
-                        <span className="slider__pagination-fill"></span>
-                    </div>
+                    <div className="slider__pagination"></div>
 
                     {/* Navigation */}
                     <div className="slider__navigation">
