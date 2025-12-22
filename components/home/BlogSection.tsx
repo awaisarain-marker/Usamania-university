@@ -98,23 +98,6 @@ export default function BlogSection({ title = "UIT University Today" }: BlogSect
                         modules={[Navigation, Pagination]}
                         onSwiper={(swiper) => {
                             swiperRef.current = swiper;
-                            // Connect navigation after swiper is initialized
-                            if (prevRef.current && nextRef.current) {
-                                swiper.params.navigation = {
-                                    prevEl: prevRef.current,
-                                    nextEl: nextRef.current,
-                                };
-                                swiper.navigation.init();
-                                swiper.navigation.update();
-                            }
-                            if (paginationRef.current) {
-                                swiper.params.pagination = {
-                                    el: paginationRef.current,
-                                    type: 'progressbar',
-                                };
-                                swiper.pagination.init();
-                                swiper.pagination.update();
-                            }
                         }}
                         loop={true}
                         spaceBetween={30}

@@ -57,7 +57,8 @@ export default function CampusExperienceSection({
     };
 
     // Parse the title to add the ampersand styling
-    const titleParts = title.split('&');
+    const safeTitle = title || "Study Hard & Enjoy Your Campus Experience";
+    const titleParts = safeTitle.split('&');
     const hasAmpersand = titleParts.length > 1;
 
     return (

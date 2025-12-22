@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { getPostBySlug } from '@/sanity/lib/queries';
@@ -76,9 +77,10 @@ const components = {
     },
 };
 
-export default function SinglePostPage({ params }: { params: Promise<{ slug: string }> }) {
-    // Unwrap the params Promise using React.use()
-    const { slug } = use(params);
+export default function SinglePostPage() {
+    // Use the useParams hook for client components
+    const params = useParams();
+    const slug = params.slug as string;
     const [post, setPost] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { getEventBySlug } from '@/sanity/lib/queries';
@@ -76,8 +77,9 @@ const components = {
     },
 };
 
-export default function SingleEventPage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = React.use(params);
+export default function SingleEventPage() {
+    const params = useParams();
+    const slug = params.slug as string;
     const [event, setEvent] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
@@ -92,7 +94,9 @@ export default function SingleEventPage({ params }: { params: Promise<{ slug: st
                 setLoading(false);
             }
         }
-        fetchEvent();
+        if (slug) {
+            fetchEvent();
+        }
     }, [slug]);
 
     if (loading) {
