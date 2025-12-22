@@ -29,7 +29,8 @@ export default function Chatbot() {
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const WEBHOOK_URL = "https://rex1280.app.n8n.cloud/webhook/ff5b65c4-ece4-4282-a58d-eaf04ade66b6";
+    // Using local API proxy to avoid CORS issues
+    const WEBHOOK_URL = "/api/chatbot";
 
     useEffect(() => {
         if (messagesEndRef.current) {

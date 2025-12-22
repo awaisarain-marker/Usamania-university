@@ -169,7 +169,7 @@ function JourneyTimelineComponent({
 
 // Render a single section
 function RenderSection({ section }: { section: Section }) {
-    const { _type, ...props } = section;
+    const { _type, _key, ...props } = section;
 
     // Handle special blocks
     if (_type === 'spacerBlock') {
