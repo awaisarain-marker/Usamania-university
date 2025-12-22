@@ -161,14 +161,14 @@ export default function Footer() {
 
                                         {contact.email && (
                                             <p className="mb-1">
-                                                <a href={`mailto:${contact.email}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.email}</a>
+                                                <a href={`mailto:${contact.email}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors hover-underline-animation">{contact.email}</a>
                                             </p>
                                         )}
 
                                         {contact.phone && (
                                             <p className="mb-1">
                                                 <span className="text-blue font-bold text-sm">Phone: </span>
-                                                <a href={`tel:${contact.phone}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.phone}</a>
+                                                <a href={`tel:${contact.phone}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors hover-underline-animation">{contact.phone}</a>
                                             </p>
                                         )}
 
@@ -182,7 +182,7 @@ export default function Footer() {
                                         {contact.admissions && (
                                             <p className="mb-1">
                                                 <span className="text-blue font-bold text-sm">Admissions: </span>
-                                                <a href={`tel:${contact.admissions}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors">{contact.admissions}</a>
+                                                <a href={`tel:${contact.admissions}`} className="text-blue text-sm hover:text-[#ed1c24] transition-colors hover-underline-animation">{contact.admissions}</a>
                                             </p>
                                         )}
                                     </div>
@@ -195,7 +195,9 @@ export default function Footer() {
                                         <ul className="space-y-3">
                                             {quickLinks.map((item: any, index: number) => (
                                                 <li key={index}>
-                                                    <a href={item.url || item.href} className="text-blue hover:text-blue transition-colors">{item.label}</a>
+                                                    <li key={index}>
+                                                        <a href={item.url || item.href} className="text-blue hover:text-blue transition-colors hover-underline-animation">{item.label}</a>
+                                                    </li>
                                                 </li>
                                             ))}
                                         </ul>

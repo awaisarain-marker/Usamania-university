@@ -142,13 +142,26 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                 <div className="space-y-1">
                                     {menuItems.map((item) => (
                                         <div key={item.id} className="border-b border-white/5 last:border-0">
-                                            <button
-                                                onClick={() => setActiveCategory(activeCategory === item.id ? '' : item.id)}
-                                                className={`w-full flex items-center justify-between py-4 px-2 text-left transition-colors cursor-pointer ${activeCategory === item.id ? 'text-[#ed1c24]' : 'text-white'}`}
-                                            >
-                                                <span className="font-serif text-xl">{item.label}</span>
-                                                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${activeCategory === item.id ? 'rotate-180 text-[#ed1c24]' : 'text-gray-500'}`} />
-                                            </button>
+                                            <div className="flex items-center justify-between py-4 px-2">
+                                                <Link
+                                                    href={item.href || '#'}
+                                                    onClick={onClose}
+                                                    className={`flex-1 font-serif text-xl text-left transition-colors ${activeCategory === item.id ? 'text-[#ed1c24]' : 'text-white'}`}
+                                                >
+                                                    {item.label}
+                                                </Link>
+                                                {item.children && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setActiveCategory(activeCategory === item.id ? '' : item.id);
+                                                        }}
+                                                        className="p-2 -mr-2"
+                                                    >
+                                                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${activeCategory === item.id ? 'rotate-180 text-[#ed1c24]' : 'text-gray-500'}`} />
+                                                    </button>
+                                                )}
+                                            </div>
 
                                             {/* Mobile Submenu */}
                                             <AnimatePresence>
