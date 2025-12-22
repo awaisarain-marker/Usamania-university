@@ -163,7 +163,7 @@ export default function OricPage() {
                              I will make this look like a standard section but maybe full width if no image.
                              Let's use the 'LeadshipSection' style or just a clean text block with the requested styles. 
                          */}
-                        <div className="w-full bg-[#f9fafb] p-8 md:p-12 rounded-lg border border-gray-100">
+                        <div className="w-full p-8 md:p-12 rounded-lg border border-gray-100">
                             <div className="section-title mb-6">
                                 <h2>Director's Message</h2>
                                 <h3 className="text-xl md:text-2xl font-bold text-[#002856] mt-2 font-lato">Muhammad Ali Kemal</h3>
@@ -271,7 +271,7 @@ export default function OricPage() {
                 </div>
             </section>
 
-            <div id="organogram" className="py-16 bg-[#f0f2f5]">
+            <div id="organogram" className="py-16">
                 <div className="container">
                     <div className="section-title mb-8">
                         <h2>ORIC Organogram</h2>

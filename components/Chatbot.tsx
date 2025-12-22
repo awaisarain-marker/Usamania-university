@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { MessageSquare, X, Send, Loader2 } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 type Message = {
     id: string;
@@ -138,7 +139,11 @@ export default function Chatbot() {
                                         : 'bg-white text-gray-800 border border-gray-100 shadow-sm'
                                         }`}
                                 >
-                                    {msg.text}
+                                    {msg.sender === 'bot' ? (
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(msg.text) }} />
+                                    ) : (
+                                        msg.text
+                                    )}
                                 </div>
                             </div>
                         ))}

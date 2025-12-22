@@ -66,7 +66,7 @@ export default function EventsPage() {
                 <div className="container">
                     <div className="blog-section__slider">
                         <div className="slider__wrapper">
-                            <div className="blog-listing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '30px' }}>
+                            <div className="blog-listing-grid grid grid-cols-1 md:grid-cols-2 gap-[30px]">
                                 {events.map((event, index) => (
                                     <div key={index} style={{ position: 'relative', backgroundColor: 'transparent' }}>
                                         <Link
