@@ -95,6 +95,11 @@ const deskStructure = (S: any) =>
                 .schemaType('job')
                 .child(S.documentTypeList('job').title('Job Positions')),
 
+            // Virtual Tour
+            S.listItem()
+                .title('Virtual Tour')
+                .child(S.document().schemaType('virtualTour').documentId('virtualTour')),
+
             S.divider(),
 
             // Settings Group

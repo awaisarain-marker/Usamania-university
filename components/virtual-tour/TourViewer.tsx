@@ -33,8 +33,16 @@ function Loader() {
     );
 }
 
-export default function TourViewer() {
-    const modelUrl = "/models/un18.glb";
+// Preload not possible with dynamic URL unless we know it ahead of time
+// useGLTF.preload("/models/un18.glb");
+
+interface TourViewerProps {
+    modelUrl?: string | null;
+}
+
+export default function TourViewer({ modelUrl }: TourViewerProps) {
+    // Use fallback if no URL provided (though in prod it should be provided)
+    const finalUrl = modelUrl || "/models/un18.glb";
 
     return (
         <div className="w-full h-full relative bg-gray-50">
@@ -47,7 +55,7 @@ export default function TourViewer() {
             >
                 <Suspense fallback={<Loader />}>
                     <Stage environment="city" intensity={0.6}>
-                        <Model url={modelUrl} />
+                        <Model url={finalUrl} />
                     </Stage>
                     <OrbitControls
                         makeDefault
@@ -66,5 +74,4 @@ export default function TourViewer() {
     );
 }
 
-// Preload the model
-useGLTF.preload("/models/un18.glb");
+

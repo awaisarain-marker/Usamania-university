@@ -664,3 +664,11 @@ export async function getAllJobs() {
         }
     `)
 }
+// get the virtual tour
+export async function getVirtualTour() {
+    return client.fetch(`
+        *[_type == "virtualTour"][0] {
+            "modelUrl": modelFile.asset->url
+        }
+    `)
+}

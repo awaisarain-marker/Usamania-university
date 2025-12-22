@@ -1,8 +1,7 @@
-'use client';
-
 import React from 'react';
 import PageHero from '@/components/layout/PageHero';
 import dynamic from 'next/dynamic';
+import { getVirtualTour } from '@/sanity/lib/queries';
 
 const TourViewer = dynamic(() => import('@/components/virtual-tour/TourViewer'), {
     ssr: false,
@@ -14,7 +13,10 @@ const TourViewer = dynamic(() => import('@/components/virtual-tour/TourViewer'),
     )
 });
 
-export default function VirtualTourPage() {
+export default async function VirtualTourPage() {
+    const data = await getVirtualTour();
+    const modelUrl = data?.modelUrl;
+
     return (
         <div className="page-virtual-tour">
             <PageHero
@@ -35,7 +37,7 @@ export default function VirtualTourPage() {
 
                     {/* 3D Model Viewer */}
                     <div className="w-full aspect-video bg-gray-100 flex items-center justify-center border border-gray-200 shadow-sm relative overflow-hidden group h-[600px]">
-                        <TourViewer />
+                        <TourViewer modelUrl={modelUrl} />
                     </div>
 
                     <div className="mt-12 grid md:grid-cols-3 gap-8 text-center">

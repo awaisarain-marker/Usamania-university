@@ -18,6 +18,7 @@ import faculty from './schemas/faculty'
 import facultyCategory from './schemas/facultyCategory'
 import page from './schemas/page'
 import job from './schemas/job'
+import virtualTour from './schemas/virtualTour'
 import { pageBuilderBlocks } from './schemas/pageBuilderBlocks'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -34,6 +35,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         // Content
         post,
         job,
+        virtualTour,
         hero,
         course,
         event,
