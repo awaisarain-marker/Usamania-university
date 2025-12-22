@@ -49,20 +49,28 @@ const defaultData = {
   // Testimonials defaults
   testimonials: [
     {
-      name: "Daniel Flashenburg ('28)",
-      location: "Easton, MA",
-      quote: "The benefits are endless. A tight-knit, fun, and intelligent community awaits you",
-      fullText: "Do it! The benefits are endless. A tight-knit, fun, and intelligent community awaits you, and experiences you couldn't even dream of at a school in the US are ahead-- all the while you are receiving the same level of education at an (often times) monumentally less expensive cost.\"",
+      name: "Ali Khan ('24)",
+      location: "Karachi, Sindh",
+      quote: "UIT University provided me with the technical skills and industry exposure needed to excel in Data Science.",
+      fullText: "Joining UIT University was the best decision for my career. The benefits are endless. A tight-knit, fun, and intelligent community awaits you here. The Data Science program is rigorous and up-to-date with industry standards. I’ve had access to state-of-the-art labs and mentorship from experienced faculty, which allowed me to work on real-world projects. Experiences you couldn't even dream of at other local universities are ahead—all while receiving a world-class education right here in Karachi.",
       bgImageUrl: "https://www.aubg.edu/wp-content/uploads/2025/06/Daniel-Flashenburg-AUBG-Testimonial-945x700.png",
       avatarUrl: "https://www.aubg.edu/wp-content/uploads/2025/06/Daniel-Flasheburg-profile-150x150.png",
     },
     {
-      name: "Owen Kemerer ('25)",
-      location: "Burlington, VT",
-      quote: "I had the opportunity to take a trip to Brussels as part of a European Studies class.",
-      fullText: "One of my favorite moments at UIT University was during the fall semester of my senior year. I had the opportunity to take a trip to Brussels as part of a European Studies class. I was standing waiting for the metro talking to some friends from Ukraine and Bulgaria. In that moment I realized how surreal my whole experience at UIT University has been. I am an American who has been lucky enough to live on another continent for four years and meet people from all over the world.",
+      name: "Sara Ahmed ('25)",
+      location: "Lahore, Punjab",
+      quote: "The collaborative environment at UIT allowed me to work on innovative software engineering projects.",
+      fullText: "One of my favorite moments at UIT University was showcasing my final year project. I had the opportunity to collaborate with peers from different disciplines, developing a comprehensive software solution. I was standing there presenting to industry leaders, realizing how surreal my whole experience at UIT University has been. I am from Lahore but found a second home here, meeting people from all over Pakistan and growing both personally and professionally for four years.",
       bgImageUrl: "https://www.aubg.edu/wp-content/uploads/2025/06/Owen-Kemerer-25-1-945x700.png",
       avatarUrl: "https://www.aubg.edu/wp-content/uploads/2025/06/Owen-Kemerer-profile-photo-150x150.png",
+    },
+    {
+      name: "Zainab Malik ('26)",
+      location: "Islamabad",
+      quote: "UIT University broadened my horizons with its diverse community and practical approach to learning.",
+      fullText: "\"UIT University helped grow my horizons by offering a diverse community, wonderfully passionate professors, and areas to practice the academic material and skills learned on campus. The focus on practical application in the BBA program has been instrumental in preparing me for the corporate world. The workshops and seminars organized regularly have given me insights that go beyond textbooks.\"",
+      bgImageUrl: "https://www.aubg.edu/wp-content/uploads/2023/10/Kayla-AUBG-USA-939x700.png",
+      avatarUrl: "https://www.aubg.edu/wp-content/uploads/2023/10/Greti-website-covers-150x150.jpg",
     },
   ],
 
