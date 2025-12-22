@@ -111,7 +111,7 @@ export default function Chatbot() {
 
             {/* Chat Window - Sharp Corners */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[400px] h-[600px] max-h-[80vh] flex flex-col bg-white shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-10 fade-in duration-300">
+                <div className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[400px] h-[600px] max-h-[70vh] flex flex-col bg-white shadow-2xl border border-gray-200 animate-in slide-in-from-bottom-10 fade-in duration-300">
 
                     {/* Header */}
                     <div className="bg-primary-blue p-4 flex items-center gap-3">

@@ -59,11 +59,11 @@ export default function Footer() {
     ];
 
     const defaultFooterMenuItems = [
-        { href: "/staff-and-faculty-members/", label: "Contact us" },
+        { href: "/contact-us/", label: "Contact us" },
         { href: "/careers/", label: "Careers at UIT" },
         { href: "/events/", label: "Events" },
-        { href: "/open-tenders/", label: "Open Tenders" },
-        { href: "/privacy-notices/", label: "Privacy Notices" }
+        { href: "/tenders/", label: "Open Tenders" },
+        { href: "#", label: "Privacy Notices" }
     ];
 
     // Use Sanity data or fallback

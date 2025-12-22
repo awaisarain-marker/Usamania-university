@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    /* config options here */
+    compiler: {
+        styledComponents: true,
+    },
+    // Optimize images
+    images: {
+        remotePatterns: [
+            { hostname: '**' }
+        ],
+    },
 };
 
 export default nextConfig;
