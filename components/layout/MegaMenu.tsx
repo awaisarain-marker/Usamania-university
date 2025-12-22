@@ -183,9 +183,12 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                             href={item.href || '#'}
                                             key={item.id}
                                             onMouseEnter={() => {
-                                                startTransition(() => {
-                                                    setActiveCategory(item.id);
-                                                });
+                                                // Check if actually different to avoid redundant updates
+                                                if (activeCategory !== item.id) {
+                                                    startTransition(() => {
+                                                        setActiveCategory(item.id);
+                                                    });
+                                                }
                                             }}
                                             onClick={onClose}
                                             className={`group block py-3 border-l-4 transition-all duration-300 ease-out cursor-pointer pl-6 ${activeCategory === item.id
@@ -218,10 +221,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                             {/* DESKTOP RIGHT SIDE: Dynamic Content Area (lg+) */}
                             <div className="hidden lg:block lg:col-span-9 bg-[#00152e] relative h-full overflow-y-auto no-scrollbar p-8 xl:p-12">
                                 <motion.div
-                                    key={activeCategory} // Force re-render animation when category changes
+                                    // Removed key={activeCategory} to prevent full re-mounting. React will diff the DOM updates which is much faster.
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ duration: 0.2 }} // Faster transition
                                     className="max-w-6xl mx-auto"
                                 >
                                     <div className="flex items-center gap-3 mb-8">
